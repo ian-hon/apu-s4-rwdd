@@ -43,6 +43,8 @@ body,
 head {
     margin: 0;
     padding: 0;
+
+    box-sizing: border-box;
 }
 
 h1,
@@ -127,7 +129,7 @@ h6 {
     border-color: var(--tertiary);
 
     & #icon {
-        height: 2em;
+        height: 3em;
         padding: 0.5em;
 
         background: var(--accent-background);
@@ -222,7 +224,7 @@ h6 {
         width: 100%;
 
         & img {
-            height: 2.5em;
+            height: 3.5em;
 
             margin-right: 2ch;
 
