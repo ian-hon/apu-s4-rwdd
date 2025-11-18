@@ -11,8 +11,8 @@
     --background: #000;
     --background-secondary: #101309;
 
-    --tertiary: #ffffff19;
-    --tertiary-background: #ffffff0d;
+    --tertiary: #34352d;
+    --tertiary-background: #1d1f15;
 
     --accent: #519C03;
     --accent-background: color-mix(in srgb, var(--accent) 20%, transparent 80%);
@@ -45,6 +45,12 @@ head {
     padding: 0;
 
     box-sizing: border-box;
+}
+
+hr {
+    border-collapse: collapse;
+    border-style: solid;
+    border-radius: 1000px;
 }
 
 h1,
@@ -124,6 +130,8 @@ h6 {
 }
 
 .task-card {
+    position: relative;
+
     display: flex;
     justify-content: space-between;
     align-items: center;

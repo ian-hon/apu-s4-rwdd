@@ -1,5 +1,18 @@
-const countdown = document.querySelector(".countdown");
+// #region full dynamic height (https://stackoverflow.com/a/60229913)
+function setProperVh() {
+    // attempts to solve this problem (unsuccessful)
+    // https://www.reddit.com/r/css/comments/1nk3uzp/full_viewport_height_on_ios_26/
 
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+window.addEventListener('resize', setProperVh);
+
+setProperVh();
+// #endregion
+
+// #region dummy timer at task section
+const countdown = document.querySelector(".countdown");
 const target = (Date.now() - (Date.now() % 86400_000)) + 86400_000;
 
 function getCountdownText(seconds) {
@@ -16,8 +29,7 @@ function getCountdownText(seconds) {
 }
 
 function updateCountdown() {
-    let now = target - Date.now();
-    countdown.innerHTML = getCountdownText(now);
+    countdown.innerHTML = getCountdownText(target - Date.now());
 }
 
 updateCountdown();
@@ -25,3 +37,12 @@ updateCountdown();
 setInterval(() => {
     updateCountdown();
 }, 300);
+// #endregion
+
+// #region navbar logic
+const navbarElement = document.querySelector("#navbar");
+
+function toggleNavbar() {
+    navbarElement.setAttribute("data-active", navbarElement.getAttribute("data-active") == "true" ? "false" : "true");
+}
+// #endregion
