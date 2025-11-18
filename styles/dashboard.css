@@ -1,18 +1,6 @@
 #parent {
-    /* height: calc(100vh - (2 * var(--screen-padding)));
-
-    padding: var(--screen-padding); */
-
-    /* width: 100%; */
-
-    /* mobile */
-    /* margin: 0 auto;
-    aspect-ratio: calc(18 / 41);
-    border-style: solid;
-    border-width: 0 1px;
-    border-color: #fff3; */
-
     &>div {
+        /* make all immediate div chilren have this margin */
         margin: var(--block-padding);
     }
 }
@@ -29,6 +17,8 @@
         justify-content: flex-start;
         align-items: center;
 
+        /* make only the first child have accent colour */
+        /* in this case, the "eco" in ecoquest */
         &>*:first-of-type {
             color: var(--accent);
         }
@@ -107,6 +97,8 @@
     & #task-container {
         margin-top: 1em;
 
+        /* selector does exactly what it says */
+        /* selects the .task-card thats not the last child */
         & .task-card:not(:last-of-type) {
             margin-bottom: 1em;
         }

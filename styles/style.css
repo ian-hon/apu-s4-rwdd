@@ -104,14 +104,18 @@ h6 {
 
     padding: 0 0.5ch;
 
+    /* makes the element be exactly 1em tall */
+    /* if not, will be 1.5em or something */
     line-height: 1em;
     font-weight: 500;
 
-    background: red;
-
+    /* trick to have two backgrounds */
+    /* first background is background outside of parent */
     background-color: black;
 
+    /* second background is background of parent */
     background-image: linear-gradient(var(--background-secondary), var(--background-secondary));
+    /* this second background is only 50% height */
     background-size: 100% 50%;
     background-position: center bottom;
     background-repeat: no-repeat;
@@ -121,7 +125,7 @@ h6 {
 
 .task-card {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 
     background: var(--tertiary-background);
@@ -137,6 +141,9 @@ h6 {
     }
 
     & #details {
+        /* makes #details have maximum width */
+        flex: 1;
+
         margin: 0 2ch;
 
         & h6 {
@@ -149,6 +156,7 @@ h6 {
         justify-content: center;
         align-items: center;
 
+        /* makes this be aligned to top */
         align-self: flex-start;
 
         & img {
