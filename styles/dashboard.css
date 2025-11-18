@@ -204,6 +204,8 @@
         border-color: var(--border-color);
         border-width: 2px;
 
+        text-decoration: none;
+
         & img {
             height: 2em;
             margin-right: 2ch;
@@ -228,10 +230,10 @@
         justify-content: flex-start;
         align-items: center;
 
+        text-decoration: none;
+
         &:not(:last-of-type) {
             margin-bottom: 1em;
-
-
         }
 
         & img {
