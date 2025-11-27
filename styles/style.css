@@ -58,7 +58,10 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+input,
+button,
+a {
     font-family: 'Jetbrains Mono';
     font-weight: 400;
 

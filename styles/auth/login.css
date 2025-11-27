@@ -1,0 +1,156 @@
+html {
+  background-color: black;
+  color: var(--text-primary);
+}
+
+body {
+  background-color: black;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: 4em;
+}
+
+h3 {  
+  font-size: 1.4em;
+  color: white;
+  margin: 0.5em 0;
+  align-items: flex-start;
+
+  &.email-password {
+    font-size: 1.2em;
+  }
+}
+
+#parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding: 10vh 0;
+}
+
+#logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#login-page-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0em 4em;
+  min-width: 26em;
+  max-width: 30em;
+  height: 100%;
+}
+
+#welcome-back {
+  margin-top: 1em;
+}
+
+.subtitle {
+  font-size: 0.9em;
+  color: grey;
+  margin-bottom: 1.5em;
+}
+
+input {
+  border: 1.5px solid var(--accent-border);
+  background-color: #181d0d;
+  color: var(--text-primary);
+  width: 100%;
+  padding: 1em;
+  margin-bottom: 0.6em;
+  border-radius: 10px;
+}
+
+input::placeholder {
+  font-size: 1em;
+  color: grey;
+  opacity: 50%;
+  padding: 1em;
+}
+
+input[type=text] {
+  color: white;
+}
+
+#forgot-password {
+  display: flex;
+  justify-content: end;
+  font-size: 0.8em;
+}
+
+#forgot-password a {
+  color: #519C03;
+}
+
+#forgot-password a:hover {
+  opacity: 75%;
+  cursor: pointer;
+}
+
+#or-page-divider {
+  color: grey;
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+}
+
+.continue-with-btn {
+  font-size: 0.9em;
+  font-weight: bold;
+  border: 1px solid var(--accent-border);
+  background-color: var(--accent-background);
+  width: 100%;
+  padding: 0.9em;
+  margin-bottom: 1em;
+  border-radius: 10px;
+}
+
+#continue-with-btn:hover {
+  opacity: 75%;
+  cursor: pointer;
+}
+
+#login-btn {
+  font-size: 0.9em;
+  font-weight: bold;
+  border: 1px solid var(--accent-border);
+  background-color: #519C03;
+  width: 100%;
+  padding: 0.9em;
+  border-radius: 8px;
+}
+
+#login-btn:hover {
+  opacity: 75%;
+  cursor: pointer;
+}
+
+#no-account {
+  display: flex;
+  color: grey;
+  font-size: 0.9em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5em;
+}
+
+#sign-up {
+  color: #519C03;
+  cursor: pointer;
+  margin-left: 0.5em;
+}
+
+#sign-up:hover {
+  opacity: 75%;
+  cursor: pointer;
+}
