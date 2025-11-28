@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration | EcoQuest</title>
+    <title>Login | EcoQuest</title>
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/auth/login.css">
 </head>
@@ -18,31 +18,31 @@
         <div id="login-page-box">
             <div id="welcome-back">
                 <h3>Welcome Back</h3>
-                <h4 class="subtitle">Sign in to continue your journey</h4>
+                <h4 id="subtitle">Sign in to continue your journey</h4>
             </div>
-            <div>
-                <h3 class="email-password">Email</h3>
+            <div id="input-section">
+                <h3>Email</h3>
                 <input type="text" placeholder="your@email.com">
             </div>
-            <div>
-                <h3 class="email-password">Password</h3>
+            <div id="input-section">
+                <h3>Password</h3>
                 <input type="text" placeholder="Enter your password">
             </div>
             <div id="forgot-password">
                 <a href="https://www.wikipedia.com/" target="_blank">Forgot Password?</a>
             </div>
             <div>
-                <p id="or-page-divider">or</p>
+                <h5 id="or-page-divider">or</h5>
+            </div>
+            <div id="continue-with">
+                <button class="button">Continue with Google</button>
+                <button class="button">Continue with Apple</button>
             </div>
             <div>
-                <button class="continue-with-btn">Continue with Google</button>
-                <button class="continue-with-btn">Continue with Apple</button>
+                <button class="button" id="login-button">Login</button>
             </div>
-            <div>
-                <button id="login-btn">Login</button>
-            </div>
-            <div>
-                <h4 id="no-account">Don't have an account?<span id="sign-up">Sign Up</span></h4>
+            <div id="no-account">
+                <h4>Don't have an account?<a href="/auth/register.html">Sign Up</a></h4>
             </div>
         </div>
     </div>
