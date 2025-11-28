@@ -1,0 +1,466 @@
+body {
+    color: white;
+    font-family: geist;
+    min-height: 100vh !important;
+}
+
+#bg-color {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(ellipse 2200px 1800px at 97% 30%, #519C03 0%, transparent 10%),
+        radial-gradient(ellipse 2200px 1800px at 5% 71%, #519C03 0%, transparent 10%),
+        black !important;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+@media(min-width: 1024px) {
+    #bg-color {
+        background:
+            radial-gradient(ellipse 2000px 1800px at 90% 35%, #519C03 0%, transparent 20%),
+            radial-gradient(ellipse 2000px 1800px at 7% 70%, #519C03 0%, transparent 20%),
+            black !important;
+        height: 100vh;
+    }
+}
+
+/* Header */
+#header {
+    background: black;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+
+    & h3 {
+        font-family: geist;
+        font-size: 20px;
+        font-weight: 600;
+        /* padding: 10px; */
+        margin: 0;
+    }
+}
+
+#header .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    padding: 8px 15px;
+}
+
+#ellipsis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    & img {
+        /* top: 17px;
+        right: 10px; */
+
+        width: 20px;
+        height: auto;
+    }
+}
+
+#elements {
+    overflow-y: scroll;
+    width: 100%;
+
+    scrollbar-width: none;
+}
+
+/* Achievement */
+#achievement {
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr 1fr;
+    margin: 2em;
+    gap: 1em;
+    justify-content: space-evenly;
+
+    & img {
+        position: absolute;
+        width: 20px;
+    }
+}
+
+.achm {
+    display: block;
+    padding: 25px;
+
+    border: 1px solid #202318;
+    border-radius: 16px;
+    background: #101309;
+}
+
+.achm .p1 {
+    font-size: 14px;
+    color: grey;
+    font-weight: 600;
+
+    margin-left: 30px;
+}
+
+.achm .p2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 15px 0px 5px 0px;
+}
+
+.achm .p3 {
+    font-family: IBM Plex Mono;
+    font-size: 13px;
+    font-weight: 400;
+    color: grey;
+}
+
+@media (min-width: 1024px) {
+    #header {
+        & h3 {
+            font-size: 25px;
+        }
+
+        & img {
+            width: 25px;
+        }
+    }
+
+    #achievement {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        /* grid-template-rows: auto; */
+    }
+}
+
+/* Impact */
+#impact-header {
+    position: relative;
+}
+
+#your-impact {
+    position: absolute;
+    width: 20px;
+    margin-left: 2em;
+}
+
+#header-impact {
+    font-size: 16px;
+    margin-left: 3.5em;
+    margin-bottom: 0;
+}
+
+#impact {
+    display: grid;
+    position: relative;
+    margin: 1em 2em;
+    /* margin: 2em; */
+    gap: 1em;
+}
+
+.impt {
+    background: var(--background-secondary);
+    border-style: solid;
+    border-width: var(--border-width);
+    border-color: var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--block-padding);
+
+    & img {
+        width: 60px;
+    }
+
+    & .impt-p1 {
+        font-size: 15px;
+        font-weight: 400;
+        margin: 5px 0px 0px 0px;
+    }
+
+    & .impt-p2 {
+        font-size: 24px;
+        font-weight: 600;
+        color: #519C03;
+        margin: 10px 0px;
+    }
+
+    & .impt-p3 {
+        font-size: 13px;
+        font-weight: 400;
+        color: grey;
+    }
+}
+
+@media (min-width: 1024px) {
+    #your-impact {
+        width: 25px;
+    }
+
+    #header-impact {
+        font-size: 20px;
+    }
+
+    #impact {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+/* Tracking */
+#tracking {
+    display: grid;
+    grid-template-columns: 120px 120px;
+    margin: 2em;
+    gap: 1em;
+
+    & button {
+        background: var(--background-secondary);
+        border-style: solid;
+        border-width: var(--border-width);
+        border-color: var(--border-color);
+        border-radius: var(--border-radius);
+        padding: var(--block-padding);
+        color: white;
+    }
+}
+
+#tracking button:hover {
+    color: black;
+    background: #519C03;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* Goals */
+#goal {
+    display: grid;
+    margin: 2em;
+    gap: 1em;
+}
+
+.goals {
+    position: relative;
+
+    background: var(--background-secondary);
+    border-style: solid;
+    border-width: var(--border-width);
+    border-color: var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--block-padding);
+
+    & .goals-p1 {
+        font-size: 12px;
+        color: grey;
+        font-weight: 500;
+    }
+
+    & .goals-p2 {
+        font-size: 28px;
+        margin: 10px 0px 10px 0px;
+    }
+
+    & .goals-p2 span {
+        font-size: 12px;
+        color: grey;
+        margin: 10px 0px 10px 0px;
+    }
+}
+
+.icons {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    padding: 5px;
+
+    border: 2px solid #202318;
+    border-radius: 10px;
+    background: #012510;
+}
+
+.icons img {
+    display: absolute;
+    top: 5px;
+    right: 5px;
+    width: 35px;
+}
+
+/* progess */
+.progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: conic-gradient(#519C03 calc(90%), grey 0);
+    border-radius: 1000px;
+    height: 100px;
+    width: 100px;
+
+    margin: 20px auto;
+    box-sizing: border-box;
+
+
+    & #thumb {
+        justify-items: center;
+        align-content: center;
+
+        background: #101309;
+        border-radius: 1000px;
+        height: 90px;
+        width: 85px;
+        min-width: 90px;
+
+        box-sizing: border-box;
+    }
+
+    & .percent {
+        font-size: 22px;
+        font-weight: bold;
+        margin: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    #goal {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .goals {
+        & .goals-p1 {
+            font-size: 12px;
+            color: grey;
+            font-weight: 500;
+        }
+
+        & .goals-p2 {
+            font-size: 28px;
+            margin: 10px 0px 10px 0px;
+        }
+
+        & .goals-p2 span {
+            font-size: 12px;
+            color: grey;
+            margin: 10px 0px 10px 0px;
+        }
+    }
+
+    .progress .percent {
+        font-size: 24px;
+    }
+}
+
+/* Track info */
+#track-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 2em;
+    gap: 1em;
+}
+
+#track-info>.info:first-child {
+    grid-column: span 2;
+}
+
+.info {
+    background: var(--background-secondary);
+    border-style: solid;
+    border-width: var(--border-width);
+    border-color: var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--block-padding);
+
+    & img {
+        width: 20px;
+    }
+
+    & .card-header {
+        display: flex;
+        gap: 0.5em;
+    }
+
+    & .info-p1 {
+        font-size: 12px;
+        color: grey;
+        font-weight: 500;
+    }
+
+    & .info-p2 {
+        font-size: 24px;
+        color: #519C03;
+        font-weight: 500;
+        margin: 15px 0px 10px 0px;
+    }
+
+    & .info-p3 {
+        font-size: 12px;
+        color: grey;
+    }
+}
+
+@media (min-width: 1024px) {
+    #track-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    #track-info>.info:first-child {
+        grid-column: span 1;
+    }
+
+    .info {
+        padding: 30px;
+    }
+}
+
+/* Bottom Navbar */
+#bottom-nav {
+    background: black;
+    /* position: fixed; */
+
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+
+}
+
+.nav-btn {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    & button {
+        background-color: transparent;
+        border-color: transparent;
+
+        padding: 5px;
+    }
+
+    & img {
+        width: 25px;
+    }
+}
+
+button:hover {
+    background: #101309;
+    cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+    .nav-btn {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+
+        & img {
+            width: 30px;
+        }
+    }
+}
