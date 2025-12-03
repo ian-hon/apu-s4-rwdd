@@ -22,16 +22,15 @@ CREATE TABLE TASK (
     ID VARCHAR PRIMARY KEY,
     title VARCHAR,
     description VARCHAR,
+    curator_instructions VARCHAR,
     active BOOLEAN,
 
-    completion_reward INTEGER,
+    target INT,
+    excess_limit INT,
+    reward_rate INT,
     goal_type VARCHAR FOREIGN KEY REFERENCES(GOAL_TYPE.ID),
     goal_contribution DECIMAL,
-
-    excess_reward INT,
-    excess_goal_contribution INT,
-    max_excess_count INT,
-
+    
     occurance_type VARCHAR,
     schedule INT
 );
@@ -42,7 +41,7 @@ CREATE TABLE SUBMISSION (
     task_ID VARCHAR FOREIGN KEY REFERENCES(TASK.ID)
     media VARCHAR,
     submitted_timestamp TIMESTAMP,
-    excess_count INT,
+    action_count INT,
     status VARCHAR,
     curator VARCHAR NULLABLE FOREIGN KEY REFERENCES(USER.username)
 );
@@ -51,7 +50,7 @@ CREATE TABLE POINTS (
     ID VARCHAR PRIMARY KEY,
     amount INT,
     timestamp TIMESTAMP,
-    from VARCHAR FOREIGN KEY REFERENCES(SUBMISSION.ID)
+    submission VARCHAR FOREIGN KEY REFERENCES(SUBMISSION.ID)
 );
 
 CREATE TABLE REWARD (
@@ -73,7 +72,7 @@ CREATE TABLE REDEMPTION (
     price INT
 );
 
-CREATE TABLE GLOBAL_STATISTICS(
+CREATE TABLE GLOBAL_GOALS (
     ID VARCHAR PRIMARY KEY,
     title VARCHAR,
     description VARCHAR,
@@ -84,7 +83,7 @@ CREATE TABLE GLOBAL_STATISTICS(
     ending_time TIMESTAMP
 );
 
-CREATE TABLE PERSONAL_STATISTICS (
+CREATE TABLE PERSONAL_GOALS (
     ID VARCHAR PRIMARY KEY,
     user VARCHAR FOREIGN KEY REFERENCES(USER.username)
     title VARCHAR,
