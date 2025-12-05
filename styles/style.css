@@ -18,8 +18,8 @@
     --accent-background: color-mix(in srgb, var(--accent) 20%, transparent 80%);
     --accent-border: color-mix(in srgb, var(--accent) 10%, transparent 90%);
 
-    --error: #E7000B;
-    --error-secondary: #3A170F;
+    --error: #e76c00;
+    --error-secondary: color-mix(in srgb, var(--error) 20%, transparent 80%);
 
     --border-color: #202318;
     --border-radius: 16px;
@@ -64,7 +64,7 @@ button,
 a,
 span,
 button,
-p  {
+p {
     font-family: 'Jetbrains Mono';
     font-weight: 400;
 
