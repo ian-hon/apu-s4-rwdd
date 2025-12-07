@@ -5,6 +5,10 @@
 /* leaf icon */
 /* https://www.flaticon.com/free-icon/leaf_16912450?term=leaf&page=1&position=71&origin=search&related_id=16912450 */
 
+/* css nesting */
+/* we use the old method (prefix with &) just in case some browsers dont support without (sass-style) */
+/* https://caniuse.com/css-nesting */
+
 :root {
     --text: #ddd;
 

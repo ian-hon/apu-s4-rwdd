@@ -55,14 +55,6 @@
             &:last-child {
                 margin-right: 0;
             }
-
-            &[data-selected] {
-                color: var(--accent);
-                background: var(--accent-background);
-                border-color: var(--accent-border);
-
-                border-width: 2px;
-            }
         }
     }
 
@@ -121,11 +113,7 @@
                     border-color: var(--accent-background);
                 }
 
-                &[data-selected] {
-                    color: var(--accent);
-                    border-color: var(--accent-border);
-                    background: var(--accent-background);
-                }
+
             }
         }
     }
@@ -165,8 +153,6 @@
                 border-width: 1px;
                 border-color: var(--tertiary);
 
-                opacity: 0.5;
-
                 transition-duration: 0.3s;
             }
 
@@ -201,13 +187,7 @@
 
                 transition-duration: 0.3s;
 
-                opacity: 0.5;
-
                 cursor: alias;
-
-                &:hover {
-                    opacity: 1;
-                }
 
                 &#approved h5 {
                     color: var(--accent);
@@ -219,16 +199,98 @@
             }
         }
     }
-
-    & #submissions:has(#statistics #pending:hover) #pie #pending {
-        opacity: 1;
-    }
-
-    & #submissions:has(#statistics #approved:hover) #pie #approved {
-        opacity: 1;
-    }
-
-    & #submissions:has(#statistics #rejected:hover) #pie #rejected {
-        opacity: 1;
-    }
 }
+
+/* #region query/filter specific */
+#sidebar {
+
+    &[data-tab='submissions'] #tabs #submissions,
+    &[data-tab='tasks'] #tabs #tasks,
+    &[data-tab='schedule'] #tabs #schedule {
+        color: var(--accent);
+        background: var(--accent-background);
+        border-color: var(--accent-border);
+
+        border-width: 2px;
+    }
+
+    /* #region submissions tab */
+    /* submission tab filter */
+    &[data-filter='pending'] #filter #pending,
+    &[data-filter='rejected'] #filter #rejected,
+    &[data-filter='approved'] #filter #approved {
+        color: var(--accent);
+        border-color: var(--accent-border);
+        background: var(--accent-background);
+    }
+
+    /* #region selection animation thingy */
+    /* is there a dynamic/smarter way to do this? */
+    & #submissions:has(#statistics #pending:hover),
+    &[data-filter='pending'] {
+        & span:not(#pending) {
+            opacity: 0.5;
+        }
+
+        & #pie {
+            & #pending {
+                transform: scale(1.1);
+                z-index: 1000;
+                border: none;
+            }
+
+            &>div:not(#pending) {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    & #submissions:has(#statistics #approved:hover),
+    &[data-filter='approved'] {
+        & span:not(#approved) {
+            opacity: 0.5;
+        }
+
+        & #pie {
+            & #approved {
+                transform: scale(1.1);
+                z-index: 1000;
+                border: none;
+            }
+
+            &>div:not(#approved) {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    & #submissions:has(#statistics #rejected:hover),
+    &[data-filter='rejected'] {
+        & span:not(#rejected) {
+            opacity: 0.5;
+        }
+
+        & #pie {
+            & #rejected {
+                transform: scale(1.1);
+                z-index: 1000;
+                border: none;
+            }
+
+            &>div:not(#rejected) {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    /* #endregion */
+    /* #endregion */
+
+    /* #region tasks tab */
+    /* #endregion */
+
+    /* #region schedule tab */
+    /* #endregion */
+}
+
+/* #endregion */

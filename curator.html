@@ -12,14 +12,14 @@
 
 <body>
     <div id="page">
-        <div id="sidebar">
+        <div id="sidebar" data-filter="" data-tab="submissions">
             <div id="top">
                 <h3>CURATOR DASHBOARD</h3>
             </div>
             <div id="tabs">
-                <h5 class="border" data-selected>SUBMISSIONS</h5>
-                <h5 class="border">TASKS</h5>
-                <h5 class="border">SCHEDULE</h5>
+                <h5 id="submissions" class="border">SUBMISSIONS</h5>
+                <h5 id="tasks" class="border">TASKS</h5>
+                <h5 id="schedule" class="border">SCHEDULE</h5>
             </div>
             <!-- <input> -->
             <hr>
@@ -29,9 +29,9 @@
                 </div>
                 <h6 id="filter-subtitle">SHOW ONLY:</h6>
                 <div id="filter">
-                    <h6 class="border" data-selected>PENDING</h6>
-                    <h6 class="border">APPROVED</h6>
-                    <h6 class="border">REJECTED</h6>
+                    <h6 id="pending" class="border">PENDING</h6>
+                    <h6 id="approved" class="border">APPROVED</h6>
+                    <h6 id="rejected" class="border">REJECTED</h6>
                 </div>
             </div>
             <hr>
