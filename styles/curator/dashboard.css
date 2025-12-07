@@ -1,8 +1,57 @@
 #page {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
+
+    flex-direction: row-reverse;
 
     height: 100vh;
     width: 100%;
+}
+
+#content {
+    flex: 1;
+    height: 100%;
+
+    &>div {
+        margin: var(--screen-padding);
+    }
+
+    & #submissions {
+        &>#header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            flex-direction: column;
+
+            & span {
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                flex-direction: row;
+            }
+
+            & #submission-count {
+                opacity: 0.5;
+
+                margin-left: 1ch;
+            }
+
+            & #last-updated {
+                opacity: 0.3;
+                font-style: italic;
+                font-weight: 300;
+            }
+        }
+
+        &>#container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, var(--submission-card-width));
+            justify-content: center;
+            gap: 1.5em;
+
+            margin-top: 2em;
+        }
+    }
 }
