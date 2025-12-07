@@ -1,4 +1,6 @@
 #page {
+    overflow: hidden;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,6 +14,17 @@
 #content {
     flex: 1;
     height: 100%;
+
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--tertiary);
+        border-radius: 1000px;
+    }
 
     &>div {
         margin: var(--screen-padding);
