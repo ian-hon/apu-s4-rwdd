@@ -81,8 +81,8 @@ body {
     scrollbar-width: none;
 }
 
-/* Achievement */
-#achievement {
+/* Statistic */
+#statistic {
     display: grid;
     position: relative;
     grid-template-columns: 1fr 1fr;
@@ -96,7 +96,7 @@ body {
     }
 }
 
-.achm {
+.ststc {
     display: block;
     padding: 25px;
 
@@ -105,7 +105,7 @@ body {
     background: #101309;
 }
 
-.achm .p1 {
+.ststc .p1 {
     font-size: 14px;
     color: grey;
     font-weight: 600;
@@ -113,13 +113,13 @@ body {
     margin-left: 30px;
 }
 
-.achm .p2 {
+.ststc .p2 {
     font-size: 24px;
     font-weight: 600;
     margin: 15px 0px 5px 0px;
 }
 
-.achm .p3 {
+.ststc .p3 {
     font-family: IBM Plex Mono;
     font-size: 13px;
     font-weight: 400;
@@ -137,7 +137,7 @@ body {
         }
     }
 
-    #achievement {
+    #statistic {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         /* grid-template-rows: auto; */
@@ -419,6 +419,134 @@ body {
 
     .info {
         padding: 30px;
+    }
+}
+
+/* Achievements */
+#personalGoal {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 2em;
+    gap: 1em;
+}
+
+#pg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & h4 {
+        font-size: 16px;
+    }
+}
+
+#pg-counter {
+    font-size: 14px;
+    opacity: 0.4;
+}
+
+.personalGoals {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+.pg {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    gap: 1em;
+
+    background: var(--background-secondary);
+    border-style: solid;
+    border-width: var(--border-width);
+    border-color: var(--border-color);
+    border-radius: var(--border-radius);
+    padding: var(--block-padding);
+
+    & img {
+        width: 60px;
+        height: auto;
+
+        border: 2px solid #222;
+        border-radius: 10px;
+
+        padding: 10px;
+    }
+
+    & .pg-p1 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 0.2em;
+        margin-bottom: 0.6em;
+    }
+
+    & .pg-p2 {
+        font-size: 13px;
+        opacity: 0.6;
+    }
+
+    & .pg-p3 {
+        position: absolute;
+        top: 18px;
+        right: 10px;
+
+        font-size: 11px;
+        padding: 5px;
+
+        background: rgba(3, 89, 3, 0.56);
+        border: 2px solid;
+        color: #84ff00;
+        border-color: var(--border-color);
+        border-radius: 8px;
+
+        &.yellow {
+            background: rgb(51, 51, 2);
+            color: rgb(255, 255, 0);
+        }
+
+        &.purple {
+            background: rgb(42, 6, 42);
+            color: rgb(255, 0, 255);
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .personalGoals {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #pg-header h4 {
+        font-size: 20px;
+    }
+
+    .pg {
+        padding: 30px;
+
+        & img {
+            width: 70px;
+            height: auto;
+        }
+
+        & .pg-p1 {
+            font-size: 22px;
+        }
+
+        & .pg-p2 {
+            font-size: 14px;
+        }
+
+        & .pg-p3 {
+            top: 20px;
+            right: 20px;
+
+            font-size: 13px;
+            padding: 6px;
+        }
     }
 }
 
