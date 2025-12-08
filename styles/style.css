@@ -41,6 +41,15 @@
     --block-padding: 1rem;
 
     --submission-card-width: 30em;
+
+    --pending: #F0B000;
+    --pending-background: color-mix(in srgb, var(--pending), transparent 80%);
+
+    --approved: var(--accent);
+    --approved-background: var(--accent-background);
+
+    --rejected: var(--error);
+    --rejected-background: var(--error-secondary);
 }
 
 html,
@@ -569,6 +578,8 @@ h6 {
             user-select: none;
             -webkit-user-select: none;
 
+            border-width: 2px;
+
             &:active {
                 opacity: 0.5;
             }
@@ -577,15 +588,56 @@ h6 {
                 background: var(--error-secondary);
                 color: var(--error);
                 border-color: color-mix(in srgb, var(--error), transparent 70%);
-                border-width: 2px;
             }
 
             &#approve {
                 background: var(--accent-background);
                 color: var(--accent);
                 border-color: color-mix(in srgb, var(--accent), transparent 70%);
-                border-width: 2px;
             }
         }
     }
+
+    /* #region data specific */
+    &[data-occurance='daily'] {
+        & #data #task #rewards #occurance {
+            color: var(--daily);
+            background: var(--daily-background);
+            border-color: var(--daily);
+        }
+    }
+
+    &[data-occurance='weekly'] {
+        & #data #task #rewards #occurance {
+            color: var(--weekly);
+            background: var(--weekly-background);
+            border-color: var(--weekly);
+        }
+    }
+
+    &[data-status='pending'] {
+        & #header #tag {
+            background: var(--pending-background);
+            color: var(--pending);
+            border-color: var(--pending);
+        }
+    }
+
+    &[data-status='approved'] {
+        & #header #tag {
+            background: var(--approved-background);
+            color: var(--approved);
+            border-color: var(--approved);
+        }
+    }
+
+    &[data-status='rejected'] {
+        & #header #tag {
+            background: var(--rejected-background);
+            color: var(--rejected);
+            border-color: var(--rejected);
+        }
+    }
+
+    /* #endregion */
 }
