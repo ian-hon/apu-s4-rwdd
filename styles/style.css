@@ -332,6 +332,7 @@ h6 {
 .submission-card {
     display: block;
     width: var(--submission-card-width);
+    height: min-content;
 
     padding: var(--block-padding);
 
