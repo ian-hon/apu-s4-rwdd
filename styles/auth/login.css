@@ -52,7 +52,7 @@ input {
     border: 1.5px solid var(--accent-border);
 
     background-color: #181d0d;
-    color: var(--text-primary);
+    color: var(--text);
 
     width: 100%;
     padding: 1em;
@@ -65,10 +65,6 @@ input {
 
         color: grey;
         opacity: 50%;
-    }
-
-    &[type=text] {
-        color: var(--text);
     }
 }
 
