@@ -16,33 +16,60 @@
         </div>
 
         <div id="login-page-box">
-            <div id="welcome-back">
+            <div id="greeting">
                 <h3>Welcome Back</h3>
                 <h4 id="subtitle">Sign in to continue your journey</h4>
             </div>
-            <div id="input-section">
-                <h3>Email</h3>
-                <input type="text" placeholder="your@email.com">
+
+            <form action="" method="post" name="login">
+                <div id="input-section">    
+                    <h4>Email</h4>
+                    <div id="input-form">
+                        <div id="input-icon">
+                            <img id="email-icon" src="/assets/email.svg" alt="email-icon">
+                        </div>
+                        <input type="email" placeholder="your@email.com"> 
+                    </div>
+                    <h4>Password</h4>
+                    <div id="input-form">
+                        <div id="input-icon">
+                            <img id="password-icon" src="/assets/password.svg" alt="password-icon">
+                        </div>
+                        <input type="password" placeholder="Enter your password">
+                    </div>
+                </div>
+            </form>
+
+
+            <div id="remember-me-forgot-password">
+                <div id="remember-me">
+                    <div>
+                        <input type="checkbox">
+                    </div>                  
+                    <div>
+                        <p id="remember-me-text">Remember me</p>
+                    </div>  
+                </div>
+                <div id="forgot-password">
+                    <a href="/auth/password-recovery.html" target="_blank">Forgot Password?</a>
+                </div>
             </div>
-            <div id="input-section">
-                <h3>Password</h3>
-                <input type="text" placeholder="Enter your password">
-            </div>
-            <div id="forgot-password">
-                <a href="https://www.wikipedia.com/" target="_blank">Forgot Password?</a>
-            </div>
+            
+            
             <div>
-                <h5 id="or-page-divider">or</h5>
+                <h5 id="or-continue-with">or</h5>
             </div>
+
             <div id="continue-with">
                 <button class="button">Continue with Google</button>
                 <button class="button">Continue with Apple</button>
             </div>
+
             <div>
                 <button class="button" id="login-button">Login</button>
             </div>
             <div id="no-account">
-                <h4>Don't have an account?<a href="/auth/register.html">Sign Up</a></h4>
+                <h3>Don't have an account?<a href="/auth/register.html">Sign Up</a></h3>
             </div>
         </div>
     </div>

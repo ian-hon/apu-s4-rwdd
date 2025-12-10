@@ -4,14 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | EcoQuest</title>
-    <link rel="stylesheet" href="../styles/login.css">
-    <link rel="stylesheet" href="../styles/register.css">
+    <title>Registration | EcoQuest</title>
     <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/auth/login.css">
+    <link rel="stylesheet" href="../styles/auth/register.css">
 </head>
 
 <body>
-    <script src="./scripts/script.js"></script>
+    <div id="parent">
+        <div id="logo">
+            <h1>EcoQuest</h1>
+        </div>
+
+        <div id="login-page-box">
+            <div id="greeting">
+                <h3>Welcome</h3>
+                <h4 id="subtitle">Sign up to begin your journey</h4>
+            </div>
+
+            <form action="" method="post" name="login">
+                <div id="input-section">    
+                    <h4>Email</h4>
+                    <div id="input-form">
+                        <div id="input-icon">
+                            <img id="email-icon" src="/assets/email.svg" alt="email-icon">
+                        </div>
+                        <input type="email" placeholder="your@email.com"> 
+                    </div>
+                    <h4>Password</h4>
+                    <div id="input-form">
+                        <div id="input-icon">
+                            <img id="password-icon" src="/assets/password.svg" alt="password-icon">
+                        </div>
+                        <input type="password" placeholder="Enter your password">
+                    </div>
+                    <h4>Password</h4>
+                    <div id="input-form">
+                        <div id="input-icon">
+                            <img id="password-icon" src="/assets/password.svg" alt="password-icon">
+                        </div>
+                        <input type="password" placeholder="Enter your password">
+                    </div>
+                </div>
+            </form>
+
+            <div id="remember-me-forgot-password">
+                <div id="remember-me">
+                    <div>
+                    <input type="checkbox">
+                    </div>                  
+                    <div>
+                        <p id="remember-me-text">Remember me</p>
+                    </div>  
+                </div>
+            </div>
+            
+            <div>
+                <button class="button" id="login-button">Create Account</button>
+            </div>
+            <div id="no-account">
+                <h3>Already have an account?<a href="/auth/login.html">Sign In</a></h3>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/script.js"></script>
 </body>
 
 </html>

@@ -7,6 +7,7 @@
 
 :root {
     --text: #ddd;
+    --subtitle: #808080;
 
     --background: #000;
     --background-secondary: #101309;
@@ -59,6 +60,7 @@ h3,
 h4,
 h5,
 h6,
+p,
 input,
 button,
 a {
