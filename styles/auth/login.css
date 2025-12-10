@@ -93,7 +93,7 @@
     font-size: 0.9rem;
 
     background-color: #181d0d;
-    color: var(--text-primary);
+    color: var(--text);
 
     border-top: 0.1em solid var(--accent-border);
     border-right: 0.1em solid var(--accent-border);
@@ -109,24 +109,8 @@
             outline: 0;
         }
 
-        &::placeholder {
-            padding: 1em;
-
-            color: grey;
-            opacity: 50%;
-        }
-
-        &[type="text"] {
-            color: var(--text);
-        }
-
-        &[type="email"] {
-            color: var(--text);
-        }
-
-        &[type="password"] {
-            color: var(--text);
-        }
+        color: grey;
+        opacity: 50%;
     }
 }
 
