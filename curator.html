@@ -12,7 +12,7 @@
 
 <body>
     <div id="page">
-        <div id="sidebar" data-filter="" data-tab="submissions">
+        <div id="sidebar" data-filter="" data-tab="tasks">
             <div id="top">
                 <h3>CURATOR DASHBOARD</h3>
             </div>
@@ -24,15 +24,19 @@
             <!-- <input> -->
             <hr>
             <div id="query">
-                <div id="search">
-                    <input class="border" placeholder="🔍 search submissions">
+                <div id="submissions">
+                    <div id="search">
+                        <input class="border" placeholder="🔍 search submissions">
+                    </div>
+                    <h6 id="filter-subtitle">SHOW ONLY:</h6>
+                    <div id="filter">
+                        <h6 id="pending" class="border">PENDING</h6>
+                        <h6 id="approved" class="border">APPROVED</h6>
+                        <h6 id="rejected" class="border">REJECTED</h6>
+                    </div>
                 </div>
-                <h6 id="filter-subtitle">SHOW ONLY:</h6>
-                <div id="filter">
-                    <h6 id="pending" class="border">PENDING</h6>
-                    <h6 id="approved" class="border">APPROVED</h6>
-                    <h6 id="rejected" class="border">REJECTED</h6>
-                </div>
+                <div id="tasks"></div>
+                <div id="schedule"></div>
             </div>
             <hr>
             <div id="overview">
@@ -59,6 +63,8 @@
                         </span>
                     </div>
                 </div>
+                <div id="schedule"></div>
+                <div id="tasks"></div>
             </div>
         </div>
         <div id="content">
@@ -260,6 +266,87 @@
                 </div>
 
             </div>
+            <div id="tasks">
+                <div id="header">
+                    <div id="text">
+                        <h2>Task Catalogue</h2>
+                        <h5>Create and manage all tasks (40 available)</h5>
+                    </div>
+                    <div id="action" class="border">
+                        <h2>+</h2>
+                        <h4>CREATE TASK</h4>
+                    </div>
+                </div>
+                <div id="container">
+                    <div class="task-card-detailed">
+                        <div id="header">
+                            <div id="data">
+                                <span>
+                                    <h3>Recycle 10 plastic bottles</h3>
+                                    <h6 class="border" id="occurance-tag">DAILY</h6>
+                                    <h6 class="border" id="active-tag">ACTIVE</h6>
+                                </span>
+                                <h5>Find a recycling bin and recycling 10 separate plastic bottles</h5>
+                            </div>
+                            <div id="actions">
+                                <img class="border" src="./assets/edit.svg">
+                                <img class="border" src="./assets/trash.svg">
+                            </div>
+                        </div>
+                        <div id="statistics">
+                            <div class="border" id="points">
+                                <img src="./assets/leaf.svg">
+                                <h5>400</h5>
+                            </div>
+                            <div class="border" id="points">
+                                <img src="./assets/leaf.svg">
+                                <h5>15 per excess (5 excess max)</h5>
+                            </div>
+                            <div class="border" id="completion_rate">
+                                <img src="./assets/completion_rate.svg">
+                                <h5>50% completion rate</h5>
+                            </div>
+                        </div>
+                        <div id="schedule">
+                            <div id="scheduled-days" class="border">
+                                <h5 class="box-title">SCHEDULED FOR</h5>
+                                <div id="days">
+                                    <h4 class="border" data-active>M</h4>
+                                    <h4 class="border">T</h4>
+                                    <h4 class="border" data-active>W</h4>
+                                    <h4 class="border">T</h4>
+                                    <h4 class="border">S</h4>
+                                    <h4 class="border">S</h4>
+                                </div>
+                            </div>
+                            <div id="curator-note" class="border">
+                                <!-- the (!) img icon here -->
+                                <!-- <img> -->
+                                <h5>
+                                    <!-- could use ::before element here -->
+                                    NOTE TO CURATORS :
+                                </h5>
+                                <h5>
+                                    Make sure all bottles are plastic bottles, not aluminium cans etc.
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-card-detailed">
+
+                    </div>
+                    <div class="task-card-detailed">
+
+                    </div>
+                    <div class="task-card-detailed">
+
+                    </div>
+                    <div class="task-card-detailed">
+
+                    </div>
+                </div>
+            </div>
+            <div id="schedule"></div>
         </div>
     </div>
     <script src="./scripts/script.js"></script>

@@ -204,6 +204,18 @@
 /* #region query/filter specific */
 #sidebar {
 
+    &[data-tab='submissions'] #overview>div:not(#submissions),
+    &[data-tab='tasks'] #overview>div:not(#tasks),
+    &[data-tab='schedule'] #overview>div:not(#schedule) {
+        display: none;
+    }
+
+    &[data-tab='submissions'] #query>div:not(#submissions),
+    &[data-tab='tasks'] #query>div:not(#tasks),
+    &[data-tab='schedule'] #query>div:not(#schedule) {
+        display: none;
+    }
+
     &[data-tab='submissions'] #tabs #submissions,
     &[data-tab='tasks'] #tabs #tasks,
     &[data-tab='schedule'] #tabs #schedule {

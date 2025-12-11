@@ -28,6 +28,8 @@
     --weekly: #8B5CF6;
     --weekly-background: color-mix(in srgb, var(--weekly), transparent 80%);
 
+    /* we use this red value */
+    /* make a new variable for the fire one */
     --error: #E7000B;
     --error-secondary: #3A170F;
 
@@ -119,6 +121,7 @@ h6 {
 .border,
 .progressbar,
 .task-card,
+.task-card-detailed,
 .submission-card {
     background: var(--background-secondary);
 
@@ -206,6 +209,203 @@ h6 {
 
             color: var(--accent);
         }
+    }
+}
+
+.task-card-detailed {
+    width: 100%;
+
+    padding: var(--screen-padding);
+
+    & #header {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start !important;
+        flex-direction: row;
+
+        & #data {
+            & span {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                width: max-content;
+
+                & #occurance-tag,
+                & #active-tag {
+                    padding: 0.4em 2ch;
+                    margin-left: 2ch;
+
+                    background: var(--daily-background);
+                    border-color: var(--daily);
+                    color: var(--daily);
+
+                    border-radius: 0.7em;
+                    border-width: 1px;
+                }
+            }
+
+            &>h5 {
+                margin-top: 1em;
+                opacity: 0.8;
+            }
+        }
+
+        & #actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & img {
+                background: var(--tertiary-background);
+                border-color: var(--tertiary);
+
+                height: 3em;
+                padding: 0.6em;
+
+                opacity: 0.8;
+                transition-duration: 0.3s;
+
+                cursor: pointer;
+
+                &:hover {
+                    opacity: 1;
+                }
+
+                &:last-child {
+                    margin-left: 1.5ch;
+                }
+            }
+        }
+    }
+
+    & #statistics {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        margin-top: 1em;
+
+        & #points,
+        & #completion_rate {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 0.3em 1.5ch;
+
+            background: var(--accent-background);
+            border-color: var(--accent);
+            border-radius: 0.7em;
+            border-width: 1.5px;
+
+            & img {
+                height: 1em;
+            }
+
+            & h5 {
+                margin-left: 1ch;
+
+                color: var(--accent);
+            }
+
+            &:not(:first-child) {
+                margin-left: 1ch;
+            }
+        }
+
+        & #completion_rate {
+            background: var(--weekly-background);
+            border-color: var(--weekly);
+
+            & h5 {
+                color: var(--weekly);
+            }
+        }
+    }
+
+    & #scheduled-days {
+        position: relative;
+
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        width: max-content;
+
+        & .box-title {
+            color: #fff7;
+            background: var(--background-secondary);
+        }
+
+        & #days {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & h4 {
+                background: var(--tertiary-background);
+                border-color: var(--tertiary);
+                border-width: 2px;
+
+                padding: 0.7em 1.5ch;
+
+                transition-duration: 0.3s;
+
+                cursor: pointer;
+                user-select: none;
+                -webkit-user-select: none;
+
+                &:not(:first-child) {
+                    margin-left: 1ch;
+                }
+
+                &[data-active] {
+                    border-color: var(--daily);
+                    background: var(--daily-background);
+                    color: var(--daily);
+                }
+
+                &:not([data-active]):hover {
+                    border-color: color-mix(in srgb, var(--tertiary) 80%, var(--daily));
+                    background: color-mix(in srgb, var(--tertiary-background) 80%, var(--daily-background));
+                    /* color: color-mix(in srgb, var(--tertiary) 80%, var(--daily)); */
+                }
+            }
+        }
+    }
+
+    & #curator-note {
+        margin-left: 2ch;
+
+        margin-top: 0;
+
+        padding-top: 0.8em;
+
+        flex: 1;
+        border-color: var(--daily);
+        background: var(--daily-background);
+
+        & h5 {
+            font-style: italic;
+
+            color: var(--daily);
+
+            &:first-child {
+                font-weight: 700;
+                font-style: normal;
+            }
+        }
+    }
+
+    & #schedule {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        margin-top: 2em;
     }
 }
 
