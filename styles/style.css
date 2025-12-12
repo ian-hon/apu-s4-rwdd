@@ -239,9 +239,40 @@ h6 {
                     background: var(--daily-background);
                     border-color: var(--daily);
                     color: var(--daily);
+                    font-weight: bold;
 
                     border-radius: 0.7em;
                     border-width: 1px;
+                }
+
+                & #active-tag {
+                    border-color: var(--tertiary);
+                    background: var(--tertiary-background);
+                    color: var(--accent);
+                }
+
+                & #completion-rate {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    padding: 0.3em 1.5ch;
+                    margin-left: 2ch;
+
+                    background: var(--weekly-background);
+                    border-color: var(--weekly);
+                    border-radius: 0.7em;
+                    border-width: 1.5px;
+
+                    & img {
+                        height: 1em;
+                    }
+
+                    & h5 {
+                        margin-left: 1ch;
+
+                        color: var(--weekly);
+                    }
                 }
             }
 
@@ -287,7 +318,7 @@ h6 {
         margin-top: 1em;
 
         & #points,
-        & #completion_rate {
+        & #completion-rate {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -314,73 +345,177 @@ h6 {
             }
         }
 
-        & #completion_rate {
+        /* & #completion-rate {
             background: var(--weekly-background);
             border-color: var(--weekly);
 
             & h5 {
                 color: var(--weekly);
             }
-        }
+        } */
     }
 
-    & #scheduled-days {
-        position: relative;
-
+    & #holder {
         display: flex;
-        justify-content: center;
-        align-items: flex-start;
+        justify-content: flex-start;
+        align-items: center;
 
-        flex-direction: column;
+        margin-top: 2em;
 
-        width: max-content;
-
-        & .box-title {
-            color: #fff7;
-            background: var(--background-secondary);
+        &>div {
+            border-color: var(--tertiary);
+            border-width: 2px;
         }
 
-        & #days {
+        & #scheduled-days {
+            position: relative;
+
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+
+            flex-direction: column;
+
+            width: max-content;
+
+            /* margin-left: 2ch; */
+
+            & #days {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                & h4 {
+                    background: var(--tertiary-background);
+                    border-color: var(--tertiary);
+                    border-width: 2px;
+
+                    padding: 0.7em 1.5ch;
+
+                    transition-duration: 0.3s;
+
+                    cursor: pointer;
+                    user-select: none;
+                    -webkit-user-select: none;
+
+                    &:not(:first-child) {
+                        margin-left: 1ch;
+                    }
+
+                    &[data-active] {
+                        border-color: var(--daily);
+                        background: var(--daily-background);
+                        color: var(--daily);
+                    }
+
+                    &:not([data-active]):hover {
+                        border-color: color-mix(in srgb, var(--tertiary) 80%, var(--daily));
+                        background: color-mix(in srgb, var(--tertiary-background) 80%, var(--daily-background));
+                        /* color: color-mix(in srgb, var(--tertiary) 80%, var(--daily)); */
+                    }
+                }
+            }
+
+            & .box-title {
+                color: #fff7;
+                background: var(--background-secondary);
+            }
+        }
+
+        & #rewards {
             display: flex;
             justify-content: center;
             align-items: center;
 
-            & h4 {
+            margin-left: 4ch;
+
+            &>div {
+                position: relative;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
                 background: var(--tertiary-background);
                 border-color: var(--tertiary);
                 border-width: 2px;
 
-                padding: 0.7em 1.5ch;
+                & #calculation,
+                & #result {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
 
-                transition-duration: 0.3s;
-
-                cursor: pointer;
-                user-select: none;
-                -webkit-user-select: none;
-
-                &:not(:first-child) {
-                    margin-left: 1ch;
+                    & img {
+                        margin-left: 0.7ch;
+                        height: 1em;
+                    }
                 }
 
-                &[data-active] {
-                    border-color: var(--daily);
-                    background: var(--daily-background);
-                    color: var(--daily);
+                & #calculation {
+                    opacity: 0.7;
+
+                    & h6 {
+                        color: var(--accent);
+                        font-style: italic;
+                    }
                 }
 
-                &:not([data-active]):hover {
-                    border-color: color-mix(in srgb, var(--tertiary) 80%, var(--daily));
-                    background: color-mix(in srgb, var(--tertiary-background) 80%, var(--daily-background));
-                    /* color: color-mix(in srgb, var(--tertiary) 80%, var(--daily)); */
+                & #result {
+                    margin-top: 0.4em;
+
+                    & h3 {
+                        color: var(--accent);
+                        font-weight: bold;
+                    }
+
+                    & img {
+                        height: 1.3em;
+                    }
+                }
+
+                & .box-title {
+                    color: var(--accent);
+                    font-weight: bold;
+
+                    background-color: var(--background-secondary);
+                    background-image: linear-gradient(var(--tertiary-background), var(--tertiary-background));
+                    background-size: 100% calc(50% + 2px);
+                    /* 2px because border-width */
                 }
             }
+
+            &>h3 {
+                margin: 0 1ch;
+                font-weight: bold;
+                opacity: 0.6;
+            }
         }
+
+        /* & #completion-rate {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            background: var(--weekly-background);
+            border-color: var(--weekly);
+
+            margin-left: 4ch;
+
+            & h2 {
+                color: var(--weekly);
+            }
+
+            & h5 {
+                color: var(--weekly);
+            }
+        } */
     }
 
     & #curator-note {
-        margin-left: 2ch;
-
-        margin-top: 0;
+        margin-top: 1em;
 
         padding-top: 0.8em;
 
@@ -390,23 +525,58 @@ h6 {
 
         & h5 {
             font-style: italic;
-
             color: var(--daily);
 
-            &:first-child {
+            white-space: pre-line;
+
+            &::before {
+                content: "NOTE TO CURATORS :\A";
                 font-weight: 700;
                 font-style: normal;
             }
         }
     }
 
-    & #schedule {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-
-        margin-top: 2em;
+    /* #region data specific selectors */
+    &[data-occurance="daily"] {
+        & #header #data #occurance-tag {
+            &::before {
+                content: "DAILY";
+            }
+        }
     }
+
+    &[data-occurance="weekly"] {
+        & #header #data #occurance-tag {
+            background: var(--weekly-background);
+            color: var(--weekly);
+            border-color: var(--weekly);
+
+            &::before {
+                content: "WEEKLY";
+            }
+        }
+    }
+
+    &[data-active="true"] {
+        & #header #data #active-tag {
+            &::before {
+                content: "ACTIVE";
+            }
+        }
+    }
+
+    &[data-active="false"] {
+        & #header #data #active-tag {
+            color: color-mix(in srgb, var(--text) 30%, transparent);
+
+            &::before {
+                content: "INACTIVE";
+            }
+        }
+    }
+
+    /* #endregion */
 }
 
 .progressbar {
