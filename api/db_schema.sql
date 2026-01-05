@@ -1,5 +1,5 @@
 CREATE TABLE ROLES (
-    role VARCHAR(100) PRIMARY KEY
+    role VARCHAR(20) PRIMARY KEY
 );
 
 CREATE TABLE GOAL_TYPE (
@@ -10,12 +10,12 @@ CREATE TABLE GOAL_TYPE (
 );
 
 CREATE TABLE USERS (
-    username VARCHAR(100) PRIMARY KEY,
-    password VARCHAR(100),
+    username VARCHAR(200) PRIMARY KEY,
+    password VARCHAR(64),
     name VARCHAR(200),
     DOB INT,
-    profile_picture VARCHAR(500),
-    role VARCHAR(100),
+    profile_picture BLOB,
+    role VARCHAR(20),
     FOREIGN KEY (role) REFERENCES ROLES(role)
 );
 
@@ -41,13 +41,13 @@ CREATE TABLE TASK (
 
 CREATE TABLE SUBMISSION (
     ID VARCHAR(50) PRIMARY KEY,
-    user VARCHAR(100),
+    user VARCHAR(200),
     task_ID VARCHAR(50),
-    media VARCHAR(500),
+    media BLOB,
     submitted_timestamp INT,
     action_count INT,
-    status VARCHAR(15),
-    curator VARCHAR(100),
+    status VARCHAR(20),
+    curator VARCHAR(200),
 
     FOREIGN KEY (user) REFERENCES USERS(username),
     FOREIGN KEY (task_ID) REFERENCES TASK(ID),
@@ -65,10 +65,10 @@ CREATE TABLE POINTS (
 
 CREATE TABLE REWARD (
     ID VARCHAR(50) PRIMARY KEY,
-    title VARCHAR(50),
+    title VARCHAR(200),
     description VARCHAR(2000),
     price INT,
-    media VARCHAR(500),
+    media BLOB,
     active BOOLEAN,
     remaining INT,
     initial INT
@@ -77,7 +77,7 @@ CREATE TABLE REWARD (
 CREATE TABLE REDEMPTION (
     ID VARCHAR(50) PRIMARY KEY,
     reward_ID VARCHAR(50),
-    user VARCHAR(100),
+    user VARCHAR(200),
     timestamp INT,
     price INT,
 
@@ -94,12 +94,13 @@ CREATE TABLE GLOBAL_GOALS (
     goal DECIMAL,
     starting_time INT,
     ending_time INT,
+
     FOREIGN KEY (goal_type) REFERENCES GOAL_TYPE(ID)
 );
 
 CREATE TABLE PERSONAL_GOALS (
     ID VARCHAR(50) PRIMARY KEY,
-    user VARCHAR(100),
+    user VARCHAR(200),
     title VARCHAR(200),
     description VARCHAR(2000),
     media VARCHAR(500),

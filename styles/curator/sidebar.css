@@ -39,6 +39,9 @@
 
         margin-top: 1em;
 
+        user-select: none;
+        -webkit-user-select: none;
+
         &>* {
             padding: 0.6em 2ch;
             margin-right: 1ch;
@@ -94,6 +97,9 @@
 
             margin-top: 0.3em;
 
+            user-select: none;
+            -webkit-user-select: none;
+
             &>h6 {
                 padding: 0.5em 2ch;
                 background: var(--tertiary-background);
@@ -112,8 +118,6 @@
 
                     border-color: var(--accent-background);
                 }
-
-
             }
         }
     }
@@ -196,6 +200,10 @@
                 &#rejected h5 {
                     color: var(--error);
                 }
+
+                &#pending h5 {
+                    color: var(--pending);
+                }
             }
         }
     }
@@ -203,6 +211,18 @@
 
 /* #region query/filter specific */
 #sidebar {
+
+    &[data-tab='submissions'] #overview>div:not(#submissions),
+    &[data-tab='tasks'] #overview>div:not(#tasks),
+    &[data-tab='schedule'] #overview>div:not(#schedule) {
+        display: none;
+    }
+
+    &[data-tab='submissions'] #query>div:not(#submissions),
+    &[data-tab='tasks'] #query>div:not(#tasks),
+    &[data-tab='schedule'] #query>div:not(#schedule) {
+        display: none;
+    }
 
     &[data-tab='submissions'] #tabs #submissions,
     &[data-tab='tasks'] #tabs #tasks,
