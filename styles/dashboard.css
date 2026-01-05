@@ -32,32 +32,25 @@
 
     margin-top: var(--screen-padding) !important;
 
-    & #logo {
+    & #stats {
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
-
-        flex: 1;
-
-        /* make only the first child have accent colour */
-        /* in this case, the "eco" in ecoquest */
-        &>*:first-of-type {
-            color: var(--accent);
-        }
     }
 
-    & #leaves {
+    & #leaves,
+    & #streak {
         display: flex;
         justify-content: center;
         align-items: center;
 
         background: var(--accent-background);
 
-        padding: 0.6em 2ch;
+        padding: 0.6em 1.5ch;
 
         border-radius: var(--border-radius);
         border-style: solid;
-        border-width: 1.5px;
+        border-width: 2px;
         border-color: var(--accent-border);
 
         & h4 {
@@ -68,6 +61,20 @@
 
         & img {
             height: 1.5em;
+        }
+    }
+
+    & #streak {
+        margin-left: 1.5ch;
+
+        border-color: var(--error-secondary);
+        background: var(--error-secondary);
+
+        & h4 {
+            margin-right: 0;
+            margin-left: 0.5ch;
+
+            color: var(--error);
         }
     }
 
