@@ -42,7 +42,7 @@
         margin: var(--screen-padding);
     }
 
-    & #submissions {
+    /* & #submissions {
         &>#header {
             display: flex;
             justify-content: flex-start;
@@ -78,9 +78,9 @@
 
             margin-top: 2em;
         }
-    }
+    } */
 
-    & #tasks {
+    /* & #tasks {
         & #header {
             display: flex;
             justify-content: space-between;
@@ -89,7 +89,6 @@
             & #text {
                 & h5 {
                     opacity: 0.5;
-                    /* font-style: italic; */
                 }
             }
 
@@ -138,5 +137,5 @@
 
             margin-top: 2em;
         }
-    }
+    } */
 }

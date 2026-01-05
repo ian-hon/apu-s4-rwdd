@@ -130,7 +130,7 @@
         opacity: 0.5;
     }
 
-    & #submissions {
+    /* & #submissions {
         & #pie {
             position: relative;
 
@@ -206,7 +206,7 @@
                 }
             }
         }
-    }
+    } */
 }
 
 /* #region query/filter specific */

@@ -1,0 +1,120 @@
+#content {
+    & #submissions {
+        &>#header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            flex-direction: column;
+
+            & span {
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                flex-direction: row;
+            }
+
+            & #submission-count {
+                opacity: 0.5;
+
+                margin-left: 1ch;
+            }
+
+            & #last-updated {
+                opacity: 0.3;
+                font-style: italic;
+                font-weight: 300;
+            }
+        }
+
+        &>#container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, var(--submission-card-width));
+            justify-content: center;
+            gap: 1.5em;
+
+            margin-top: 2em;
+        }
+    }
+}
+
+
+#sidebar #overview {
+    & #submissions {
+        & #pie {
+            position: relative;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 100%;
+            height: 15em;
+
+            margin-top: 1em;
+
+            &>div {
+                position: absolute;
+
+                top: 0;
+
+                height: 15em;
+                width: 15em;
+
+                border-radius: 1000px;
+
+                border-style: solid;
+                border-width: 1px;
+                border-color: var(--tertiary);
+
+                transition-duration: 0.3s;
+            }
+
+            & #rejected {
+                background: conic-gradient(var(--error) 50deg, transparent 50deg);
+            }
+
+            & #approved {
+                background: conic-gradient(transparent 50deg, var(--accent) 50deg 80deg, transparent 80deg);
+            }
+
+            & #pending {
+                background: conic-gradient(transparent 80deg, var(--tertiary-background) 80deg 360deg, transparent 360deg);
+            }
+        }
+
+        & #statistics {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            flex-direction: column;
+
+            margin-top: 1em;
+
+            & span {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                min-width: 15em;
+
+                transition-duration: 0.3s;
+
+                cursor: alias;
+
+                &#approved h5 {
+                    color: var(--accent);
+                }
+
+                &#rejected h5 {
+                    color: var(--error);
+                }
+
+                &#pending h5 {
+                    color: var(--pending);
+                }
+            }
+        }
+    }
+}
