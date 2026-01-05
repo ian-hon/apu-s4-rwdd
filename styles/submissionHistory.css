@@ -1,0 +1,258 @@
+body {
+    color: white;
+    font-family: geist;
+    min-height: 100vh !important;
+    margin: 0;
+    background: transparent;
+}
+
+#bg-color {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+
+    background:
+        radial-gradient(ellipse 2200px 1800px at 97% 30%, #519C03 0%, transparent 10%),
+        radial-gradient(ellipse 2200px 1800px at 5% 71%, #519C03 0%, transparent 10%),
+        black !important;
+
+    z-index: -1;
+
+    overflow: hidden;
+}
+
+@media(min-width: 1024px) {
+    #bg-color {
+        background:
+            radial-gradient(ellipse 2000px 1800px at 90% 43%, #519C03 0%, transparent 20%),
+            radial-gradient(ellipse 2000px 1800px at 7% 70%, #519C03 0%, transparent 20%),
+            black !important;
+        height: 100vh;
+    }
+}
+
+/* header */
+#header {
+    position: fixed;
+    top: 0;
+    background: black;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+
+    & h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0;
+    }
+}
+
+#header .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    padding: 8px 15px;
+}
+
+#ellipsis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 30px;
+
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    & img {
+        width: 20px;
+        height: auto;
+    }
+}
+
+/* element */
+#elements {
+    overflow-y: scroll;
+    width: 100%;
+    height: calc(100vh - 0px);
+    /* IMPORTANT */
+    scrollbar-width: none;
+    background: transparent;
+}
+
+#submissionHistory {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-evenly;
+    position: relative;
+    margin: 2em;
+    margin-top: 4.5em;
+    gap: 1em;
+
+
+    background: #101309;
+    padding: 20px;
+
+    border: 2px solid #222;
+    border-radius: 16px;
+
+    img {
+        width: 20px;
+        height: auto;
+    }
+
+    & .sh-tracking-p1 {
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    & .sh-tracking-p2 {
+        color: #519C03;
+        font-size: 18px;
+    }
+}
+
+@media(min-width: 1024px) {
+    #header {
+        & h3 {
+            font-size: 25px;
+        }
+
+        & img {
+            width: 25px;
+        }
+    }
+
+    #submissionHistory {
+        & .sh-tracking {
+            display: flex;
+            flex-direction: row;
+            gap: 1em;
+
+            img {
+                width: 25px;
+            }
+
+            & .sh-tracking-p2 {
+                font-size: 1.7em;
+                font-weight: bold;
+            }
+        }
+
+        & .sh-tracking-p1,
+        .sh-tracking-p2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            width: 30px;
+            height: auto;
+        }
+
+        & .sh-tracking-p1 {
+            font-size: 18px;
+        }
+
+        & .sh-tracking-p2 {
+            font-size: 18px;
+        }
+    }
+}
+
+/* All submission */
+#allSubmission {
+    position: relative;
+}
+
+#header-allSubmission {
+    font-size: 18px;
+    margin: 1.5em 2em;
+    opacity: 0.5;
+}
+
+.all-submts {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 1em 2em;
+
+    border: 2px solid #222;
+    border-radius: 16px;
+
+    background: black;
+
+    img {
+        border-radius: 16px 16px 0px 0px;
+        width: 100%;
+        height: 330px;
+        object-fit: cover;
+    }
+
+    & .tasks-title,
+    & .tasks-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 0px 22px;
+
+        p {
+            margin: 15px 0px;
+        }
+
+        & .all-submts-p1 {
+            font-weight: bold;
+        }
+
+        & .all-submts-p2 {
+            color: #84ff00;
+            border: 2px solid #222;
+            border-radius: 16px;
+            background: rgba(3, 89, 3, 0.56);
+
+            padding: 3px 15px;
+            margin: 0px;
+            margin-top: 3px;
+
+            &.orange {
+                color: orange;
+                background: rgb(59, 39, 3);
+            }
+
+            &.red {
+                color: red;
+                background: rgb(62, 1, 1);
+            }
+        }
+
+        & .all-submts-p3 {
+            opacity: 0.5;
+            margin-top: 0px;
+        }
+
+        & .all-submts-p4 {
+            font-weight: bold;
+            color: #519C03;
+
+            margin-top: 0px;
+        }
+    }
+}
+
+@media(min-width: 1024px) {
+    #allSubmissions {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    #header-allSubmission {
+        grid-column: 1/-1;
+        font-size: 20px;
+        margin: 1em 1.5em;
+    }
+}
