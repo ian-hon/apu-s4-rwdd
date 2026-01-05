@@ -122,7 +122,10 @@ h6 {
 .progressbar,
 .task-card,
 .task-card-detailed,
-.submission-card {
+.submission-card,
+/* from curator */
+.task-minimal-card,
+.task-selector-card {
     background: var(--background-secondary);
 
     border-style: solid;
