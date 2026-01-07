@@ -32,9 +32,9 @@ foreach ($keys as $k => $v) {
 }
 
 if (!empty($updates)) {
-    $query = "UPDATE ecoquest.TASK SET " . implode(", ", $updates) . " WHERE id = '" . $task_id . "'";
+    $query = "UPDATE ecoquest.TASK SET " . implode(", ", $updates) . " WHERE ID = '" . $task_id . "'";
     echo "<script>console.log(" . '"' . $query . '"' . ")</script>";
 
     echo $query;
-    // mysqli_query($dbConnection, $query);
+    mysqli_query($dbConnection, $query);
 }

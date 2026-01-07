@@ -2,14 +2,15 @@ const overviewElement = document.querySelector("#page #content #overview");
 const selectorElement = document.querySelector("#page #content #selector #container");
 var tasks = {};
 
-fetch('/api/task/fetch_all.php')
-    .then((e) => e.json())
-    .then((e) => {
-        tasks = e;
-        // tasks = Object.values(e);
+function fetchData() {
+    fetch('/api/task/fetch_all.php')
+        .then((e) => e.json())
+        .then((e) => {
+            tasks = e;
 
-        render();
-    });
+            render();
+        });
+}
 
 let totalPoints = (task) => {
     return task["reward_rate"] * task["target"];
@@ -35,9 +36,13 @@ function getDayMap(task) {
 function toggleDay(task_id, day) {
     tasks[task_id]['schedule'] ^= (1 << day);
 
-    render();
-
-    // fetch('/api/task/update.php',)
+    fetch('/api/task/update.php?' + new URLSearchParams({
+        id: task_id,
+        schedule: tasks[task_id]['schedule']
+    }).toString())
+        .then((_) => {
+            fetchData();
+        });
 }
 // #endregion
 
@@ -103,6 +108,8 @@ function renderTimetable() {
 
     overviewElement.innerHTML = result;
 }
+
+fetchData();
 
 /*
 'title'
