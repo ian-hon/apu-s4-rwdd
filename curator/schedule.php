@@ -119,8 +119,10 @@ function getDayMap($task)
                             <img src='./assets/leaf.svg'>
                         </div>
                     </div>
-                    <hr>
-                    <div id='select'>{$dayContent}</div>
+                    <div id='schedule'>
+                        <hr>
+                        <div id='select'>{$dayContent}</div>
+                    </div>
                 </div>";
             }
 

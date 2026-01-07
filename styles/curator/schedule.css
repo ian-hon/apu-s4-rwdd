@@ -182,57 +182,63 @@
                     }
                 }
 
-                & hr {
-                    margin: 0 2ch;
-
-                    height: 3em;
-                    min-width: 2px;
-                    width: 2px;
-                    border-collapse: collapse;
-
-                    border: none;
-
-                    background: white;
-
-                    opacity: 0.05;
-                }
-
-                & #select {
+                & #schedule {
                     display: flex;
-                    justify-content: center;
-                    align-items: flex-start;
+                    justify-content: flex-end;
+                    align-items: center;
 
-                    flex-direction: row;
+                    & hr {
+                        margin: 0 2ch;
 
-                    width: max-content;
+                        height: 3em;
+                        min-width: 2px;
+                        width: 2px;
+                        border-collapse: collapse;
 
-                    & h4 {
-                        background: var(--tertiary-background);
-                        border-color: var(--tertiary);
-                        border-width: 2px;
+                        border: none;
 
-                        padding: 0.7em 1.5ch;
+                        background: white;
 
-                        transition-duration: 0.3s;
+                        opacity: 0.05;
+                    }
 
-                        cursor: pointer;
-                        user-select: none;
-                        -webkit-user-select: none;
+                    & #select {
+                        display: flex;
+                        justify-content: center;
+                        align-items: flex-start;
 
-                        &:not(:first-child) {
-                            margin-left: 1ch;
-                        }
+                        flex-direction: row;
 
-                        &[data-active] {
-                            border-color: var(--daily);
-                            background: var(--daily-background);
-                            color: var(--daily);
-                        }
+                        width: max-content;
 
-                        &:not([data-active]):hover {
-                            border-color: color-mix(in srgb, var(--tertiary) 80%, var(--daily));
-                            background: color-mix(in srgb, var(--tertiary-background) 80%, var(--daily-background));
-                            /* color: color-mix(in srgb, var(--tertiary) 80%, var(--daily)); */
+                        & h4 {
+                            background: var(--tertiary-background);
+                            border-color: var(--tertiary);
+                            border-width: 2px;
+
+                            padding: 0.7em 1.5ch;
+
+                            transition-duration: 0.3s;
+
+                            cursor: pointer;
+                            user-select: none;
+                            -webkit-user-select: none;
+
+                            &:not(:first-child) {
+                                margin-left: 1ch;
+                            }
+
+                            &[data-active] {
+                                border-color: var(--daily);
+                                background: var(--daily-background);
+                                color: var(--daily);
+                            }
+
+                            &:not([data-active]):hover {
+                                border-color: color-mix(in srgb, var(--tertiary) 80%, var(--daily));
+                                background: color-mix(in srgb, var(--tertiary-background) 80%, var(--daily-background));
+                                /* color: color-mix(in srgb, var(--tertiary) 80%, var(--daily)); */
+                            }
                         }
                     }
                 }
