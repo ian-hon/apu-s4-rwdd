@@ -55,7 +55,9 @@
     </div>
     <script src="./scripts/script.js"></script>
     <script src="./scripts/curator.js"></script>
-    <script src="./scripts/curator/schedule.js"></script>
+    <div id="script-imports">
+        <script src="./scripts/curator/schedule.js"></script>
+    </div>
 </body>
 
 </html>
