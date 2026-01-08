@@ -68,6 +68,19 @@ head {
     padding: 0;
 
     box-sizing: border-box;
+
+    /* #region scrollbar */
+    &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--tertiary);
+        border-radius: 1000px;
+    }
+
+    /* #endregion */
 }
 
 hr {

@@ -26,18 +26,6 @@
 
     overflow-y: scroll;
 
-    /* #region scrollbar */
-    &::-webkit-scrollbar {
-        width: 4px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: var(--tertiary);
-        border-radius: 1000px;
-    }
-
-    /* #endregion */
-
     &>div {
         margin: var(--screen-padding);
     }
