@@ -1,9 +1,13 @@
+// for dynamically loading scripts
 var importElement = null;
+var currentChild = null;
+
 const sidebarElement = document.querySelector("#sidebar");
 let currentFilter = '';
 
 let imports = {
-    'schedule': '<script src="./scripts/curator/schedule.js"></script>',
+    'schedule': './scripts/curator/schedule.js',
+    'tasks': './scripts/curator/tasks.js',
 }
 
 function changeTab(t) {
@@ -13,10 +17,17 @@ function changeTab(t) {
         importElement = document.querySelector("#script-imports");
     }
 
+    if (currentChild) {
+        importElement.removeChild(currentChild);
+        currentChild = null;
+    }
+
     if (t in imports) {
-        importElement.innerHTML = imports[t];
-    } else {
-        importElement.innerHTML = '';
+        const script = document.createElement('script');
+        script.src = imports[t] + '?t=' + Date.now(); // cache bust lol
+        script.defer = true; // for iife
+        importElement.appendChild(script);
+        currentChild = script;
     }
 }
 

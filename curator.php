@@ -17,7 +17,7 @@
 
 <body>
     <div id="page">
-        <div id="sidebar" data-filter="" data-tab="schedule">
+        <div id="sidebar" data-filter="rejected" data-tab="submissions">
             <div id="top">
                 <h3>CURATOR DASHBOARD</h3>
             </div>
@@ -55,8 +55,9 @@
     </div>
     <script src="./scripts/script.js"></script>
     <script src="./scripts/curator.js"></script>
+    <!-- <script src="./scripts/curator/schedule.js"></script> -->
+    <!-- <script src="./scripts/curator/tasks.js"></script> -->
     <div id="script-imports">
-        <script src="./scripts/curator/schedule.js"></script>
     </div>
 </body>
 
