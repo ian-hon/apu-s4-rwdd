@@ -16,7 +16,7 @@ foreach (mysqli_fetch_all($queryResult, MYSQLI_ASSOC) as $line) {
         'target' => (int)$line['target'],
         'excess_limit' => (int)$line['excess_limit'],
         'reward_rate' => (int)$line['reward_rate'],
-        'goal_contribution' => (int)$line['goal_contribution'],
+        'goal_contribution' => (float)$line['goal_contribution'],
         'schedule' => (int)$line['schedule'],
 
         'goal_type' => $line['goal_type'],
