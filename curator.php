@@ -17,7 +17,7 @@
 
 <body>
     <div id="page">
-        <div id="sidebar" data-filter="rejected" data-tab="submissions">
+        <div id="sidebar" data-filter="<?php echo isset($_GET['filter']) && (in_array($_GET['filter'], ['pending', 'approved', 'rejected'])) ? $_GET['filter'] : '' ?>" data-tab="">
             <div id="top">
                 <h3>CURATOR DASHBOARD</h3>
             </div>
@@ -26,7 +26,6 @@
                 <h5 id="tasks" class="border" onclick="changeTab('tasks')">TASKS</h5>
                 <h5 id="schedule" class="border" onclick="changeTab('schedule')">SCHEDULE</h5>
             </div>
-            <!-- <input> -->
             <hr>
             <div id="query">
                 <?php
@@ -55,10 +54,11 @@
     </div>
     <script src="./scripts/script.js"></script>
     <script src="./scripts/curator.js"></script>
-    <!-- <script src="./scripts/curator/schedule.js"></script> -->
-    <!-- <script src="./scripts/curator/tasks.js"></script> -->
     <div id="script-imports">
     </div>
+    <script defer>
+        <?php echo "changeTab('" .  (isset($_GET['tab']) && in_array($_GET['tab'], ["submissions", "tasks", "schedule"]) ? $_GET['tab'] : 'submissions') . "')" ?>
+    </script>
 </body>
 
 </html>
