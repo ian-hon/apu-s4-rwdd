@@ -8,6 +8,7 @@ let currentFilter = '';
 let imports = {
     'schedule': './scripts/curator/schedule.js',
     'tasks': './scripts/curator/tasks.js',
+    'submissions': './scripts/curator/submissions.js',
 }
 
 function changeTab(t) {
