@@ -1,6 +1,4 @@
 <div id="schedule">
-    <p>
-    </p>
     <div id="header">
         <h2>TASK SCHEDULING</h2>
         <h5>Assign a task to each day of the week</h5>
