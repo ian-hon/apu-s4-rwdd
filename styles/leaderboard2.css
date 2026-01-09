@@ -1,4 +1,44 @@
 
+<<<<<<< Updated upstream
+=======
+#header {
+    background-color:var(--background); 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    height: 60px; 
+}
+
+
+#leaderboard {
+    display: flex;
+    align-items: center;
+}
+
+
+#leaderboard img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+#leaderboard h2 {
+    text-decoration:none;
+}
+
+#burger {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+#board-filter {
+    display: flex;
+    padding: 20px 0;
+    background-color: var(--background); 
+}
+
+>>>>>>> Stashed changes
 .board-filters {
     display: flex; 
     gap: 10px;    
@@ -14,7 +54,10 @@
     cursor: pointer;
     transition: background-color 0.2s, border-color 0.2s, color 0.2s;
     border: 2px solid #1a1a1a;
+<<<<<<< Updated upstream
     margin: 20px 0 20px 0;
+=======
+>>>>>>> Stashed changes
 }
 
 
@@ -52,7 +95,11 @@
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
 }
 
+<<<<<<< Updated upstream
 
+=======
+/* Subtle green glow inside card */
+>>>>>>> Stashed changes
 .rank-card::before {
   content: '';
   position: absolute;

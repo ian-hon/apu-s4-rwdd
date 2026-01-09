@@ -11,7 +11,11 @@
 
 :root {
     --text: #ddd;
+<<<<<<< Updated upstream
     --secondary-text:#7f7f7f;
+=======
+    --secondary-text: #888;
+>>>>>>> Stashed changes
 
     --background: #000;
     --background-secondary: #101309;

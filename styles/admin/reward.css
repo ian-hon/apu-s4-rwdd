@@ -364,3 +364,8 @@ input:checked + .slider:before { transform: translateX(14px); }
     flex-wrap: wrap;
     grid-template-columns: 2fr auto;
 }
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
