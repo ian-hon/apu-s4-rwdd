@@ -7,6 +7,8 @@
     const sidebarPie = sidebar.querySelector("#pie");
     const sidebarStatistics = sidebar.querySelector("#statistics");
 
+    const sidebarQueryInput = document.querySelector("#page #sidebar #query #submissions #search input");
+
     var submissions = {};
     var tasks = {};
 
@@ -15,6 +17,24 @@
         approved: 0,
         rejected: 0,
     };
+
+    let currentFilter = '';
+    let currentQuery = '';
+
+    // #region sidebar related
+    function changeFilter(f) {
+        currentFilter = currentFilter == f ? '' : f;
+        sidebarElement.setAttribute("data-filter", currentFilter);
+        render();
+    }
+    window.changeFilter = changeFilter;
+
+    function changeQuery(q) {
+        currentQuery = q;
+        sidebarElement.setAttribute("data-query", currentQuery);
+        render();
+    }
+    // #endregion
 
     function fetchData() {
         fetch('/api/task/fetch_all.php')
@@ -70,13 +90,38 @@
     }
 
     function renderSidebar() {
-        sidebarStatistics.querySelector("#pending")
+        let approved = parseInt((ratios.approved / Object.keys(submissions).length) * 100);
+        let rejected = parseInt((ratios.rejected / Object.keys(submissions).length) * 100);
+        let pending = 100 - approved - rejected;
+
+        sidebarStatistics.querySelector("#pending").innerHTML = `<h5>${ratios.pending} PENDING</h5><h5>${pending}%</h5>`;
+        sidebarStatistics.querySelector("#approved").innerHTML = `<h5>${ratios.approved} APPROVED</h5><h5>${approved}%</h5>`;
+        sidebarStatistics.querySelector("#rejected").innerHTML = `<h5>${ratios.rejected} REJECTED</h5><h5>${rejected}%</h5>`;
+
+        approved *= 3.60;
+        rejected *= 3.60;
+        pending *= 3.60;
+
+        // rejected, approved, pending
+        sidebarPie.innerHTML = `<div id="rejected" style="background: conic-gradient(var(--error) ${rejected}deg, transparent ${rejected}deg)"></div>
+        <div id="approved" style="background: conic-gradient(transparent ${rejected}deg, var(--accent) ${rejected}deg ${approved + rejected}deg, transparent ${approved + rejected}deg)"></div>
+        <div id="pending" style="background: conic-gradient(transparent ${rejected + approved}deg, var(--tertiary-background) ${rejected + approved}deg 360deg, transparent 360deg)"></div>`;
     }
 
     function render() {
         let result = '';
         Object.values(submissions).forEach((s) => {
-            result += `<div class="submission-card" data-status="${s['status']}" data-occurance="${tasks[s['task_ID']]['occurance_type']}">
+            if (currentFilter && (s['status'] != currentFilter)) {
+                return;
+            }
+
+            let t = tasks[s['task_ID']];
+            console.log(currentQuery);
+            if (currentQuery && ([t['title'], t['description'], s['user'], humanReadableTime(s['submitted_timestamp'])].filter((text) => text.includes(currentQuery)).length == 0)) {
+                return;
+            }
+
+            result += `<div class="submission-card" data-status="${s['status']}" data-occurance="${t['occurance_type']}">
                 <div id="header">
                     <!-- is there a justify-self thing that can do this? -->
                     <span>
@@ -94,10 +139,10 @@
                 <div id="data" class="border">
                     <div id="task">
                         <div id="info">
-                            <h5 id="title">${tasks[s['task_ID']]['title']}</h5>
-                            <h6 id="description">${tasks[s['task_ID']]['description']}</h6>
+                            <h5 id="title">${t['title']}</h5>
+                            <h6 id="description">${t['description']}</h6>
                         </div>
-                        <h6 id="occurance" class="border">${tasks[s['task_ID']]['occurance_type'].toUpperCase()}</h6>
+                        <h6 id="occurance" class="border">${t['occurance_type'].toUpperCase()}</h6>
                     </div>
                     <!-- show excess only if applicable -->
                     <div id="excess">
@@ -123,7 +168,7 @@
                             <!-- could use ::before element here -->
                             NOTE TO CURATORS :
                         </h6>
-                        <h6>${tasks[s['task_ID']]['curator_instructions']}</h6>
+                        <h6>${t['curator_instructions']}</h6>
                     </div>
                 </div>
                 <div id="actions">
@@ -142,21 +187,11 @@
         renderSidebar();
     }
 
-    // #region crud functions
-    // function toggleDay(task_id, day) {
-    //     tasks[task_id]['schedule'] ^= (1 << day);
-
-    //     fetch('/api/task/update.php?' + new URLSearchParams({
-    //         id: task_id,
-    //         schedule: tasks[task_id]['schedule']
-    //     }).toString())
-    //         .then((_) => {
-    //             fetchData();
-    //         });
-    // }
-    // window.toggleDay = toggleDay;
-    // #endregion
-
-
+    changeQuery('');
+    changeFilter('');
     fetchData();
+
+    sidebarQueryInput.addEventListener('keyup', () => {
+        changeQuery(sidebarQueryInput.value);
+    });
 })();
