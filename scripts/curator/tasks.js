@@ -37,11 +37,12 @@
                 dayContent += `<h4 class='border' ${m ? 'data-active' : ''} onclick='toggleDay("${t['ID']}", ${index})'>${days[index]}</h4>`;
             });
 
-            result += `<div class="task-card-detailed" data-active="${t['active']}">
+            result += `<div class="task-card-detailed" data-active="${t['active']}" data-occurance="${t['occurance_type']}">
     <div id="header">
         <div id="data">
             <span>
                 <h3>${t['title']}</h3>
+                <h6 class="border" id="occurance-tag"></h6>
                 <div class="border" id="completion-rate">
                     <img src="./assets/completion_rate.svg">
                     <h5>50% completion rate</h5>
@@ -94,8 +95,8 @@
                 <h6 class="box-title">MAXIMUM</h6>
             </div>
         </div>
-    </div >
-    <div id="curator-note" class="border">
+    </div>
+    <div id="curator-note">
         <h5>${t['curator_instructions']}</h5>
     </div>
 </div > `;
