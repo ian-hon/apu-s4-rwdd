@@ -1,3 +1,14 @@
+<?php
+include './api/conn.php'; // connects to the database
+
+$query = 'select * from ecoquest.USERS where username = "user1"';
+$result = mysqli_query($dbConnection, $query); // $dbConnection comes from conn.php
+$user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and stores it inside $user
+
+// refer line 50
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +47,7 @@
                         <a href="#name">
                             <img src="assets/ivp/pen-svgrepo-com.svg" alt="">
                         </a>
-                        <input type="text" id="name" value="EcoWarrior2024" required readonly>
+                        <input type="text" id="name" value="<?php echo $user['username'] ?>" required readonly>
                     </div>
                     <div class="user">
                         <p>Password</p>
