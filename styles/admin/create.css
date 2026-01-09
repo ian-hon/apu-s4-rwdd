@@ -1,9 +1,10 @@
 #parent.blur {
     filter: blur(5px);
-    pointer-events: none; 
+    pointer-events: none;
 }
+
 /*pointer events none is to prevent clicking the element behind the blur*/
-  /* opacity: 20%;
+/* opacity: 20%;
   background-color: var(--background); 
   incase blur-error*/
 
@@ -15,11 +16,11 @@
     width: 100%;
     height: 100%;
     z-index: 1000;
-    display: none; 
+    display: none;
     justify-content: center;
     align-items: center;
-    background: var(--background); 
-    backdrop-filter: blur(8px); 
+    background: var(--background);
+    backdrop-filter: blur(8px);
 }
 
 
@@ -34,12 +35,12 @@
     border-radius: 16px;
     padding: 24px;
     border: 1px solid var(--tertiary);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
 .popup-header {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     margin-bottom: 25px;
 }
@@ -55,7 +56,7 @@
     text-transform: uppercase;
 }
 
-.reward-form input, 
+.reward-form input,
 .reward-form select {
     width: 100%;
     background: var(--tertiary);
@@ -71,8 +72,8 @@
 
 .reward-form input:focus,
 .reward-form select:focus {
-    border-color: var(--accent); 
-    outline: none; 
+    border-color: var(--accent);
+    outline: none;
 }
 
 
@@ -81,10 +82,13 @@
     gap: 15px;
 }
 
-.form-group { flex: 1; }
+.form-group {
+    flex: 1;
+}
 
 .auto-discontinue-box {
-    background: var(--tertiary); /* Contrast against the popup background */
+    background: var(--tertiary);
+    /* Contrast against the popup background */
     padding: 15px;
     border-radius: 12px;
     display: flex;
@@ -93,14 +97,15 @@
     margin-bottom: 25px;
 }
 
-.auto-discontinue-box p { 
-    margin: 0; 
-    font-size: 0.9rem; 
+.auto-discontinue-box p {
+    margin: 0;
+    font-size: 0.9rem;
 }
-.auto-discontinue-box small { 
-    color: var(--secondary-text); 
-    font-size: 0.75rem; 
-    display: block; 
+
+.auto-discontinue-box small {
+    color: var(--secondary-text);
+    font-size: 0.75rem;
+    display: block;
 }
 
 
@@ -110,7 +115,8 @@
     gap: 15px;
 }
 
-.cancel-btn, .submit-btn {
+.cancel-btn,
+.submit-btn {
     padding: 14px;
     border-radius: 8px;
     border: none;
@@ -119,16 +125,12 @@
     font-size: 1rem;
 }
 
-.cancel-btn { 
-    background: var(--accent-background); 
-    color: var(--text); 
+.cancel-btn {
+    background: var(--accent-background);
+    color: var(--text);
 }
 
-.submit-btn { 
-    background: var(--accent); 
-    color: var(--text); 
+.submit-btn {
+    background: var(--accent);
+    color: var(--text);
 }
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes

@@ -3,8 +3,18 @@
     const lastUpdatedElement = document.querySelector("#page #content #submissions #header #last-updated");
     const submissionCountElement = document.querySelector("#page #content #submissions #header #submission-count");
 
+    const sidebar = document.querySelector("#page #sidebar #overview");
+    const sidebarPie = sidebar.querySelector("#pie");
+    const sidebarStatistics = sidebar.querySelector("#statistics");
+
     var submissions = {};
     var tasks = {};
+
+    var ratios = {
+        pending: 100,
+        approved: 0,
+        rejected: 0,
+    };
 
     function fetchData() {
         fetch('/api/task/fetch_all.php')
@@ -19,6 +29,13 @@
 
                         lastUpdatedElement.innerHTMl = `last updated at ${(new Date()).toString()}`;
                         submissionCountElement.innerHTML = `(${Object.keys(submissions).length} submissions)`;
+
+                        ratios = {
+                            approved: Object.values(submissions).filter(s => s['status'] == 'approved').length,
+                            rejected: Object.values(submissions).filter(s => s['status'] == 'rejected').length,
+                        };
+                        ratios.pending = Object.keys(submissions).length - ratios.approved - ratios.rejected;
+                        console.log(ratios);
 
                         render();
                     })
@@ -50,6 +67,10 @@
         let d = new Date(epoch * 1000);
         let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Sep', 'Oct', 'Nov', 'Dec'];
         return `${d.getDate()} ${months[d.getMonth()]} at ${("0" + d.getHours()).slice(-2)}:${("0" + d.getMinutes()).slice(-2)}`; // https://stackoverflow.com/a/30272803/13684100
+    }
+
+    function renderSidebar() {
+        sidebarStatistics.querySelector("#pending")
     }
 
     function render() {
@@ -117,6 +138,8 @@
             </div>`;
         })
         container.innerHTML = result;
+
+        renderSidebar();
     }
 
     // #region crud functions

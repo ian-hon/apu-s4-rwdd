@@ -1,77 +1,72 @@
-
-<<<<<<< Updated upstream
-=======
 #header {
-    background-color:var(--background); 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 15px;
-    height: 60px; 
+  background-color: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  height: 60px;
 }
 
 
 #leaderboard {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 
 #leaderboard img {
-    width: 24px;
-    height: 24px;
-    margin-right: 8px;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
 }
 
 #leaderboard h2 {
-    text-decoration:none;
+  text-decoration: none;
 }
 
 #burger {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-}
-#board-filter {
-    display: flex;
-    padding: 20px 0;
-    background-color: var(--background); 
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 
->>>>>>> Stashed changes
+#board-filter {
+  display: flex;
+  padding: 20px 0;
+  background-color: var(--background);
+}
+
 .board-filters {
-    display: flex; 
-    gap: 10px;    
+  display: flex;
+  gap: 10px;
 }
 
 
 .board-button {
-    border: none;
-    background-color: var(--tertiary-background); 
-    border-radius: 15px;
-    padding: 10px 20px;
-    color: var(--text); 
-    cursor: pointer;
-    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
-    border: 2px solid #1a1a1a;
-<<<<<<< Updated upstream
-    margin: 20px 0 20px 0;
-=======
->>>>>>> Stashed changes
+  border: none;
+  background-color: var(--tertiary-background);
+  border-radius: 15px;
+  padding: 10px 20px;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  border: 2px solid #1a1a1a;
+  margin: 20px 0 20px 0;
 }
 
 
 .board-button:hover:not(.active) {
-    border: 2px solid var(--accent); 
+  border: 2px solid var(--accent);
 }
 
 
 .board-button.active {
-    background-color: var(--accent); 
+  background-color: var(--accent);
 
-    color:var(--background); 
-    border: 2px solid var(--accent);
+  color: var(--background);
+  border: 2px solid var(--accent);
 }
+
 .user-card {
   margin-bottom: 32px;
 }
@@ -95,15 +90,13 @@
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
 }
 
-<<<<<<< Updated upstream
-
-=======
-/* Subtle green glow inside card */
->>>>>>> Stashed changes
 .rank-card::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: radial-gradient(circle at top right, rgba(74, 222, 128, 0.1), transparent 60%);
   pointer-events: none;
 }
@@ -156,7 +149,8 @@
 
 .user-level {
   font-family: var(--font-mono);
-  color: #88a876; /* Muted green text */
+  color: #88a876;
+  /* Muted green text */
   font-size: 12px;
   font-weight: 600;
   margin-top: 4px;
@@ -220,9 +214,17 @@
   border: 2px solid transparent;
 }
 
-.card.gold .avatar svg { border-color: #fbbf24; }
-.card.silver .avatar svg { border-color: #cbd5e1; }
-.card.bronze .avatar svg { border-color: #d97706; }
+.card.gold .avatar svg {
+  border-color: #fbbf24;
+}
+
+.card.silver .avatar svg {
+  border-color: #cbd5e1;
+}
+
+.card.bronze .avatar svg {
+  border-color: #d97706;
+}
 
 .badge {
   position: absolute;
@@ -237,7 +239,7 @@
   justify-content: center;
   font-size: 14px;
   border: 2px solid var(--accent);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .card h3 {
