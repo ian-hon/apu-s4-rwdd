@@ -1,0 +1,130 @@
+#parent.blur {
+    filter: blur(5px);
+    pointer-events: none; 
+}
+/*pointer events none is to prevent clicking the element behind the blur*/
+  /* opacity: 20%;
+  background-color: var(--background); 
+  incase blur-error*/
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    background: var(--background); 
+    backdrop-filter: blur(8px); 
+}
+
+
+.overlay.active {
+    display: flex;
+}
+
+
+.popup {
+    background: var(--background-secondary);
+    width: 550px;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--tertiary);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.popup-header {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+
+.reward-form label {
+    display: block;
+    text-align: left;
+    font-size: 0.75rem;
+    color: var(--secondary-text);
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.reward-form input, 
+.reward-form select {
+    width: 100%;
+    background: var(--tertiary);
+    border: 1px solid var(--tertiary);
+    color: var(--text);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+
+.reward-form input:focus,
+.reward-form select:focus {
+    border-color: var(--accent); 
+    outline: none; 
+}
+
+
+#form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-group { flex: 1; }
+
+.auto-discontinue-box {
+    background: var(--tertiary); /* Contrast against the popup background */
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.auto-discontinue-box p { 
+    margin: 0; 
+    font-size: 0.9rem; 
+}
+.auto-discontinue-box small { 
+    color: var(--secondary-text); 
+    font-size: 0.75rem; 
+    display: block; 
+}
+
+
+.modal-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.cancel-btn, .submit-btn {
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.cancel-btn { 
+    background: var(--accent-background); 
+    color: var(--text); 
+}
+
+.submit-btn { 
+    background: var(--accent); 
+    color: var(--text); 
+}
