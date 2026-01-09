@@ -170,39 +170,6 @@ body {
     }
 }
 
-/* Setting */
-#btn {
-    background-color: #101309;
-    border: 2px solid #222;
-    border-radius: 15px;
-    margin: 1.5em;
-
-    & a {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        gap: 0.5em;
-        align-items: center;
-        font-size: 16px;
-        text-decoration: none;
-    }
-
-    & button {
-        background: none;
-        border: none;
-        width: 100%;
-        text-align: left;
-    }
-
-    & img {
-        width: 20px;
-        margin: 1em 1em;
-    }
-
-    & p {
-        margin-right: 1.5em;
-    }
-}
-
 /* Email */
 #personal-info {
     background: #101309;
@@ -210,17 +177,6 @@ body {
     border-radius: 15px;
     margin: 1.5em;
 
-}
-
-#email {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 1em;
-
-    p:first-child {
-        color: grey;
-    }
 }
 
 #member {
