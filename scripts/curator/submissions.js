@@ -72,14 +72,11 @@
                 </div>
                 <div id="data" class="border">
                     <div id="task">
-                        <h5 id="title">${tasks[s['task_ID']]['title']}</h5>
-                        <div id="rewards">
-                            <div id="points" class="border">
-                                <h6>${totalPoints(s)}</h6>
-                                <img src="./assets/leaf.svg">
-                            </div>
-                            <h6 id="occurance" class="border">${tasks[s['task_ID']]['occurance_type'].toUpperCase()}</h6>
+                        <div id="info">
+                            <h5 id="title">${tasks[s['task_ID']]['title']}</h5>
+                            <h6 id="description">${tasks[s['task_ID']]['description']}</h6>
                         </div>
+                        <h6 id="occurance" class="border">${tasks[s['task_ID']]['occurance_type'].toUpperCase()}</h6>
                     </div>
                     <!-- show excess only if applicable -->
                     <div id="excess">
@@ -93,10 +90,8 @@
                                 <h5>+</h5>
                             </div>
                         </div>
-                        <div id="reward">
-                            <h6>
-                                1 action = ${tasks[s['task_ID']]['reward_rate']}
-                            </h6>
+                        <div id="points" class="border">
+                            <h6>${totalPoints(s)}</h6>
                             <img src="./assets/leaf.svg">
                         </div>
                     </div>
@@ -107,9 +102,7 @@
                             <!-- could use ::before element here -->
                             NOTE TO CURATORS :
                         </h6>
-                        <h6>
-                            ${tasks[s['task_ID']]['curator_instructions']}
-                        </h6>
+                        <h6>${tasks[s['task_ID']]['curator_instructions']}</h6>
                     </div>
                 </div>
                 <div id="actions">
