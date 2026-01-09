@@ -95,8 +95,8 @@
                 <h6 class="box-title">MAXIMUM</h6>
             </div>
         </div>
-    </div >
-    <div id="curator-note" class="border">
+    </div>
+    <div id="curator-note">
         <h5>${t['curator_instructions']}</h5>
     </div>
 </div > `;

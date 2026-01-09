@@ -531,17 +531,24 @@ h6 {
     }
 
     & #curator-note {
-        margin-top: 1em;
-
+        margin-top: 1.5em;
         padding-top: 0.8em;
 
         flex: 1;
-        border-color: var(--daily);
-        background: var(--daily-background);
+        border-style: solid;
+        border-width: 0px;
+        border-top-width: 1.5px;
+        border-color: var(--tertiary);
+
+        &:has(h5:empty) {
+            display: none;
+        }
 
         & h5 {
             font-style: italic;
-            color: var(--daily);
+            color: var(--text);
+
+            opacity: 0.5;
 
             white-space: pre-line;
 
@@ -793,47 +800,31 @@ h6 {
             align-items: center;
             flex-direction: row;
 
-            & #rewards {
+            & #info {
                 display: flex;
-                justify-content: center;
-                align-items: center;
+                justify-content: flex-start;
+                align-items: flex-start;
 
-                flex-direction: row;
+                flex-direction: column;
 
-                & #points {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    padding: 0.3em 1.2ch;
-                    background: var(--accent-background);
-                    border-color: var(--accent-border);
-                    border-width: 2px;
-
-                    & h6 {
-                        margin-left: 0.4ch;
-                    }
-
-                    & img {
-                        margin-left: 0.8ch;
-                        height: 1em;
-                        aspect-ratio: 1;
-                    }
+                & #description {
+                    margin-top: 0.5em;
+                    opacity: 0.5;
                 }
+            }
 
-                & #occurance {
-                    padding: 0.4em 1.6ch;
-                    margin-left: 1ch;
+            & #occurance {
+                padding: 0.4em 1.6ch;
+                margin-left: 1ch;
 
-                    font-weight: 700;
+                font-weight: 700;
 
-                    color: var(--daily);
-                    border-color: var(--daily);
-                    border-width: 1.5px;
-                    background: var(--daily-background);
+                color: var(--daily);
+                border-color: var(--daily);
+                border-width: 1.5px;
+                background: var(--daily-background);
 
-                    border-radius: 1em;
-                }
+                border-radius: 1em;
             }
         }
 
@@ -904,20 +895,24 @@ h6 {
                 }
             }
 
-            & #reward {
+            & #points {
                 display: flex;
+                justify-content: center;
                 align-items: center;
 
-                opacity: 0.6;
+                padding: 0.3em 1.2ch;
+                background: var(--accent-background);
+                border-color: var(--accent-border);
+                border-width: 2px;
 
                 & h6 {
-                    font-style: italic;
+                    margin-left: 0.4ch;
                 }
 
                 & img {
-                    height: 1.2em;
-
                     margin-left: 0.8ch;
+                    height: 1em;
+                    aspect-ratio: 1;
                 }
             }
         }
@@ -931,6 +926,10 @@ h6 {
             border-width: 0;
             border-top-width: var(--border-width);
 
+            &:has(h6:empty) {
+                display: none;
+            }
+
             & h6 {
                 font-style: italic;
 
@@ -939,6 +938,7 @@ h6 {
                 &:first-child {
                     font-weight: 700;
                     font-style: normal;
+                    margin-bottom: 0.2em;
                 }
             }
         }
@@ -986,7 +986,7 @@ h6 {
 
     /* #region data specific */
     &[data-occurance='daily'] {
-        & #data #task #rewards #occurance {
+        & #data #task #occurance {
             color: var(--daily);
             background: var(--daily-background);
             border-color: var(--daily);
@@ -994,7 +994,7 @@ h6 {
     }
 
     &[data-occurance='weekly'] {
-        & #data #task #rewards #occurance {
+        & #data #task #occurance {
             color: var(--weekly);
             background: var(--weekly-background);
             border-color: var(--weekly);
