@@ -224,6 +224,8 @@ body {
     gap: 1em;
 
     & button {
+        font-size: 1rem;
+
         background: var(--background-secondary);
         border-style: solid;
         border-width: var(--border-width);
@@ -300,7 +302,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    background: conic-gradient(#519C03 calc(90%), grey 0);
+    background: conic-gradient(var(--accent) calc(90%), var(--tertiary) 0);
     border-radius: 1000px;
     height: 100px;
     width: 100px;
@@ -308,10 +310,10 @@ body {
     margin: 20px auto;
     box-sizing: border-box;
 
-
     & #thumb {
-        justify-items: center;
-        align-content: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         background: #101309;
         border-radius: 1000px;
