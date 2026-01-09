@@ -4,12 +4,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasks | EcoQuest</title>
+    <title>Profile | EcoQuest</title>
     <link rel="stylesheet" href="./styles/profile.css">
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 
 <body>
+    <div id="parent">
+        <div id="bg-color">
+
+            <div id="navbar">
+                <a href="dashboard.html">
+                    <img src="assets/ivp/arrow-back-basic-svgrepo-com (2).svg" alt="">
+                </a>
+                <p>Profile</p>
+                <a href="">
+                    <img src="assets/ivp/ellipsis-v-svgrepo-com (1).svg" alt="">
+                </a>
+            </div>
+            <hr style="color: #222;">
+
+            <div id="element">
+
+                <!-- profile -->
+                <div id="profile">
+                    <div id="pfp">
+                        <img src="assets/ivp/profile-picture.avif" alt="">
+                    </div>
+                    <div class="user">
+                        <p>Username</p>
+                        <a href="#name">
+                            <img src="assets/ivp/pen-svgrepo-com.svg" alt="">
+                        </a>
+                        <input type="text" id="name" value="EcoWarrior2024" required>
+                    </div>
+                    <div class="user">
+                        <p>Password</p>
+                        <a href="#password">
+                            <img src="assets/ivp/pen-svgrepo-com.svg" alt="">
+                        </a>
+                        <input type="password" id="password" value="eco1234" required>
+                    </div>
+                </div>
+
+                <!-- Point-tracking -->
+                <div id="point-tracker">
+                    <div class="point">
+                        <img src="assets/ivp/medal-champion-award-winner-olympic-23-svgrepo-com.svg" alt="">
+                        <p>Total Point</p>
+                        <p>1200</p>
+                    </div>
+
+                    <div class="point">
+                        <img src="assets/ivp/leaf-svgrepo-com.svg" alt="">
+                        <p>Available</p>
+                        <p>470</p>
+                    </div>
+                </div>
+
+                <!-- Impact -->
+                <div id="impact">
+                    <p class="impact-title">Your Impact This Year</p>
+                    <div id="impact-info">
+                        <p>You saved <span style="color: #519C03;">5,000 bottles</span> this year! That
+                            requires <span style="color: #519C03;">50kWh</span> of energy to process, or <span
+                                style="color: #519C03;">5
+                                barrels</span> of crude oil
+                        </p>
+                    </div>
+                    <div class="impact-list">
+                        <img src="assets/ivp/leaf-svgrepo-com.svg" alt="">
+                        <div class="impact-name">
+                            <p>Carbon Reduced</p>
+                            <p>2.5 tons CO₂</p>
+                        </div>
+                    </div>
+                    <div class="impact-list">
+                        <img src="assets/ivp/thunder-svgrepo-com.svg" alt="">
+                        <div class="impact-name">
+                            <p>Energy Saved</p>
+                            <p>50 kWh</p>
+                        </div>
+                    </div>
+                    <div class="impact-list">
+                        <img src="assets/ivp/water-drops-svgrepo-com (1).svg" alt="">
+                        <div class="impact-name">
+                            <p>Water Saved</p>
+                            <p>1,500 liters</p>
+                        </div>
+                    </div>
+                    <div class="impact-list">
+                        <img src="assets/ivp/gas-station-svgrepo-com.svg" alt="">
+                        <div class="impact-name">
+                            <p>Oil Saved</p>
+                            <p>5 barrels</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Setting -->
+                <div id="setting">
+                    <div id="btn">
+                        <button>
+                            <a href="">
+                                <img src="assets/ivp/setting-svgrepo-com.svg" alt="">
+                                Setting
+                                <p>></p>
+                            </a>
+                        </button>
+                        <hr style="color: #222;">
+                        <button>
+                            <a href="">
+                                <img src="assets/ivp/bell-svgrepo-com.svg" alt="">
+                                Notification
+                                <p>></p>
+                            </a>
+                        </button>
+                        <hr style="color: #222;">
+                        <button>
+                            <a href="">
+                                <img src="assets/ivp/question-mark-circle-svgrepo-com.svg" alt="">
+                                Help & Support
+                                <p>></p>
+                            </a>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Personal Info -->
+                <div id="personal-info">
+                    <div id="email">
+                        <p>Email</p>
+                        <p>ecowarrior@gmail.com</p>
+                    </div>
+                    <hr style="color: #222; width: 95%; margin-left: 2.5%;">
+                    <div id="member">
+                        <p>Member Since</p>
+                        <p>January 2024</p>
+                    </div>
+                </div>
+
+                <!-- Logout -->
+                <div id="logout">
+                    <button>
+                        <a href="auth/login.html">
+                            <img src="assets/ivp/logout-svgrepo-com.svg" alt="">
+                            Logout
+                        </a>
+
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <script src="./scripts/script.js"></script>
 </body>
 
