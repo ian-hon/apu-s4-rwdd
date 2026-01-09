@@ -3,7 +3,6 @@ var importElement = null;
 var currentChild = null;
 
 const sidebarElement = document.querySelector("#sidebar");
-let currentFilter = '';
 
 let imports = {
     'schedule': './scripts/curator/schedule.js',
@@ -30,9 +29,4 @@ function changeTab(t) {
         importElement.appendChild(script);
         currentChild = script;
     }
-}
-
-function changeFilter(f) {
-    currentFilter = currentFilter == f ? '' : f;
-    sidebarElement.setAttribute("data-filter", currentFilter);
 }

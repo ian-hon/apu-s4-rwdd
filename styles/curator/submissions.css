@@ -69,18 +69,6 @@
 
                 transition-duration: 0.3s;
             }
-
-            & #rejected {
-                background: conic-gradient(var(--error) 50deg, transparent 50deg);
-            }
-
-            & #approved {
-                background: conic-gradient(transparent 50deg, var(--accent) 50deg 80deg, transparent 80deg);
-            }
-
-            & #pending {
-                background: conic-gradient(transparent 80deg, var(--tertiary-background) 80deg 360deg, transparent 360deg);
-            }
         }
 
         & #statistics {

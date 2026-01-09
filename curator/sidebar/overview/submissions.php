@@ -1,8 +1,5 @@
 <div id="submissions">
     <div id="pie">
-        <div id="pending"></div>
-        <div id="approved"></div>
-        <div id="rejected"></div>
     </div>
     <div id="statistics">
         <span id="pending">
