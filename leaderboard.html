@@ -7,6 +7,7 @@
     <title>Leaderboard | EcoQuest</title>
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="./styles/leaderboard.css">
+    <link rel="stylesheet" href="./styles/leaderboard2.css">
 
 </head>
 
@@ -104,13 +105,74 @@
 
             <section id="global-rankings">
                 <h2>Global Rankings</h2>
+                <div class="user-card">
+                    <div class="label-header">
+                    <p>Compete with eco-warriors worldwide</p>
+                    </div>
+                
+                    <div class="rank-card">
+                        <div class="card-content">
+                        
+                        <div class="user-section">
+                            <div class="user-avatar">
+                              <span>EW</span>
+                            </div>
+                            <div class="user-info">
+                              <span class="user-title">Your Rank</span>
+                              <span class="user-level">Intermediate</span>
+                            </div>
+                        </div>
+                    
+                        <div class="user-stats-section">
+                            <span class="user-rank-number">#12</span>
+                            <span class="user-points">2340 pts</span>
+                        </div>
+                    </div>
+                </div>
+                <div id ="board-filter">
+                    <nav class="board-filters" id="timeFilters">
+                    <button class="board-button" data-filter="total-point">Total Point</button>
+                    <button class="board-button" data-filter="plastic-impact">Plastic Impact</button>
+                    <button class="board-button" data-filter="carbon-impact">Carbon Impact</button>
+                </nav>
+                </div>
+                <div class="leaderboard">
+                    <div class="card gold">
+                        <div class="avatar">
+                            <img src="./assets/avatar.svg">
+                            <span class="badge">👑</span>
+                        </div>
+                        <h3>Sarah M.</h3>
+                        <p class="points">4520</p>
+                        <p class="label">pts</p>
+                    </div>
+                
+                    <div class="card silver">
+                        <div class="avatar">
+                            <img src="./assets/avatar.svg">
+                            <span class="badge">🥈</span>
+                        </div>
+                        <h3>Mike T.</h3>
+                        <p class="points">3890</p>
+                        <p class="label">pts</p>
+                    </div>
+                
+                    <div class="card bronze">
+                        <div class="avatar">
+                            <img src="./assets/avatar.svg">
+                            <span class="badge">🥉</span>
+                        </div>
+                        <h3>Emma L.</h3>
+                        <p class="points">3654</p>
+                        <p class="label">pts</p>
+                    </div>
+                </div>
+
 
                 <ul id="leaderboard-list">
 
                     <li class="ranking-item">
-                        <div class="rank-badge gold-medal">
-                            <img src="./assets/gold-medal.svg" >
-                        </div>
+                        <div class="rank-badge number-rank">#4</div>
                         <div class="user-initials">SC</div>
                         <div class="user-info">
                             <span class="user-name">Sarah Chen</span>
@@ -131,9 +193,7 @@
                     </li>
 
                     <li class="ranking-item active-user">
-                        <div class="rank-badge bronze-medal">
-                            <img src="./assets/bronze-medal.svg" > <!-- missing icon -->
-                        </div>
+                        <div class="rank-badge number-rank">#5</div>
                         <div class="user-initials">AK</div>
                         <div class="user-info">
                             <span class="user-name">You (Alex Kim)</span>
@@ -154,7 +214,7 @@
                     </li>
 
                     <li class="ranking-item">
-                        <div class="rank-badge number-rank">#4</div>
+                        <div class="rank-badge number-rank">#6</div>
                         <div class="user-initials">ET</div>
                         <div class="user-info">
                             <span class="user-name">Emma Thompson</span>

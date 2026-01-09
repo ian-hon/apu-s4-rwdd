@@ -1,0 +1,219 @@
+
+.board-filters {
+    display: flex; 
+    gap: 10px;    
+}
+
+
+.board-button {
+    border: none;
+    background-color: var(--tertiary-background); 
+    border-radius: 15px;
+    padding: 10px 20px;
+    color: var(--text); 
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    border: 2px solid #1a1a1a;
+    margin: 20px 0 20px 0;
+}
+
+
+.board-button:hover:not(.active) {
+    border: 2px solid var(--accent); 
+}
+
+
+.board-button.active {
+    background-color: var(--accent); 
+
+    color:var(--background); 
+    border: 2px solid var(--accent);
+}
+.user-card {
+  margin-bottom: 32px;
+}
+
+.label-header {
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.rank-card {
+  background: linear-gradient(145deg, rgba(20, 35, 5, 0.9), #050505);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+}
+
+
+.rank-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at top right, rgba(74, 222, 128, 0.1), transparent 60%);
+  pointer-events: none;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-avatar {
+  width: 52px;
+  height: 52px;
+  background-color: var(--accent-dark-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(63, 98, 18, 0.5);
+  border: 1px solid var(--accent-border);
+}
+
+.user-avatar span {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: white;
+  line-height: 1.2;
+}
+
+.user-level {
+  font-family: var(--font-mono);
+  color: #88a876; /* Muted green text */
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.user-stats-section {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.user-rank-number {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.user-points {
+  font-family: var(--text-secondary);
+  color: #d4d4d8;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+
+
+
+.leaderboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.card .avatar {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 12px;
+}
+
+.card .avatar svg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.card.gold .avatar svg { border-color: #fbbf24; }
+.card.silver .avatar svg { border-color: #cbd5e1; }
+.card.bronze .avatar svg { border-color: #d97706; }
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 24px;
+  height: 24px;
+  background: var(--tertiary-background);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border: 2px solid var(--accent);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.card h3 {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0 0 6px 0;
+  color: white;
+  white-space: nowrap;
+}
+
+.card .points {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--accent);
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.card .label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #52525b;
+  margin: 2px 0 0 0;
+  text-transform: lowercase;
+}
