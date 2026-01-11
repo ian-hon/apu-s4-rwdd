@@ -8,11 +8,11 @@
 .sidebar {
     position: sticky;
     grid-area: sidebar;
-    background-color: var(--background);
+    background-color: var(--background-secondary);
     min-height: 100vh;
     top: 0;
     align-self: start;
-    border-right: 1px solid var(--accent);
+    border-right: 1px solid var(--border-color);
 }
 
 .main {
@@ -20,7 +20,7 @@
 }
 
 #top {
-    border-bottom: 1px solid var(--accent);
+    border-bottom: 1px solid var(--border-color);
     padding: 15px 20px 15px 20px;
 }
 
@@ -46,7 +46,7 @@
     }
 }
 
-.buttons {
+.dash-btn {
     margin: 0.5em;
     border: none;
     background-color: var(--background);
@@ -64,12 +64,42 @@
 }
 
 
-.buttons:hover:not(.active) {
+.dash-btn:hover:not(.active) {
     border: 2px solid var(--accent);
 }
 
 
-.buttons.active {
+.dash-btn.active {
+    background-color: var(--accent);
+
+    color: var(--background);
+    border: 2px solid var(--accent);
+}
+
+.cls-btn {
+    margin: 0.5em;
+    border: none;
+    background-color: var(--background);
+    border-radius: 15px;
+    padding: 10px 20px;
+    color: var(--text);
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    border: 2px solid var(--accent-border);
+    font-size: 0.8rem;
+    grid-template-rows: 1fr auto;
+    width: 90%;
+    gap: 10px;
+
+}
+
+
+.cls-btn:hover:not(.active) {
+    border: 2px solid var(--accent);
+}
+
+
+.cls-btn.active {
     background-color: var(--accent);
 
     color: var(--background);
@@ -81,7 +111,7 @@
     padding: 20px;
     font-family: sans-serif;
     width: 300px;
-    border-top: 1px solid var(--accent);
+    border-top: 1px solid var(--border-color);
 }
 
 

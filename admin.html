@@ -21,8 +21,8 @@
                 <h5>Reward Management</h5>
             </div>
             <div id="tabs">
-                <button id="Reward" class="buttons acitve" onclick="changeTab('reward',event)">REWARD</button>
-                <button id="Statistics" class="buttons" onclick="changeTab('stats',event)">STATISTICS</button>
+                <button id="Reward" class="dash-btn active" onclick="changeTab('reward',event)">REWARD</button>
+                <button id="Statistics" class="dash-btn" onclick="changeTab('stats',event)">STATISTICS</button>
             </div>
             <div id="overview">
                 <h5>OVERVIEW</h5>
@@ -55,9 +55,9 @@
                 </div>
             </div>
             <div id="filter" >
-                <button id="all-reward" class="buttons" onclick="changeFilter('pending',event)">All Reward</button>
-                <button id="active" class="buttons" onclick="changeFilter('approved',event)">Active</button>
-                <button id="discontinue" class="buttons" onclick="changeFilter('rejected',event)">Discontinue</button>
+                <button id="all-reward" class="cls-btn active" onclick="changeFilter('pending',event)">All Reward</button>
+                <button id="active" class="cls-btn" onclick="changeFilter('approved',event)">Active</button>
+                <button id="discontinue" class="cls-btn" onclick="changeFilter('rejected',event)">Discontinued</button>
             </div>
         </aside>
 
@@ -282,22 +282,41 @@
                     <button class="fil-btn" onclick="filterTab('performance', event)">Performance</button>
                 </nav>
 
-                <div id="chart-container">
+                <div id="chart-container"> 
                     <div class="chart">
-                        <div>
-                            <canvas id="linechart"></canvas>
-                        </div>
-                        <div>
-                            <canvas id="roundchart"></canvas>
-                        </div>
-                        <div>
-                            <canvas id="activechart"></canvas>
-                        </div>
+                        <h3>Task Completion Trend</h3>
+                        <div id="chart-wrapper">
+                            <div class="y-axis">
+                                <span>100</span>
+                                <span>75</span>
+                                <span>50</span>
+                                <span>25</span>
+                                <span>0</span>
+                            </div>
 
+                            <div class="bar-chart">
+                                <div class="bar" style="--value: 70"><span>Mon</span></div>
+                                <div class="bar" style="--value: 85"><span>Tue</span></div>
+                                <div class="bar" style="--value: 60"><span>Wed</span></div>
+                                <div class="bar" style="--value: 90"><span>Thu</span></div>
+                                <div class="bar" style="--value: 75"><span>Fri</span></div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="chart">
+                        <h3>Task Status Distribution</h3>
+                        <div id="pie-wrapper">
 
-
+                            <div class="pie-chart">
+                                <li><span class="pie"></span> Complete (40%)</li>
+                                <li><span class="pie"></span> Pending (35%)</li>
+                                <li><span class="pie"></span> fail (25%)</li>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
 
             </section>
         </main>
@@ -308,9 +327,9 @@
         
 
 
-<div class="overlay" id="overlay">
-    <div class="popup">
-        <div class="popup-header">
+<div id="overlay" class="overlay">
+    <div id="popup">
+        <div id="popup-header">
             <h3>Create New Reward</h3>
         </div>
         <form class="reward-form">
@@ -352,6 +371,5 @@
 </div>
     
 <script src=" ./scripts/script.js"></script>
-<script src="./scripts/adminCreateReward.js"></script>
+<script src="./scripts/admin/admin_create_reward.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="./scripts/adminChart.js"></script>

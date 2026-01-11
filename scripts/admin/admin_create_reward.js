@@ -1,30 +1,30 @@
 function openPopup() {
-  const overlay = document.getElementById("overlay");
-  const parent = document.getElementById("parent");
-
-  if (overlay) overlay.classList.add("active");
-  if (parent) parent.classList.add("blur");
+    const overlay = document.getElementById("overlay");
+    const parent = document.getElementById("parent");
+    
+    if (overlay) overlay.classList.add("active");
+    if (parent) parent.classList.add("blur");
 }
 
 function closePopup() {
-  const overlay = document.getElementById("overlay");
-  const parent = document.getElementById("parent");
+    const overlay = document.getElementById("overlay");
+    const parent = document.getElementById("parent");
 
-  if (overlay) overlay.classList.remove("active");
-  if (parent) parent.classList.remove("blur");
+    if (overlay) overlay.classList.remove("active");
+    if (parent) parent.classList.remove("blur"); 
 }
 
 const overlayEl = document.getElementById("overlay");
 if (overlayEl) {
-  overlayEl.addEventListener("click", function (e) {
-    if (e.target === this) {
-      closePopup();
-    }
-  });
+    overlayEl.addEventListener("click", function (e) {
+        if (e.target === this) {
+            closePopup();
+        }
+    });
 }
 
 function changeTab(pageId) {
-
+  
   const pages = document.querySelectorAll('.page-content');
   pages.forEach(page => {
     page.style.display = 'none';
@@ -38,7 +38,7 @@ function changeTab(pageId, event) {
   pages.forEach(page => page.style.display = 'none');
   document.getElementById(pageId).style.display = 'block';
 
-  const buttons = document.querySelectorAll('.buttons');
+  const buttons = document.querySelectorAll('.dash-btn');
   buttons.forEach(btn => btn.classList.remove('active'));
 
   event.currentTarget.classList.add('active');
