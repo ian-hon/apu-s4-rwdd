@@ -67,11 +67,11 @@
   border: 2px solid var(--accent);
 }
 
-.user-card {
+#user-card {
   margin-bottom: 32px;
 }
 
-.label-header {
+#label-header {
   color: var(--text-secondary);
   font-family: var(--font-mono);
   font-size: 13px;
@@ -80,7 +80,7 @@
   letter-spacing: 0.5px;
 }
 
-.rank-card {
+#rank-card {
   background: linear-gradient(145deg, rgba(20, 35, 5, 0.9), #050505);
   border: 1px solid rgba(74, 222, 128, 0.2);
   border-radius: 20px;
@@ -90,7 +90,7 @@
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
 }
 
-.rank-card::before {
+#rank-card::before {
   content: '';
   position: absolute;
   top: 0;
@@ -101,7 +101,7 @@
   pointer-events: none;
 }
 
-.card-content {
+#card-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -109,16 +109,16 @@
   z-index: 1;
 }
 
-.user-section {
+#user-section {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.user-avatar {
+#user-avatar {
   width: 52px;
   height: 52px;
-  background-color: var(--accent-dark-green);
+  background-color: var(--accent);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -127,14 +127,14 @@
   border: 1px solid var(--accent-border);
 }
 
-.user-avatar span {
+#user-avatar span {
   font-size: 18px;
   font-weight: 600;
-  color: white;
+  color: var(--text);
   letter-spacing: 1px;
 }
 
-.user-info {
+#user-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -143,20 +143,18 @@
 .user-title {
   font-size: 17px;
   font-weight: 600;
-  color: white;
+  color: var(--text);
   line-height: 1.2;
 }
 
 .user-level {
-  font-family: var(--font-mono);
-  color: #88a876;
-  /* Muted green text */
+  color: var(--accent);
   font-size: 12px;
   font-weight: 600;
   margin-top: 4px;
 }
 
-.user-stats-section {
+#user-stats-section {
   text-align: right;
   display: flex;
   flex-direction: column;
@@ -172,8 +170,7 @@
 }
 
 .user-points {
-  font-family: var(--text-secondary);
-  color: #d4d4d8;
+  color: var(--secondary-text);
   font-size: 12px;
   font-weight: 500;
   margin-top: 4px;
@@ -246,7 +243,7 @@
   font-size: 13px;
   font-weight: 500;
   margin: 0 0 6px 0;
-  color: white;
+  color: var(--text);
   white-space: nowrap;
 }
 
@@ -265,4 +262,13 @@
   color: #52525b;
   margin: 2px 0 0 0;
   text-transform: lowercase;
+}
+
+.ranking-item{
+  border: 1px solid var(--border-color);
+}
+
+.green-text{
+  color: var(--accent);
+  font-size: 20px;
 }
