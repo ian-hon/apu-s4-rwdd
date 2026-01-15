@@ -1,3 +1,12 @@
+<?php
+include './api/conn.php'; // connects to the database
+
+$query = 'SELECT * FROM ecoquest.USERS WHERE username = "user1"';
+$result = mysqli_query($dbConnection, $query); // $dbConnection comes from conn.php
+$user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and stores it inside $user
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
