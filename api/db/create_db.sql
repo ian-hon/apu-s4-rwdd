@@ -154,7 +154,22 @@ INSERT INTO ecoquest.SUBMISSION (ID, user, task_ID, media, submitted_timestamp, 
 ('sub2', 'user2', 'task3', '/uploads/submissions/trash_pickup_001.jpg', 1700010000, 15, 'approved', 'curator1'),
 ('sub3', 'user3', 'task2', '/uploads/submissions/can_reuse_001.jpg', 1700020000, 5, 'pending', NULL),
 ('sub4', 'user1', 'task4', '/uploads/submissions/energy_saved_001.jpg', 1700030000, 6, 'approved', 'curator1'),
-('sub5', 'user2', 'task1', '/uploads/submissions/bottles_recycled_002.jpg', 1700040000, 8, 'rejected', 'curator1');
+('sub5', 'user2', 'task1', '/uploads/submissions/bottles_recycled_002.jpg', 1700040000, 8, 'rejected', 'curator1'),
+
+('sub6', 'user1', 'task1', '/uploads/submissions/bottles_recycled_002.jpg', 86400 * (FLOOR(UNIX_TIMESTAMP() / 86400) - 5), 0, 'approved', NULL),
+('sub7', 'user1', 'task2', '/uploads/submissions/bottles_recycled_002.jpg', 86400 * (FLOOR(UNIX_TIMESTAMP() / 86400) - 4), 0, 'approved', NULL),
+('sub8', 'user1', 'task3', '/uploads/submissions/bottles_recycled_002.jpg', 86400 * (FLOOR(UNIX_TIMESTAMP() / 86400) - 3), 0, 'approved', NULL),
+('sub9', 'user1', 'task1', '/uploads/submissions/bottles_recycled_002.jpg', 86400 * (FLOOR(UNIX_TIMESTAMP() / 86400) - 2), 0, 'approved', NULL),
+('sub10', 'user1', 'task4', '/uploads/submissions/bottles_recycled_002.jpg', 86400 * (FLOOR(UNIX_TIMESTAMP() / 86400) - 1), 0, 'approved', NULL),
+('sub17', 'user1', 'task4', '/uploads/submissions/bottles_recycled_002.jpg', 86400 * (FLOOR(UNIX_TIMESTAMP() / 86400)), 0, 'approved', NULL),
+
+('sub11', 'user2', 'task1', '/uploads/submissions/bottles_recycled_002.jpg', 86400 * (FLOOR(UNIX_TIMESTAMP() / 86400) - 5), 0, 'approved', NULL),
+('sub12', 'user2', 'task2', '/uploads/submissions/bottles_recycled_002.jpg', 86400 * (FLOOR(UNIX_TIMESTAMP() / 86400) - 4), 0, 'approved', NULL),
+('sub13', 'user2', 'task3', '/uploads/submissions/bottles_recycled_002.jpg', 86400 * (FLOOR(UNIX_TIMESTAMP() / 86400) - 3), 0, 'approved', NULL),
+('sub14', 'user2', 'task1', '/uploads/submissions/bottles_recycled_002.jpg', 86400 * (FLOOR(UNIX_TIMESTAMP() / 86400) - 1), 0, 'approved', NULL),
+
+('sub15', 'user3', 'task1', '/uploads/submissions/bottles_recycled_002.jpg', 86400 * (FLOOR(UNIX_TIMESTAMP() / 86400) - 1), 0, 'approved', NULL),
+('sub16', 'user3', 'task2', '/uploads/submissions/bottles_recycled_002.jpg', 86400 * FLOOR(UNIX_TIMESTAMP() / 86400), 0, 'approved', NULL);
 
 INSERT INTO ecoquest.POINTS (ID, amount, timestamp, submission) VALUES
 ('points1', 180, 1700005000, 'sub1'),
