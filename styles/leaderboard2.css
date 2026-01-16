@@ -1,5 +1,4 @@
 #header {
-  background-color: var(--background);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,7 +32,6 @@
 #board-filter {
   display: flex;
   padding: 20px 0;
-  background-color: var(--background);
 }
 
 .board-filters {
@@ -62,8 +60,6 @@
 
 .board-button.active {
   background-color: var(--accent);
-
-  color: var(--background);
   border: 2px solid var(--accent);
 }
 

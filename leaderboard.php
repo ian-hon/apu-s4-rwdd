@@ -1,13 +1,4 @@
-<?php
-include './api/conn.php'; // connects to the database
 
-$query =  'select * from ecoquest.USERS where username = "user1"';
-$result = mysqli_query($dbConnection, $query); // $dbConnection comes from conn.php
-$user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and stores it inside $user
-
-// refer line 50
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +15,7 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
 
 <body>
     <div id="bg-color">
-        <div id="element">
+        <div id="elements">
             <div id="header">
                 <div id="leaderboard">
                     <img src="./assets/trophy.svg">
@@ -49,18 +40,17 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
                         <img src="./assets/plastic.svg">
                     </div>
                     <p class="achievement-title">TOP PLASTIC SAVER</p>
-                    <p class="achievement-name">Sarah Chen</p>
-                    <input type="text" id="achievement-name" value="<?php echo $user['username']; ?>" required readonly>
-                    <p class="achievement-value green-text">142 kg</p>
+                    <p class="achievement-name"><?= htmlspecialchars($topPlasticUser['username'] ?? 'No data yet') ?></p>
+                    <p class="achievement-value green-text"><?= $topPlasticUser['plastic_saved']?? '0' ?> kg</p>
                 </div>
 
                 <div class="achievement-card">
                     <div class="card-icon">
                         <img src="./assets/leaf.svg">
                     </div>
-                    <p class="achievement-title">MOST CO₂ OFFSET</p>
-                    <p class="achievement-name">Marcus Rodriguez</p>
-                    <p class="achievement-value green-text">18.2 tons</p>
+                    <p class="achievement-title">MOST CO₂ OFFSET</p>                   
+                    <p class="achievement-name"><?= htmlspecialchars($topCo2User['username']?? 'No data yet') ?></p>
+                    <p class="achievement-value green-text"><?= $topCo2User['co2_offset'] ?? '0'?> tons</p>
                 </div>
 
                 <div class="achievement-card">
@@ -68,8 +58,8 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
                         <img src="./assets/fire.svg">
                     </div>
                     <p class="achievement-title">LONGEST STREAK</p>
-                    <p class="achievement-name">Sarah Chen</p>
-                    <p class="achievement-value green-text">28 days</p>
+                    <p class="achievement-name"><?= htmlspecialchars($longestStreak['username']?? 'No data yet') ?></p>
+                    <p class="achievement-value green-text"><?= $longestStreak['streak'] ?? '0'?> days</p>
                 </div>
 
                 <div class="achievement-card">
@@ -77,8 +67,8 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
                         <img src="./assets/trophy.svg">
                     </div>
                     <p class="achievement-title">MOST ACTIONS</p>
-                    <p class="achievement-name">Emma Thompson</p>
-                    <p class="achievement-value green-text">312 completed</p>
+                    <p class="achievement-name"><?= htmlspecialchars($mostAction['username']?? 'No data yet') ?></p>
+                    <p class="achievement-value green-text"><?= $mostAction['action'] ?? '0'?> </p>
                 </div>
             </div>
             <div id="stats-grid">
@@ -87,8 +77,8 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
                         <img src="./assets/trophy.svg">
                         <p class="stats-title">TOTAL USERS</p>
                     </div>
-                    <p class="stats-value">2,847</p>
-                    <p class="stats-footer green-text">↑ 12% this week</p>
+                    <p class="stats-value"><?= $totalUser['total-user'] ?? '0'?> </p>
+                    <p class="stats-footer green-text"><?= $totalUser['growth'] ?? '0'?>this week</p>
                 </div>
 
                 <div class="stats-card">
@@ -96,7 +86,7 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
                         <img src="./assets/fire.svg">
                         <p class="stats-title">AVG STREAK</p>
                     </div>
-                    <p class="stats-value">14.2</p>
+                    <p class="stats-value"><?= $averageStreak['average-streak'] ?? '0'?></p>
                     <p class="stats-footer green-text">days</p>
                 </div>
 
@@ -105,8 +95,8 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
                         <img src="./assets/wave.svg">
                         <p class="stats-title">AVG POINTS</p>
                     </div>
-                    <p class="stats-value">3,584</p>
-                    <p class="stats-footer green-text">↑ 8% from last month</p>
+                    <p class="stats-value"><?= $averagePoint['average-point'] ?? '0'?></p>
+                    <p class="stats-footer green-text"><?= $averagePoint['growth'] ?? '0'?>from last month</p>
                 </div>
 
                 <div class="stats-card">
@@ -123,10 +113,7 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
                 <h2>Global Rankings</h2>
                 <div class="user-card">
                     <div class="label-header">
-                        <<<<<<< Updated upstream <p>Compete with eco-warriors worldwide</p>
-                            =======
-                            Compete with eco-warriors worldwide
-                            >>>>>>> Stashed changes
+                            <p>Compete with eco-warriors worldwide</p>
                     </div>
 
                     <div class="rank-card">

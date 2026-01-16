@@ -1,7 +1,6 @@
 
 
 #header {
-    background-color:var(--background); 
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -64,8 +63,7 @@
 
 #time-filter {
     display: flex;
-    padding: 20px 0;
-    background-color: var(--background); 
+    padding: 20px 0; 
 }
 
 .time-filters {
@@ -184,7 +182,6 @@
     width: 900px;
     padding: 20px;
     margin: 0 auto;
-    background-color: var(--background); 
 }
 .stats-card {
     background-color: var(--background-secondary); 
