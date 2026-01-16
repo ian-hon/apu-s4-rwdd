@@ -38,11 +38,3 @@ setInterval(() => {
     updateCountdown();
 }, 300);
 // #endregion
-
-// #region navbar logic
-const navbarElement = document.querySelector("#navbar");
-
-function toggleNavbar() {
-    navbarElement.setAttribute("data-active", navbarElement.getAttribute("data-active") == "true" ? "false" : "true");
-}
-// #endregion

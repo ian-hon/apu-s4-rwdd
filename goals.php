@@ -1,3 +1,13 @@
+<?php
+include './api/conn.php'; // connects to the database
+
+$query = 'SELECT * FROM ecoquest.USERS WHERE username = "user1"';
+$result = mysqli_query($dbConnection, $query); // $dbConnection comes from conn.php
+$user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and stores it inside $user
+
+$p = "SELECT * FROM  "
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,10 +24,17 @@
         <!-- Header -->
         <div id="header">
             <div class="top">
-                <h3>Goal Tracking</h3>
-                <button id="ellipsis">
-                    <img src="/assets/ivp/ellipsis-v-svgrepo-com (1).svg">
+                <button id="back">
+                    <a href="./dashboard.html">
+                        <img src="./assets/ivp/arrow-back-basic-svgrepo-com.svg" alt="">
+                    </a>
                 </button>
+                <h3>Goal Tracking</h3>
+
+                <button id="hamburger">
+                    <img src="./assets/burger.svg" alt="">
+                </button>
+                <!-- <?php include './components/navbar.php'; ?> -->
             </div>
             <hr style="color: #101309; margin: 0;">
         </div>
@@ -26,28 +43,28 @@
             <!-- Statistic -->
             <div id="statistic">
                 <div class="ststc">
-                    <img src="/assets/ivp/water-drops-svgrepo-com (1).svg">
+                    <img src="./assets/ivp/water-drops-svgrepo-com (1).svg">
                     <p class="p1">YOU'VE RECYCLED</p>
                     <p class="p2">62.5</p>
                     <p class="p3">kg of plastic</p>
                 </div>
 
                 <div class="ststc">
-                    <img src="/assets/ivp/leaf-svgrepo-com.svg">
+                    <img src="./assets/ivp/leaf-svgrepo-com.svg">
                     <p class="p1">CO₂ OFFSIDE</p>
                     <p class="p2">5.2</p>
                     <p class="p3">tons of CO₂</p>
                 </div>
 
                 <div class="ststc">
-                    <img src="/assets/ivp/bolt-thunder-svgrepo-com.svg">
+                    <img src="./assets/ivp/bolt-thunder-svgrepo-com.svg">
                     <p class="p1">ACTIONS DONE</p>
                     <p class="p2">156</p>
                     <p class="p3">eco activities</p>
                 </div>
 
                 <div class="ststc">
-                    <img src="/assets/ivp/fire-svgrepo-com (1).svg">
+                    <img src="./assets/ivp/fire-svgrepo-com (1).svg">
                     <p class="p1">CURRENT STREAK</p>
                     <p class="p2">12</p>
                     <p class="p3">days strong</p>
@@ -56,24 +73,24 @@
 
             <!-- Impact -->
             <div id="impact-header">
-                <img id="your-impact" src="/assets/ivp/light-bulb-svgrepo-com.svg">
+                <img id="your-impact" src="./assets/ivp/light-bulb-svgrepo-com.svg">
                 <h4 id="header-impact">Your impact</h4>
             </div>
             <div id="impact">
                 <div class="impt">
-                    <img src="/assets/ivp/car-svgrepo-com.svg">
+                    <img src="./assets/ivp/car-svgrepo-com.svg">
                     <p class="impt-p1">CO₂ Saved</p>
                     <p class="impt-p2">5.2 tons</p>
                     <p class="impt-p3">That's equivalent to driving from Thailand to Korea and back!</p>
                 </div>
                 <div class="impt">
-                    <img src="/assets/ivp/bottle-plastic-recycle-recycling-svgrepo-com.svg">
+                    <img src="./assets/ivp/bottle-plastic-recycle-recycling-svgrepo-com.svg">
                     <p class="impt-p1">Plastic Diverted</p>
                     <p class="impt-p2">62.5 kg</p>
                     <p class="impt-p3">Equal to 2,500 plastic bottels kept out of landfills</p>
                 </div>
                 <div class="impt">
-                    <img src="/assets/ivp/tree-svgrepo-com.svg">
+                    <img src="./assets/ivp/tree-svgrepo-com.svg">
                     <p class="impt-p1">Tree Impact</p>
                     <p class="impt-p2">~30 Trees</p>
                     <p class="impt-p3">Your carbon offset equal the CO₂ absorption of 30 trees/year</p>
@@ -92,7 +109,7 @@
                     <p class="goals-p1">PLASTIC RECYCLED</p>
                     <P class="goals-p2">3.2 <span>/ 5 kg</span></P>
                     <div class="icons">
-                        <img src="/assets/ivp/water-drops-svgrepo-com (1).svg" alt="">
+                        <img src="./assets/ivp/water-drops-svgrepo-com (1).svg" alt="">
                     </div>
                     <div class="progress">
                         <div id="thumb">
@@ -105,7 +122,7 @@
                     <p class="goals-p1">CO₂ EMISSION SAVED</p>
                     <P class="goals-p2">1.8 <span>/ 2 tons</span></P>
                     <div class="icons">
-                        <img src="/assets/ivp/leaf-svgrepo-com.svg" alt="">
+                        <img src="./assets/ivp/leaf-svgrepo-com.svg" alt="">
                     </div>
                     <!-- progress -->
                     <div class="progress">
@@ -120,7 +137,7 @@
             <div id="track-info">
                 <div class="info">
                     <div class="card-header">
-                        <img src="/assets/ivp/calender-svgrepo-com.svg" alt="">
+                        <img src="./assets/ivp/calender-svgrepo-com.svg" alt="">
                         <p class="info-p1">TIME LEFT</p>
                     </div>
 
@@ -130,7 +147,7 @@
 
                 <div class="info">
                     <div class="card-header">
-                        <img src="/assets/ivp/target-marketing-goal-svgrepo-com.svg" alt="">
+                        <img src="./assets/ivp/target-marketing-goal-svgrepo-com.svg" alt="">
                         <p class="info-p1">ON TRACK</p>
                     </div>
 
@@ -140,7 +157,7 @@
 
                 <div class="info">
                     <div class="card-header">
-                        <img src="/assets/ivp/up-trend-svgrepo-com.svg" alt="">
+                        <img src="./assets/ivp/up-trend-svgrepo-com.svg" alt="">
                         <p class="info-p1">CONSISTENCY</p>
                     </div>
 
@@ -148,45 +165,13 @@
                     <p class="info-p3">above average</p>
                 </div>
             </div>
-
-            <!-- Achievement -->
-            <div id="personalGoal">
-                <div id="pg-header">
-                    <h4>Personal Goals</h4>
-                    <div id="pg-counter">3 of 12</div>
-                </div>
-
-                <div class="personalGoals">
-                    <div class="pg">
-                        <img src="/assets/ivp/sprout-tree-svgrepo-com.svg" alt="">
-                        <div id="pg-text">
-                            <p class="pg-p1">Tree Hugger</p>
-                            <p class="pg-p2">Planted 20+ trees</p>
-                        </div>
-                    </div>
-
-                    <div class="pg">
-                        <img src="/assets/ivp/h2o-svgrepo-com.svg" alt="">
-                        <div id="pg-text">
-                            <p class="pg-p1">Water Warrior</p>
-                            <p class="pg-p2">Saved 1000L of water</p>
-                        </div>
-                    </div>
-
-                    <div class="pg">
-                        <img src="/assets/ivp/carbon-dioxide-concentration-svgrepo-com.svg" alt="">
-                        <div id="pg-text">
-                            <p class="pg-p1">Carbon Champion</p>
-                            <p class="pg-p2">Offset 500kg of CO₂</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>
 
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/navbar.js"></script>
+    <script src="./scripts/goals.js"></script>
 </body>
 
 </html>
