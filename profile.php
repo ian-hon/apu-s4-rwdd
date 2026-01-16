@@ -7,6 +7,16 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
 
 // refer line 50
 
+// total point
+$totalPoint = "SELECT sum(task.reward_rate * submission.action_count) AS total_points FROM submission 
+            INNER JOIN task ON submission.task_ID = task.ID WHERE submission.user = 'user1'";
+$totalPointResult = mysqli_query($dbConnection, $totalPoint);
+$allPoint = mysqli_fetch_assoc($totalPointResult)['total_points'];
+
+// available point 
+$availablePoint = "SELECT $allPoint - sum(redemption.price) AS available_point FROM redemption WHERE redemption.user = 'user1'";
+$availableResult = mysqli_query($dbConnection, $availablePoint);
+$allAvailable = mysqli_fetch_assoc($availableResult);
 ?>
 
 <!DOCTYPE html>
@@ -26,11 +36,11 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
 
             <div id="navbar">
                 <a href="dashboard.html">
-                    <img src="assets/ivp/arrow-back-basic-svgrepo-com (2).svg" alt="">
+                    <img src="./assets/ivp/arrow-back-basic-svgrepo-com.svg" alt="">
                 </a>
-                <p>Profile</p>
+                <p style="font-weight: bold; font-size: 20px;">Profile</p>
                 <a href="">
-                    <img src="assets/ivp/ellipsis-v-svgrepo-com (1).svg" alt="">
+                    <img src="./assets/burger.svg" alt="">
                 </a>
             </div>
             <hr style="color: #222;">
@@ -47,11 +57,11 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
                         <a href="#name">
                             <img src="assets/ivp/pen-svgrepo-com.svg" alt="">
                         </a>
-                        <input type="text" id="name" value="<?php echo $user['username'] ?>" required readonly>
+                        <input type="text" id="name" value="<?php echo $user['name'] ?>" required readonly>
                     </div>
                     <div class="user">
                         <p>Password</p>
-                        <a href="change_password.html">
+                        <a href="change_password.php">
                             <img src="assets/ivp/pen-svgrepo-com.svg" alt="">
                         </a>
                         <input type="password" id="password" value="eco1234" required readonly>
@@ -63,13 +73,13 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
                     <div class="point">
                         <img src="assets/ivp/medal-champion-award-winner-olympic-23-svgrepo-com.svg" alt="">
                         <p>Total Point</p>
-                        <p>1200</p>
+                        <p><?php echo $allPoint ?></p>
                     </div>
 
                     <div class="point">
                         <img src="assets/ivp/leaf-svgrepo-com.svg" alt="">
                         <p>Available</p>
-                        <p>470</p>
+                        <p><?php echo $allAvailable['available_point'] ?></p>
                     </div>
                 </div>
 

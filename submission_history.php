@@ -1,9 +1,31 @@
 <?php
 include './api/conn.php'; // connects to the database
 
-$query = 'SELECT * FROM ecoquest.USERS WHERE username = "user1"';
-$result = mysqli_query($dbConnection, $query); // $dbConnection comes from conn.php
-$user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and stores it inside $user
+// total task
+$totalTask = 'SELECT COUNT(task_ID) AS total_tasks FROM ecoquest.SUBMISSION WHERE user = "user1"';
+$result = mysqli_query($dbConnection, $totalTask); // $dbConnection comes from conn.php
+$allTask = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and stores it inside $user
+
+// total point
+$totalPoint = "SELECT sum(task.reward_rate * submission.action_count) AS total_points FROM submission 
+            INNER JOIN task ON submission.task_ID = task.ID WHERE submission.user = 'user1'";
+$totalPointResult = mysqli_query($dbConnection, $totalPoint);
+$allPoint = mysqli_fetch_assoc($totalPointResult);
+
+$tasksQuery = "
+    SELECT 
+        task.description,
+        task.reward_rate,
+        task.excess_limit,
+        submission.media,
+        submission.status,
+        submission.action_count
+    FROM submission
+    INNER JOIN task ON submission.task_ID = task.ID
+    WHERE submission.`user` = 'user1'
+";
+
+$tasksResult = mysqli_query($dbConnection, $tasksQuery);
 
 ?>
 
@@ -14,8 +36,8 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submission History | EcoQuest</title>
-    <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/submission_history.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/submission_history.css">
 </head>
 
 <body>
@@ -23,9 +45,14 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
     <!-- header -->
     <div id="header">
         <div class="top">
+            <button id="back">
+                <a href="./dashboard.html">
+                    <img src="./assets/ivp/arrow-back-basic-svgrepo-com.svg" alt="">
+                </a>
+            </button>
             <h3>Submission History</h3>
-            <button id="ellipsis">
-                <img src="/assets/ivp/ellipsis-v-svgrepo-com (1).svg" alt="">
+            <button id="hamburger">
+                <img src="./assets/burger.svg" alt="">
             </button>
         </div>
         <hr style="border: 0; height: 2px; background-color: #101309; margin: 0;">
@@ -36,78 +63,56 @@ $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and st
         <!-- Submisstion History Tracking -->
         <div id="submissionHistory">
             <div class="sh-tracking">
-                <img src="/assets/ivp/leaf-svgrepo-com.svg" alt="">
+                <img src="./assets/ivp/leaf-svgrepo-com.svg" alt="">
                 <p class="sh-tracking-p1">Total Tasks</p>
-                <p class="sh-tracking-p2">4</p>
+                <p class="sh-tracking-p2"><?php echo $allTask['total_tasks'] ?></p>
             </div>
 
             <div class="sh-tracking">
-                <img src="/assets/ivp/tick-circle-svgrepo-com.svg" alt="">
+                <img src="./assets/ivp/tick-circle-svgrepo-com.svg" alt="">
                 <p class="sh-tracking-p1">Points Earned</p>
-                <p class="sh-tracking-p2">120</p>
+                <p class="sh-tracking-p2"><?php echo $allPoint['total_points'] ?></p>
             </div>
         </div>
 
         <!-- All submission -->
         <div id="allSubmissions">
             <h3 id="header-allSubmission">All Submissions</h3>
-            <div class="all-submts">
-                <img src="/assets/ivp/plastic bottle.jpeg" alt="">
-                <div class="tasks-title">
-                    <p class="all-submts-p1">Recycle 10 Plastic Bottles</p>
-                    <p class="all-submts-p2">Approved</p>
-                </div>
-                <div class="tasks-info">
-                    <p class="all-submts-p3">2 days ago</p>
-                    <p class="all-submts-p4">+50 points</p>
-                </div>
-            </div>
 
-            <div class="all-submts">
-                <img src="/assets/ivp/Solar Energy.jpg" alt="">
-                <div class="tasks-title">
-                    <p class="all-submts-p1">Use Solar Energy for a Week</p>
-                    <p class="all-submts-p2 orange">Pendding</p>
-                </div>
-                <div class="tasks-info">
-                    <p class="all-submts-p3">1 days ago</p>
-                    <p class="all-submts-p4">75 points</p>
-                </div>
-            </div>
+            <?php
+            while ($task = mysqli_fetch_assoc($tasksResult)) {
 
-            <div class="all-submts">
-                <img src="/assets/ivp/composting.jpeg" alt="">
-                <div class="tasks-title">
-                    <p class="all-submts-p1">Start Composting at Home</p>
-                    <p class="all-submts-p2">Approved</p>
-                </div>
-                <div class="tasks-info">
-                    <p class="all-submts-p3">2 days ago</p>
-                    <p class="all-submts-p4">+60 points</p>
-                </div>
-            </div>
+                $statusClass = '';
 
-            <div class="all-submts">
-                <img src="/assets/ivp/reusable bag.png" alt="">
-                <div class="tasks-title">
-                    <p class="all-submts-p1">Use Reusable Bags for Shopping</p>
-                    <p class="all-submts-p2 red">Rejected</p>
-                </div>
-                <div class="tasks-info">
-                    <p class="all-submts-p3">3 days ago</p>
-                </div>
-            </div>
+                if ($task['status'] === 'pending') {
+                    $statusClass = 'orange';
+                } elseif ($task['status'] === 'rejected') {
+                    $statusClass = 'red';
+                }
+            ?>
 
-            <div class="all-submts">
-                <img src="/assets/ivp/reusable bag.png" alt="">
-                <div class="tasks-title">
-                    <p class="all-submts-p1">Use Reusable Bags for Shopping</p>
-                    <p class="all-submts-p2 red">Rejected</p>
+                <div class="all-submts">
+                    <img src="<?php echo $task['media']; ?>">
+
+                    <div class="tasks-title">
+                        <p class="all-submts-p1">
+                            <?php echo $task['description']; ?>
+                        </p>
+                        <p class="all-submts-p2 <?php echo $statusClass; ?>">
+                            <?php echo $task['status']; ?>
+                        </p>
+                    </div>
+
+                    <div class="tasks-info">
+                        <p class="all-submts-p3">
+                            <?php echo $task['excess_limit']; ?> days ago
+                        </p>
+                        <p class="all-submts-p4">
+                            <?php echo $task['reward_rate'] * $task['action_count']; ?> points
+                        </p>
+                    </div>
                 </div>
-                <div class="tasks-info">
-                    <p class="all-submts-p3">3 days ago</p>
-                </div>
-            </div>
+            <?php } ?>
         </div>
 
     </div>
