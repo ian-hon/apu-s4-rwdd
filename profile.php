@@ -34,14 +34,15 @@ $allAvailable = mysqli_fetch_assoc($availableResult);
     <div id="parent">
         <div id="bg-color">
 
+        <!-- navbar -->
             <div id="navbar">
                 <a href="dashboard.html">
                     <img src="./assets/ivp/arrow-back-basic-svgrepo-com.svg" alt="">
                 </a>
                 <p style="font-weight: bold; font-size: 20px;">Profile</p>
-                <a href="">
+                <button id="hamburger">
                     <img src="./assets/burger.svg" alt="">
-                </a>
+                </button>
             </div>
             <hr style="color: #222;">
 
@@ -144,9 +145,12 @@ $allAvailable = mysqli_fetch_assoc($availableResult);
             </div>
 
         </div>
+        <?php include './components/navbar.php'; ?>
     </div>
 
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/navbar.js" defer></script>
+    <script src="./scripts/profile.js" defer></script>
 </body>
 
 </html>
