@@ -9,6 +9,36 @@
     height: 60px; 
 }
 
+#bg-color {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(ellipse 2200px 1800px at 97% 30%, #519C03 0%, transparent 10%),
+        radial-gradient(ellipse 2200px 1800px at 5% 71%, #519C03 0%, transparent 10%),
+        black !important;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+@media(min-width: 1024px) {
+    #bg-color {
+        background:
+            radial-gradient(ellipse 2000px 1800px at 90% 35%, #519C03 0%, transparent 20%),
+            radial-gradient(ellipse 2000px 1800px at 7% 70%, #519C03 0%, transparent 20%),
+            black !important;
+        height: 100vh;
+    }
+}
+
+#elements {
+    overflow-y: scroll;
+    width: 100%;
+
+    scrollbar-width: none;
+}
 
 #leaderboard {
     display: flex;
@@ -91,7 +121,6 @@
     padding: 20px;
     width: 900px; 
     margin: 0 auto;
-    background-color:var(--background);
 }
 .achievement-card {
     background-color:var(--background-secondary);
@@ -325,18 +354,12 @@
     color: var(--accent);
 }
 
-/* =========================================
-   Mobile Responsive Styles
-========================================= */
 
-/* 1. Globally ensure padding doesn't add to width, preventing horizontal scrollbar */
 * {
     box-sizing: border-box;
 }
 
-/* Media Query for Tablets and smaller (under 900px) */
 @media (max-width: 900px) {
-    /* Reset fixed widths to fluid widths */
     #top-achievements,
     #achievements-grid,
     #stats-grid,
@@ -345,7 +368,7 @@
         max-width: 100%;
         padding-left: 20px;
         padding-right: 20px;
-        margin: 0; /* Remove auto margins */
+        margin: 0; 
     }
 
     #top-achievements, #global-rankings {

@@ -1,3 +1,14 @@
+<?php
+include './api/conn.php'; // connects to the database
+
+$query =  'select * from ecoquest.USERS where username = "user1"';
+$result = mysqli_query($dbConnection, $query); // $dbConnection comes from conn.php
+$user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and stores it inside $user
+
+// refer line 50
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,15 +16,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard | EcoQuest</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/style.css">   
     <link rel="stylesheet" href="./styles/leaderboard.css">
     <link rel="stylesheet" href="./styles/leaderboard2.css">
 
 </head>
 
 <body>
-    <div id="page">
-        <div id="parent">
+    <div id="bg-color">
+        <div id="element">
             <div id="header">
                 <div id="leaderboard">
                     <img src="./assets/trophy.svg">
@@ -39,6 +50,7 @@
                     </div>
                     <p class="achievement-title">TOP PLASTIC SAVER</p>
                     <p class="achievement-name">Sarah Chen</p>
+                    <input type="text" id="achievement-name" value="<?php echo $user['username']; ?>" required readonly>
                     <p class="achievement-value green-text">142 kg</p>
                 </div>
 
