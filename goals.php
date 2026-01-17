@@ -9,6 +9,7 @@ $pTitle = "SELECT * FROM goals WHERE type = 'personal'";
 $titleResult = mysqli_query($dbConnection, $pTitle);
 
 include './api/users/contribution.php';
+include './api/goals/functions.php';
 
 $impact = user_get_contribution_total('user1');
 // e.g. $impact = [1 => 50, 2 => 20]
@@ -22,6 +23,12 @@ $actionDone = user_get_actions_total('user1');
 
 $streak = user_get_streak('user1');
 // e.g. returns integer 12 representing current streak count
+
+$personalProgress = goals_contributions_all('user1', type: 'personal');
+$globalProgress = goals_contributions_all('user1', type: 'global');
+
+$consistency = goals_overall_completion_rate();
+$onTrack = goals_all_completed('user1', type: 'personal');
 ?>
 
 <!DOCTYPE html>
@@ -44,19 +51,12 @@ $streak = user_get_streak('user1');
                     <a href="./dashboard.html">
                         <img src="./assets/ivp/arrow-back-basic-svgrepo-com.svg" alt="">
                     </a>
-                    <<<<<<< Updated upstream=======</button>
-                        <h3>Goal Tracking</h3>
+                </button>
+                <h3>Goal Tracking</h3>
 
-                        <button id="hamburger">
-                            <img src="./assets/burger.svg" alt="">
-                            >>>>>>> Stashed changes
-                        </button>
-                        <h3>Goal Tracking</h3>
-
-                        <button id="hamburger">
-                            <img src="./assets/burger.svg" alt="">
-                        </button>
-                        <!-- <?php include './components/navbar.php'; ?> -->
+                <button id="hamburger">
+                    <img src="./assets/burger.svg" alt="">
+                </button>
             </div>
             <hr style="color: #101309; margin: 0;">
         </div>
@@ -75,7 +75,7 @@ $streak = user_get_streak('user1');
                     <img src="./assets/ivp/leaf-svgrepo-com.svg">
                     <p class="p1"><?php echo $contribution['carbon']['term'] ?></p>
                     <p class="p2"><?php echo $contribution['carbon']['total'] ?></p>
-                    <p class="p3">tons of CO₂</p>
+                    <p class="p3"><?php echo $contribution['carbon']['unit'] ?> of <?php echo $contribution['carbon']['term'] ?></p>
                 </div>
 
                 <div class="ststc">
@@ -100,52 +100,81 @@ $streak = user_get_streak('user1');
             </div>
             <div id="impact">
                 <div class="impt">
-                    <img src="./assets/ivp/car-svgrepo-com.svg">
-                    <p class="impt-p1">CO₂ Saved</p>
-                    <p class="impt-p2">5.2 tons</p>
-                    <p class="impt-p3">That's equivalent to driving from Thailand to Korea and back!</p>
+                    <img src="./assets/ivp/car-svgrepo-com.svg" alt="">
+                    <!-- <img src=<?php echo $contribution['carbon']['media'] ?>> -->
+                    <p class="impt-p1"><?php echo $contribution['carbon']['term'] ?></p>
+                    <p class="impt-p2"><?php echo $contribution['carbon']['total'] ?> <?php echo $contribution['carbon']['unit'] ?></p>
+                    <p class="impt-p3"><?php echo $contribution['carbon']['description'] ?></p>
                 </div>
                 <div class="impt">
                     <img src="./assets/ivp/bottle-plastic-recycle-recycling-svgrepo-com.svg">
-                    <p class="impt-p1">Plastic Diverted</p>
-                    <p class="impt-p2">62.5 kg</p>
+                    <p class="impt-p1"><?php echo $contribution['plastic']['term'] ?></p>
+                    <p class="impt-p2"><?php echo $contribution['plastic']['total'] ?> <?php echo $contribution['plastic']['unit'] ?></p>
                     <p class="impt-p3">Equal to 2,500 plastic bottels kept out of landfills</p>
                 </div>
                 <div class="impt">
-                    <img src="./assets/ivp/tree-svgrepo-com.svg">
-                    <p class="impt-p1">Tree Impact</p>
-                    <p class="impt-p2">~30 Trees</p>
+                    <img src="./assets/ivp/electric-electricity-svgrepo-com.svg">
+                    <p class="impt-p1"><?php echo $contribution['electric']['term'] ?></p>
+                    <p class="impt-p2"><?php echo $contribution['electric']['total'] ?> <?php echo $contribution['electric']['unit'] ?></p>
+                    <p class="impt-p3">Your carbon offset equal the CO₂ absorption of 30 trees/year</p>
+                </div>
+                <div class="impt">
+                    <img src="./assets/ivp/trash-svgrepo-com.svg">
+                    <p class="impt-p1"><?php echo $contribution['trash']['term'] ?></p>
+                    <p class="impt-p2"><?php echo $contribution['trash']['total'] ?> <?php echo $contribution['trash']['unit'] ?></p>
                     <p class="impt-p3">Your carbon offset equal the CO₂ absorption of 30 trees/year</p>
                 </div>
             </div>
-            <!-- get on contribution total -->
 
             <!-- Goal Tracking -->
             <div id="tracking">
                 <button class="Personal">Personal</button>
                 <button class="Global">Global</button>
-                <!-- curator.js -->
-                <!-- dashboard.css -->
-                <!-- both inside curator folder -->
             </div>
 
             <!-- Goal -->
             <div id="goal">
-                <?php
-                while ($allTitle = mysqli_fetch_assoc($titleResult)) { ?>
-                    <div class="goals">
-                        <p class="goals-p1"><?php echo $allTitle['title']; ?></p>
-                        <p class="goals-p2"><span><?php echo $allTitle['decimal_points']; ?></span>/<?php echo $allTitle['goal']; ?></p>
-                        <div class="icons">
-                            <img src="./assets/ivp/water-drops-svgrepo-com (1).svg" alt="">
-                        </div>
-                        <div class="progress">
-                            <div id="thumb">
-                                <p class="percent">64%</p>
+                <div class="personal-goals">
+                    <?php
+                    foreach ($personalProgress as $row) { ?>
+                        <div class="goals">
+                            <p class="goals-p1"><?php echo $row['title']; ?></p>
+                            <p class="goals-p2"><?php echo $row['total']; ?>/<span><?php echo $row['goal']; ?></span></p>
+                            <div class="icons">
+                                <img src="./assets/ivp/water-drops-svgrepo-com (1).svg" alt="">
+                            </div>
+
+                            <?php $progress = floor(($row['total'] / $row['goal']) * 100); ?>
+
+                            <div class="progress">
+                                <div id="thumb">
+                                    <p class="percent"><?php echo $progress ?> %</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                </div>
+
+                <div class="global-goals">
+                    <?php
+                    foreach ($globalProgress as $row) { ?>
+                        <div class="goals">
+                            <p class="goals-p1"><?php echo $row['title']; ?></p>
+                            <p class="goals-p2"><?php echo $row['total']; ?>/<span><?php echo $row['goal']; ?></span></p>
+                            <div class="icons">
+                                <img src="./assets/ivp/water-drops-svgrepo-com (1).svg" alt="">
+                            </div>
+
+                            <?php $progress = floor(($row['total'] / $row['goal']) * 100); ?>
+
+                            <div class="progress">
+                                <div id="thumb">
+                                    <p class="percent"><?php echo $progress ?> %</p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
 
             <!-- track info -->
@@ -166,7 +195,7 @@ $streak = user_get_streak('user1');
                         <p class="info-p1">ON TRACK</p>
                     </div>
 
-                    <P class="info-p2">2 of 2</P>
+                    <P class="info-p2"><?php echo $onTrack ?>of 2</P>
                     <p class="info-p3">goals</p>
                 </div>
 
@@ -176,7 +205,7 @@ $streak = user_get_streak('user1');
                         <p class="info-p1">CONSISTENCY</p>
                     </div>
 
-                    <P class="info-p2">92%</P>
+                    <P class="info-p2"><?php echo $consistency ?>%</P>
                     <p class="info-p3">above average</p>
                 </div>
             </div>
@@ -187,14 +216,8 @@ $streak = user_get_streak('user1');
     </div>
 
     <script src="./scripts/script.js"></script>
-    <<<<<<< Updated upstream
-        <script src="./scripts/navbar.js">
-        </script>
-        <script src="./scripts/goals.js"></script>
-        =======
-        <script src="./scripts/navbar.js" defer></script>
-        <script src="./scripts/goals.js" defer></script>
-        >>>>>>> Stashed changes
+    <script src="./scripts/navbar.js" defer></script>
+    <script src="./scripts/goals.js" defer></script>
 </body>
 
 </html>

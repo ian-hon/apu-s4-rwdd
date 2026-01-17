@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form action="#profile.php" method="post" id="bg-color">
 
             <!-- navbar -->
-            <div id="navbar">
+            <div id="top-navbar">
                 <a href="profile.php">
                     <img src="./assets/ivp/arrow-back-basic-svgrepo-com.svg" alt="">
                 </a>

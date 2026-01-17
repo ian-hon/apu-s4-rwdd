@@ -249,6 +249,7 @@ body {
         border-radius: var(--border-radius);
         padding: var(--block-padding);
         color: white;
+        transition: all 0.3s ease;
     }
 }
 
@@ -264,6 +265,18 @@ body {
     display: grid;
     margin: 2em;
     gap: 1em;
+}
+
+.personal-goals,
+.global-goals {
+    display: none;
+    grid-template-columns: 1fr;
+    gap: 1em;
+}
+
+.personal-goals.active,
+.global-goals.active {
+    display: grid;
 }
 
 .goals {
@@ -318,7 +331,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    background: conic-gradient(var(--accent) calc(90%), var(--tertiary) 0);
+    background: conic-gradient(var(--accent) calc(30%), var(--tertiary) 0);
     border-radius: 1000px;
     height: 100px;
     width: 100px;

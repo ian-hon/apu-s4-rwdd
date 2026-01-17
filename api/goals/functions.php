@@ -130,5 +130,3 @@ function goals_overall_completion_rate()
     }
     return $total / $count;
 }
-
-echo goals_completion_rate();
