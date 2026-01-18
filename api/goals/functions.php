@@ -22,9 +22,9 @@ function goals_contributions_all($username, $type = NULL, $onlyActive = true)
             (submission.user = '$username') and
             (submission.status = 'approved') and
             (task.goal_type = goals.goal_type)
-            " . (is_null($type) ? "" : "and (goals.type = '$type')") . "
             " . ($onlyActive ? "and (submission.submitted_timestamp between goals.starting_time and goals.ending_time)" : "") . "
-    ), 0) as total from goals";
+    ), 0) as total from goals
+    " . (is_null($type) ? "" : "where (goals.type = '$type')");
     $queryResult = mysqli_query($dbConnection, $query);
 
     $result = array();
@@ -45,9 +45,9 @@ function goals_contributions_all($username, $type = NULL, $onlyActive = true)
     return $result;
 }
 
-function goals_contributions($username, $goalID, $type = NULL, $onlyActive = true)
+function goals_contributions($username, $goalID, $onlyActive = true)
 {
-    return goals_contributions_all($username, $type, $onlyActive)[$goalID];
+    return goals_contributions_all($username, onlyActive: $onlyActive)[$goalID];
 }
 
 function goals_progress($username, $goalID)
