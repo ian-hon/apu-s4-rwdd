@@ -53,7 +53,7 @@ function goals_contributions($username, $goalID, $onlyActive = true)
 function goals_progress($username, $goalID)
 {
     // returns from 0-100 the progress of the goal
-    $goal = goals_contributions($username, $goalID, type: 'personal');
+    $goal = goals_contributions($username, $goalID);
     return floor(($goal['total'] / $goal['goal']) * 100);
 }
 
