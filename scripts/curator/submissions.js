@@ -3,11 +3,11 @@
     const lastUpdatedElement = document.querySelector("#page #content #submissions #header #last-updated");
     const submissionCountElement = document.querySelector("#page #content #submissions #header #submission-count");
 
-    const sidebar = document.querySelector("#page #sidebar #overview");
+    const sidebar = document.querySelector("#page #sidebar #sidebar-content #submissions #overview");
     const sidebarPie = sidebar.querySelector("#pie");
     const sidebarStatistics = sidebar.querySelector("#statistics");
 
-    const sidebarQueryInput = document.querySelector("#page #sidebar #query #submissions #search input");
+    const sidebarQueryInput = document.querySelector("#page #sidebar #sidebar-content #submissions #query #search input");
 
     var submissions = {};
     var tasks = {};

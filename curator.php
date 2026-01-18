@@ -27,20 +27,11 @@
                 <h5 id="schedule" class="border" onclick="changeTab('schedule')">SCHEDULE</h5>
             </div>
             <hr>
-            <div id="query">
+            <div id="sidebar-content">
                 <?php
-                include './curator/sidebar/query/submissions.php';
-                include './curator/sidebar/query/tasks.php';
-                include './curator/sidebar/query/schedule.php';
-                ?>
-            </div>
-            <hr>
-            <div id="overview">
-                <h5>OVERVIEW</h5>
-                <?php
-                include './curator/sidebar/overview/submissions.php';
-                include './curator/sidebar/overview/tasks.php';
-                include './curator/sidebar/overview/schedule.php';
+                include './curator/sidebar/submissions.php';
+                include './curator/sidebar/tasks.php';
+                include './curator/sidebar/schedule.php';
                 ?>
             </div>
         </div>
