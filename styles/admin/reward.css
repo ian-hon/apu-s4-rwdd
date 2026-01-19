@@ -28,7 +28,6 @@
 #filter {
     min-height: 150px;
     color: var(--accent);
-    background: var(--background);
     border-color: var(--accent-border);
     align-content: space-around;
 

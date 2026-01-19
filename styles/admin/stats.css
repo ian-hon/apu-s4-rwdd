@@ -203,7 +203,11 @@
     margin-right: 10px;
 }
 
-
 .pie-chart li:nth-child(1) .pie { background-color: var(--accent); }
 .pie-chart li:nth-child(2) .pie { background-color: var(--pending); }
 .pie-chart li:nth-child(3) .pie { background-color: var(--error); }
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 300px; 
+}

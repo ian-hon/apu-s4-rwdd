@@ -31,12 +31,12 @@
                         <span id="total-reward">
                             <h5>Total Reward</h5>
                             <img src="./assets/target.svg">
-                            <h3>5</h3>
+                            <h3><?= $totalResult['count'] ?? 0?></h3>
                         </span>
                         <span id="low-stock">
                             <h5>Low Stock Alert</h5>
                             <img src="./assets/target.svg">
-                            <h3>1</h3>
+                            <h3><?= $lowStockResult['count'] ?? 0?></h3>
                             <h6>Require Attention</h6>
                         </span>
                     </div>
@@ -44,12 +44,12 @@
                         <span id="active">
                             <img src="./assets/target.svg">
                             <h5>Active</h5>
-                            <h3>5</h3>
+                            <h3><?= $activeResult['count'] ?? 0?></h3>
                         </span>
                         <span id="ended">
                             <img src="./assets/target.svg">
                             <h5>Ended</h5>
-                            <h3>1</h3>
+                            <h3><?= $endedResult['count'] ?? 0 ?></h3>
                         </span>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                         </div>
                         <button class="discontinue-btn">Discontinue</button>
                     </div>
-                                    <div class="card">
+                    <div class="card">
                         <div class="card-header">
                             <div class="user-info">
                                 <div class="avatar">MT</div>
@@ -175,7 +175,7 @@
                         </div>
                         <button class="discontinue-btn">Discontinue</button>
                     </div>
-                                    <div class="card">
+                    <div class="card">
                         <div class="card-header">
                             <div class="user-info">
                                 <div class="avatar">MT</div>
@@ -236,7 +236,7 @@
                             <p>Last updated: <?php echo date("d F Y, h:i A", strtotime($lastUpdated)); ?></p>
                         </div>
 
-                    <button class="conner-btn" onclick="openPopup()">Export Report</button>
+                    <button class="conner-btn" onclick="Export()">Export Report</button>
                 </div>
                 <div class="dashboard-container">
                     <div class="stat-card">
@@ -279,7 +279,6 @@
                     <button class="fil-btn active" onclick="filterTab('overview', event)">Overview</button>
                     <button class="fil-btn" onclick="filterTab('task', event)">Task Analytics</button>
                     <button class="fil-btn" onclick="filterTab('user', event)">User Analytics</button>
-                    <button class="fil-btn" onclick="filterTab('performance', event)">Performance</button>
                 </nav>
 
                 <div id="chart-container"> 
@@ -332,23 +331,23 @@
         <div id="popup-header">
             <h3>Create New Reward</h3>
         </div>
-        <form class="reward-form">
+        <form class="reward-form" action="create_reward.php" method="POST">
             <label>REWARD TITLE *</label>
-            <input type="text" placeholder="e.g. Eco-Friendly Tote Bag">
+            <input type="text" name="title" placeholder="e.g. Eco-Friendly Tote Bag">
             
             <label>CATEGORY *</label>
-            <select>
+            <select name="category">
                 <option>Merchandise</option>
                 <option>Voucher</option>
             </select>
             <div id="form-row">
                 <div class="form-group">
                     <label>POINTS COST *</label>
-                    <input type="number" value="500">
+                    <input type="number" name="points" value="500">
                 </div>
                 <div class="form-group">
                     <label>INITIAL STOCK *</label>
-                    <input type="number" value="50">
+                    <input type="number" name="stock" value="50">
                 </div>
             </div>
             <label>IMAGE SEARCH QUERY</label>
@@ -360,15 +359,19 @@
                     <p>Auto-discontinue when out of stock</p>
                     <small>Automatically disable reward when stock reaches 0</small>
                 </div>
-                <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                <label class="switch"> 
+                    <input type="checkbox" name="auto_discontinue" value="1" checked>
+                    <span class="slider"></span>
+                </label>
             </div>
             <div class="modal-footer">
                 <button type="button" class="cancel-btn" onclick="closePopup()">Cancel</button>
-                <button type="submit" class="submit-btn">Create Reward</button>
+                <button type="submit" class="submit-btn" name="submit_reward" >Create Reward</button>
             </div>
         </form>
     </div>
 </div>
+
     
 <script src=" ./scripts/script.js"></script>
 <script src="./scripts/admin/admin_create_reward.js"></script>
