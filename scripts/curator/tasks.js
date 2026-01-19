@@ -135,6 +135,7 @@
 
     function askDeleteTask(task_id) {
         toBeDeleted = task_id;
+        deletePopup.querySelector("input").value = '';
         deletePopup.querySelector("#instruction").innerHTML = `Enter 'delete ${tasks[task_id]['title']}' into the box below`;
 
         deletePopup.setAttribute("data-active", 'true');
