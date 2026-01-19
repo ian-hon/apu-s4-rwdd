@@ -1,7 +1,7 @@
 <?php
 include  dirname(__DIR__) . '/conn.php';
 
-$query = "select * from ecoquest.TASK";
+$query = "select * from ecoquest.TASK" . (isset($_GET['active']) ? " WHERE TASK.active = {$_GET['active']}" : "");
 $tasks = array();
 
 $queryResult = mysqli_query($dbConnection, $query);

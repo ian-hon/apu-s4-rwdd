@@ -4,7 +4,9 @@
     var tasks = {};
 
     function fetchData() {
-        fetch('/api/task/fetch_all.php')
+        fetch('/api/task/fetch_all.php?' + new URLSearchParams({
+            'active': 1
+        }).toString())
             .then((e) => e.json())
             .then((e) => {
                 tasks = e;

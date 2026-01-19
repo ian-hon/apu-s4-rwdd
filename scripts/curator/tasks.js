@@ -1,9 +1,12 @@
 (function () { // IIFE idiom
     const container = document.querySelector("#page #content #tasks #container");
+    const deletePopup = document.querySelector("#page #content #tasks #confirmation-popup");
     var tasks = {};
 
     function fetchData() {
-        fetch('/api/task/fetch_all.php')
+        fetch('/api/task/fetch_all.php?' + new URLSearchParams({
+            'active': 1
+        }).toString())
             .then((e) => e.json())
             .then((e) => {
                 tasks = e;
@@ -52,7 +55,7 @@
         </div>
         <div id="actions">
             <img class="border" src="./assets/edit.svg">
-            <img class="border" src="./assets/trash.svg">
+            <img class="border" src="./assets/trash.svg" onclick="askDeleteTask('${t['ID']}')">
         </div>
     </div>
     <div id="holder">
@@ -117,6 +120,42 @@
             });
     }
     window.toggleDay = toggleDay;
+    // #endregion
+
+    // #region confirmation popup
+    var toBeDeleted = '';
+    deletePopup.querySelector("input").addEventListener('keyup', () => {
+        deletePopup.setAttribute('data-valid', `delete ${tasks[toBeDeleted]['title']}` == deletePopup.querySelector("input").value);
+    })
+
+    function toggleDeletePopup(state) {
+        deletePopup.setAttribute("data-active", state);
+    }
+    window.toggleDeletePopup = toggleDeletePopup;
+
+    function askDeleteTask(task_id) {
+        toBeDeleted = task_id;
+        deletePopup.querySelector("#instruction").innerHTML = `Enter 'delete ${tasks[task_id]['title']}' into the box below`;
+
+        deletePopup.setAttribute("data-active", 'true');
+    }
+    window.askDeleteTask = askDeleteTask;
+
+    function deleteTask() {
+        if (`delete ${tasks[toBeDeleted]['title']}` == deletePopup.querySelector("input").value) {
+            fetch('/api/task/update.php?' + new URLSearchParams({
+                id: toBeDeleted,
+                active: 0
+            }).toString())
+                .then((e) => e.text())
+                .then((e) => {
+                    console.log(e);
+                    toggleDeletePopup(false);
+                    fetchData();
+                });
+        }
+    }
+    window.deleteTask = deleteTask;
     // #endregion
 
 
