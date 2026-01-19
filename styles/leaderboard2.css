@@ -69,7 +69,6 @@
 
 .label-header {
   color: var(--text-secondary);
-  font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 500;
   margin-bottom: 12px;
@@ -111,23 +110,21 @@
   gap: 16px;
 }
 
-.user-avatar {
-  width: 52px;
-  height: 52px;
-  background-color: var(--accent-dark-green);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 15px rgba(63, 98, 18, 0.5);
-  border: 1px solid var(--accent-border);
+.user-avatar-container {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; 
+    overflow: hidden;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #e0e0e0;
 }
 
-.user-avatar span {
-  font-size: 18px;
-  font-weight: 600;
-  color: white;
-  letter-spacing: 1px;
+.leaderboard-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevents the image from stretching */
 }
 
 .user-info {
@@ -144,8 +141,7 @@
 }
 
 .user-level {
-  font-family: var(--font-mono);
-  color: #88a876;
+  color: var(--accent);
   /* Muted green text */
   font-size: 12px;
   font-weight: 600;
@@ -168,15 +164,8 @@
 }
 
 .user-points {
-  font-family: var(--text-secondary);
-  color: #d4d4d8;
-  font-size: 12px;
-  font-weight: 500;
   margin-top: 4px;
 }
-
-
-
 
 .leaderboard {
   display: grid;
@@ -261,4 +250,9 @@
   color: #52525b;
   margin: 2px 0 0 0;
   text-transform: lowercase;
+}
+
+.green-text{
+  color: var(--accent)
+
 }
