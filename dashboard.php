@@ -43,6 +43,24 @@
                     </h5>
                 </div>
             </div>
+            <div id="fun-fact" class="border" data-state='loading' data-payload='<?php
+                                                                                    include './api/users/contribution.php';
+                                                                                    echo htmlspecialchars(json_encode(user_get_contribution_total_worded('user1')));
+                                                                                    ?>'>
+                <div id="data">
+                    <h4>Fun fact!</h4>
+                    <h5></h5>
+                    <!-- <h5>You saved 10kg of plastic and 5kWh of electricity. That is equivalent to 500 lego bricks and 3 bags of coal!</h5> -->
+                </div>
+                <div id="loading">
+                    <div id="spinner"></div>
+                    <h5>generating fun fact with AI...</h5>
+                </div>
+                <div id="failure">
+                    <h4>oh no</h4>
+                    <h5>something went wrong trying to generate. maybe try again later?</h5>
+                </div>
+            </div>
             <div id="tasks">
                 <div id="title">
                     <h3>DAILY TASKS</h3>
@@ -153,6 +171,7 @@
         <?php include './components/navbar.php' ?>
     </div>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/cohere.js"></script>
     <script src="./scripts/navbar.js" defer></script>
     <script src="./scripts/dashboard.js"></script>
 </body>

@@ -38,3 +38,31 @@ setInterval(() => {
     updateCountdown();
 }, 300);
 // #endregion
+
+// #region information card
+const funFactContainer = document.querySelector("#fun-fact");
+const funFactElement = funFactContainer.querySelector("#data h5");
+
+(async () => {
+    let payload = funFactContainer.getAttribute('data-payload');
+
+    // professional prompt engineering :)
+    await cohere_ask(
+        `Below = total savings of this user. Generate a 40-60 worded passage about fun facts regarding it. Make it SUPER SUPER SUPER interesting as possible, include animals, technology, everyday habits/objects. Show rough conversions, X saved is equivalent to Y
+
+        Use appropriate HTML tags (<strong>, etc) for font styling. Dont put it in a <p> tag. Dont use any Markdown elements. This is shown on app dashboard.
+        
+        <data>${payload}</data>`,
+        (r) => {
+            r = r.replaceAll('*', '');
+
+            funFactElement.innerHTML = r;
+            funFactContainer.setAttribute('data-state', 'data');
+        },
+        () => {
+            console.log('failure');
+            funFactContainer.setAttribute('data-state', 'failure');
+        }
+    );
+})();
+// #endregion

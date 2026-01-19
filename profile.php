@@ -17,6 +17,10 @@ $allPoint = mysqli_fetch_assoc($totalPointResult)['total_points'];
 $availablePoint = "SELECT $allPoint - sum(redemption.price) AS available_point FROM redemption WHERE redemption.user = 'user1'";
 $availableResult = mysqli_query($dbConnection, $availablePoint);
 $allAvailable = mysqli_fetch_assoc($availableResult);
+
+include './api/users/contribution.php';
+
+$contribution = user_get_contribution_total_worded('user1');
 ?>
 
 <!DOCTYPE html>
@@ -34,14 +38,15 @@ $allAvailable = mysqli_fetch_assoc($availableResult);
     <div id="parent">
         <div id="bg-color">
 
-            <div id="navbar">
+            <!-- navbar -->
+            <div id="top-navbar">
                 <a href="dashboard.html">
                     <img src="./assets/ivp/arrow-back-basic-svgrepo-com.svg" alt="">
                 </a>
                 <p style="font-weight: bold; font-size: 20px;">Profile</p>
-                <a href="">
+                <button id="hamburger">
                     <img src="./assets/burger.svg" alt="">
-                </a>
+                </button>
             </div>
             <hr style="color: #222;">
 
@@ -96,29 +101,29 @@ $allAvailable = mysqli_fetch_assoc($availableResult);
                     <div class="impact-list">
                         <img src="assets/ivp/leaf-svgrepo-com.svg" alt="">
                         <div class="impact-name">
-                            <p>Carbon Reduced</p>
-                            <p>2.5 tons CO₂</p>
+                            <p><?php echo $contribution['carbon']['term'] ?></p>
+                            <p><?php echo $contribution['carbon']['total'] ?> <?php echo $contribution['carbon']['unit'] ?></p>
                         </div>
                     </div>
                     <div class="impact-list">
                         <img src="assets/ivp/thunder-svgrepo-com.svg" alt="">
                         <div class="impact-name">
-                            <p>Energy Saved</p>
-                            <p>50 kWh</p>
+                            <p><?php echo $contribution['electric']['term'] ?></p>
+                            <p><?php echo $contribution['electric']['total'] ?> <?php echo $contribution['electric']['unit'] ?></p>
                         </div>
                     </div>
                     <div class="impact-list">
-                        <img src="assets/ivp/water-drops-svgrepo-com (1).svg" alt="">
+                        <img src="assets/ivp/recycled-plastic-bag-svgrepo-com (1).svg" alt="">
                         <div class="impact-name">
-                            <p>Water Saved</p>
-                            <p>1,500 liters</p>
+                            <p><?php echo $contribution['plastic']['term'] ?></p>
+                            <p><?php echo $contribution['plastic']['total'] ?> <?php echo $contribution['plastic']['unit'] ?></p>
                         </div>
                     </div>
                     <div class="impact-list">
-                        <img src="assets/ivp/gas-station-svgrepo-com.svg" alt="">
+                        <img src="assets/ivp/trash-list-svgrepo-com.svg" alt="">
                         <div class="impact-name">
-                            <p>Oil Saved</p>
-                            <p>5 barrels</p>
+                            <p><?php echo $contribution['trash']['term'] ?></p>
+                            <p><?php echo $contribution['trash']['total'] ?> <?php echo $contribution['trash']['unit'] ?></p>
                         </div>
                     </div>
                 </div>
@@ -144,9 +149,12 @@ $allAvailable = mysqli_fetch_assoc($availableResult);
             </div>
 
         </div>
+        <?php include './components/navbar.php'; ?>
     </div>
 
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/navbar.js" defer></script>
+    <script src="./scripts/profile.js" defer></script>
 </body>
 
 </html>

@@ -114,9 +114,12 @@ $tasksResult = mysqli_query($dbConnection, $tasksQuery);
                 </div>
             <?php } ?>
         </div>
-
+        <?php include './components/navbar.php'; ?>
     </div>
 
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/navbar.js" defer></script>
+    <script src="./scripts/submission_history.js" defer></script>
 </body>
 
 </html>

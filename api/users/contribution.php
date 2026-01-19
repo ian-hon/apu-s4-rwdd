@@ -16,7 +16,7 @@ function user_get_contribution_total($username, $time_start = NULL, $time_end = 
     GOAL_TYPE.ID, COALESCE(
         (
         SELECT
-            SUM(TASK.goal_contribution) as total
+            SUM(TASK.goal_contribution * SUBMISSION.action_count) as total
             from SUBMISSION
             inner join TASK on TASK.ID = SUBMISSION.task_ID
             where
@@ -51,7 +51,7 @@ function user_get_contribution_total_worded($username, $time_start = NULL, $time
     GOAL_TYPE.*, COALESCE(
         (
         SELECT
-            SUM(TASK.goal_contribution) as total
+            SUM(TASK.goal_contribution * SUBMISSION.action_count) as total
             from SUBMISSION
             inner join TASK on TASK.ID = SUBMISSION.task_ID
             where

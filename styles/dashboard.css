@@ -170,3 +170,71 @@
         margin-bottom: 0.5em;
     }
 }
+
+#fun-fact {
+    margin-bottom: 2em !important;
+
+    & h5 {
+        opacity: 0.8;
+        margin-top: 0.3em;
+    }
+
+    &[data-state='loading']>div:not(#loading),
+    &[data-state='data']>div:not(#data),
+    &[data-state='failure']>div:not(#failure) {
+        display: none;
+    }
+
+    #data {
+        display: flex;
+        flex-direction: column;
+    }
+
+    & #loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        flex-direction: column;
+        padding: 2em 0;
+
+        & #spinner {
+            width: 2em;
+            height: 2em;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        & h5 {
+            margin-top: 2em;
+
+            opacity: 0.5;
+            font-style: italic;
+        }
+    }
+
+    & #failure {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2em 0;
+        text-align: center;
+
+        & h4 {
+            color: var(--error);
+        }
+
+        & h5 {
+            opacity: 0.6;
+            font-style: italic;
+        }
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

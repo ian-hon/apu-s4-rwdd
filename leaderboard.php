@@ -113,7 +113,7 @@
                 <h2>Global Rankings</h2>
                 <div class="user-card">
                     <div class="label-header">
-                            <p>Compete with eco-warriors worldwide</p>
+                        <p>Compete with eco-warriors worldwide</p>
                     </div>
 
                     <div class="rank-card">

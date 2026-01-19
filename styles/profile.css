@@ -17,7 +17,7 @@ body {
 }
 
 /* Navabr */
-#navbar {
+#top-navbar {
     display: grid;
     grid-template-columns: auto 1fr auto;
     justify-content: space-between;
@@ -35,6 +35,11 @@ body {
         width: 30px;
         color: white;
     }
+}
+
+#hamburger {
+    background: none;
+    border: none;
 }
 
 /* Element */
