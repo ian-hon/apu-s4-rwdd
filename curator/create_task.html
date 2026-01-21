@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Task | EcoQuest</title>
+    <link rel="stylesheet" href="./../styles/style.css">
+    <link rel="stylesheet" href="./../styles/curator/create_task.css">
+</head>
+
+<body>
+    <div id="page">
+        <a href="../curator.php" id="back-button" class="border">
+            <h4>back to curator dashboard</h4>
+        </a>
+        <form id="form" class="border" method="POST" action="create_task.php">
+            <div id="title-and-occurance">
+                <div id="title" class="border">
+                    <h5 class="box-title">TITLE</h5>
+                    <input required name="title" id="title-input" placeholder="eg: Let's go recyling!">
+                </div>
+                <div id="occurance">
+                    <label for="daily">
+                        <input required type="radio" id="daily" name="occurance" checked>
+                        <span>Daily</span>
+                    </label>
+                    <label for="weekly">
+                        <input required type="radio" id="weekly" name="occurance">
+                        <span>Weekly</span>
+                    </label>
+                </div>
+            </div>
+            <div id="description" class="border">
+                <h5 class="box-title">DESCRIPTION</h5>
+                <textarea required name="description" id="description-input" type="textarea"
+                    placeholder="eg: Recycle 2 plastic bottles. Send a picture of 2 empty plastic bottles in a recycling bin."></textarea>
+            </div>
+            <hr>
+            <div id="rewards">
+                <table id="data">
+                    <tr>
+                        <td>
+                            <h5>Required actions:</h5>
+                        </td>
+                        <td><input id="required-actions" type="number" required></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5>Maximum actions:</h5>
+                        </td>
+                        <td><input id="maximum-actions" type="number" required></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5>Points per action:</h5>
+                        </td>
+                        <td>
+                            <input id="points-per-action" type="number" required>
+                            <img src="../assets/leaf.svg">
+                        </td>
+                    </tr>
+                </table>
+                <hr>
+                <div id="final">
+                    <div id="required" class="border">
+                        <div id="calculation">
+                            <h6>2 x 20</h6>
+                            <img src="../assets/leaf.svg">
+                        </div>
+                        <div id="result">
+                            <h3>500</h3>
+                            <img src="../assets/leaf.svg">
+                        </div>
+                        <h6 class="box-title">REQUIRED</h6>
+                    </div>
+                    <h3>+</h3>
+                    <div id="optional" class="border">
+                        <div id="calculation">
+                            <h6>1 x 20</h6>
+                            <img src="../assets/leaf.svg">
+                        </div>
+                        <div id="result">
+                            <h3>400</h3>
+                            <img src="../assets/leaf.svg">
+                        </div>
+                        <h6 class="box-title">OPTIONAL</h6>
+                    </div>
+                    <h3>=</h3>
+                    <div id="maximum" class="border">
+                        <div id="result">
+                            <h3>900</h3>
+                            <img src="../assets/leaf.svg">
+                        </div>
+                        <h6 class="box-title">MAXIMUM</h6>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div id="goal" class="border">
+                <h5 class="box-title">GOAL CONTRIBUTION</h5>
+                <select id="dropdown">
+                    <option name="plastic">plastic waste</option>
+                    <option name="carbon">CO2 offset</option>
+                </select>
+                <input required id="goal-contribution" step="0.01" type="number">
+                <h5>kWh per action</h5>
+            </div>
+            <hr>
+            <div id="curator-instructions" class="border">
+                <h5 class="box-title">CURATOR INSTRUCTIONS (OPTIONAL)</h5>
+                <textarea name="curator-instructions" id="curator-instructions-input"
+                    placeholder="eg: Make sure picture has two plastic bottles and the bin is a proper recycling bin."></textarea>
+            </div>
+            <div id="actions">
+                <input class="border" type="reset" value="Reset form">
+                <input class="border" id="submit-button" type="submit" value="Submit">
+            </div>
+        </form>
+        <div id="errors" data-state="">
+            <div id="container" class="border">
+
+            </div>
+            <h5>click anywhere to dismiss</h5>
+        </div>
+    </div>
+
+    <script src=" ./../scripts/script.js"></script>
+    <script src="./../scripts/curator/create_task.js"></script>
+</body>
+
+</html>
