@@ -88,8 +88,7 @@ input,
 button,
 a,
 span,
-button,
-p {
+label {
     font-family: 'Jetbrains Mono';
     font-weight: 400;
 

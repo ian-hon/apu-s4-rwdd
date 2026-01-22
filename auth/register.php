@@ -11,6 +11,47 @@
 </head>
 
 <body>
+    <?php
+        $conn = new mysqli("localhost", "root", "", "ecoquest");
+
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            
+            $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
+            $password = $_POST["password"];
+
+            if(empty($username)){
+                echo "Please enter a username";
+            }
+            elseif(empty($password)){
+                echo "Please enter a password";
+            }
+            else{
+                if (isset($username) && isset($password)) {
+
+                    $hash = password_hash($password, PASSWORD_DEFAULT);
+
+                    $sql = "INSERT INTO USERS (username, password) VALUES ('$username', '$hash')";
+
+                    try {
+                        mysqli_query($conn, $sql);
+                        echo "Account created successfully!";
+                    }
+                    catch(mysqli_sql_exception $e) {
+                        if($e->getCode() == 1062){
+                            echo "Username already exists. Please choose a different username.";
+                        } 
+                        else {
+                            echo "Error: " . $e->getMessage();
+                        }
+                    }
+
+                }
+            }
+        }
+
+        mysqli_close($conn);
+    ?>
+
     <div id="parent">
         <div id="logo">
             <h1>EcoQuest</h1>

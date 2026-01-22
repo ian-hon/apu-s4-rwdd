@@ -74,11 +74,18 @@
 
     border-radius: var(--border-radius) 0 0 var(--border-radius);
 
+      & #user-icon {
+          opacity: 30%;
+
+          height: 1em;
+          width: 1em;
+      }
+
       & #email-icon {
           opacity: 50%;
 
-          height: 1.20em;
-          width: 1.20em;
+          height: 1.3em;
+          width: 1.3em;
       }
 
        & #password-icon {
@@ -110,7 +117,6 @@
         }
 
         color: grey;
-        opacity: 50%;
     }
 }
 
@@ -155,15 +161,6 @@
   }
 }
 
-
-
-#or-continue-with {
-    color: grey;
-    display: flex;
-    justify-content: center;
-    margin: 1.5em;
-}
-
 .button {
     font-size: 0.9em;
     font-weight: bold;
@@ -179,18 +176,12 @@
     }
 }
 
-#continue-with {
-    & button {
-        border: 1px solid var(--accent-border);
-        background-color: var(--accent-background);
-
-        margin-bottom: 1em;
-    }
-}
-
 #login-button {
     border: 1px solid var(--accent-border);
     background-color: var(--accent);
+
+    margin-top: 2em;
+    margin-bottom: 0.5em;
 }
 
 #no-account {
@@ -201,7 +192,7 @@
     margin-top: 1.5em;
 
     & h3 {
-        font-size: 1em;
+        font-size: 0.9em;
         color: grey;
     }
 
