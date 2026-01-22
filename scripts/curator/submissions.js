@@ -116,7 +116,6 @@
             }
 
             let t = tasks[s['task_ID']];
-            console.log(currentQuery);
             if (currentQuery && ([t['title'], t['description'], s['user'], humanReadableTime(s['submitted_timestamp'])].filter((text) => text.includes(currentQuery)).length == 0)) {
                 return;
             }
@@ -173,10 +172,10 @@
                 </div>
                 <div id="actions">
                     <!-- icons next to these? -->
-                    <h4 class="border" id="reject">
+                    <h4 class="border" id="reject" onclick="updateSubmissionStatus('rejected', '${s['ID']}')">
                         REJECT
                     </h4>
-                    <h4 class="border" id="approve">
+                    <h4 class="border" id="approve" onclick="updateSubmissionStatus('approved', '${s['ID']}')">
                         APPROVE
                     </h4>
                 </div>
@@ -186,6 +185,21 @@
 
         renderSidebar();
     }
+
+    function updateSubmissionStatus(status, submissionID) {
+        fetch('../../api/submission/update.php?' + new URLSearchParams({
+            'id': submissionID,
+            'status': status,
+            // TODO: replace with session storage
+            'curator': 'curator1'
+        }))
+            .then((e) => e.text())
+            .then((e) => {
+                fetchData();
+            })
+    }
+    window.updateSubmissionStatus = updateSubmissionStatus;
+
 
     changeQuery('');
     changeFilter('');
