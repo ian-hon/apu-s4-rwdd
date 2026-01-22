@@ -55,7 +55,6 @@
                             rejected: Object.values(submissions).filter(s => s['status'] == 'rejected').length,
                         };
                         ratios.pending = Object.keys(submissions).length - ratios.approved - ratios.rejected;
-                        console.log(ratios);
 
                         render();
                     })
@@ -150,9 +149,9 @@
                             <div id="actions">
                                 <!-- replace with - and + svgs -->
                                 <!-- <img> -->
-                                <h5>-</h5>
+                                <h5 onclick="incrementExcess(-1, '${s['ID']}')">-</h5>
                                 <h5>${getParsedExcessCount(s)}</h5>
-                                <h5>+</h5>
+                                <h5 onclick="incrementExcess(1, '${s['ID']}')">+</h5>
                             </div>
                         </div>
                         <div id="points" class="border">
@@ -199,6 +198,22 @@
             })
     }
     window.updateSubmissionStatus = updateSubmissionStatus;
+
+    function incrementExcess(amount, submissionID) {
+        let action = submissions[submissionID]['action_count'];
+        action = action == 0 ? tasks[submissions[submissionID]['task_ID']]['target'] : action;
+        fetch('../../api/submission/update.php?' + new URLSearchParams({
+            'id': submissionID,
+            'action_count': action + amount,
+            // TODO: replace with session storage
+            'curator': 'curator1'
+        }))
+            .then((e) => e.text())
+            .then((e) => {
+                fetchData();
+            })
+    }
+    window.incrementExcess = incrementExcess;
 
 
     changeQuery('');
