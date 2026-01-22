@@ -54,7 +54,9 @@
             <h5>${t['description']}</h5>
         </div>
         <div id="actions">
-            <img class="border" src="./assets/edit.svg">
+            <a href="./curator/edit_task.php?id=${encodeURIComponent(t['ID'])}">
+                <img class="border" src="./assets/edit.svg">
+            </a>
             <img class="border" src="./assets/trash.svg" onclick="askDeleteTask('${t['ID']}')">
         </div>
     </div>
