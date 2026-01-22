@@ -43,6 +43,24 @@
                     </h5>
                 </div>
             </div>
+            <div id="fun-fact" class="border" data-state='loading' data-payload='<?php
+                                                                                    include './api/users/contribution.php';
+                                                                                    echo htmlspecialchars(json_encode(user_get_contribution_total_worded('user1')));
+                                                                                    ?>'>
+                <div id="data">
+                    <h4>Fun fact!</h4>
+                    <h5></h5>
+                    <!-- <h5>You saved 10kg of plastic and 5kWh of electricity. That is equivalent to 500 lego bricks and 3 bags of coal!</h5> -->
+                </div>
+                <div id="loading">
+                    <div id="spinner"></div>
+                    <h5>generating fun fact with AI...</h5>
+                </div>
+                <div id="failure">
+                    <h4>oh no</h4>
+                    <h5>something went wrong trying to generate. maybe try again later?</h5>
+                </div>
+            </div>
             <div id="tasks">
                 <div id="title">
                     <h3>DAILY TASKS</h3>
@@ -150,47 +168,11 @@
                 </div>
             </div>
         </div>
-        <div id="navbar" data-active="false">
-            <div id="container" class="border">
-                <a href="profile.html" id="profile-card" class="border">
-                    <img src="./assets/fire.svg">
-                    <h4>ajian_nedo</h4>
-                </a>
-                <hr>
-                <a href="tasks.html" class="navbar-card">
-                    <img src="./assets/task.svg">
-                    <h4>TASKS</h4>
-                </a>
-                <a href="achievements.html" class="navbar-card">
-                    <img src="./assets/trophy.svg">
-                    <h4>ACHIEVEMENTS</h4>
-                </a>
-                <a href="goals.html" class="navbar-card">
-                    <img src="./assets/target.svg">
-                    <h4>GOALS</h4>
-                </a>
-                <a href="leaderboard.html" class="navbar-card">
-                    <img src="./assets/leaderboard.svg">
-                    <h4>LEADERBOARD</h4>
-                </a>
-                <a href="points.html" class="navbar-card">
-                    <img src="./assets/leaf.svg">
-                    <h4>POINTS</h4>
-                </a>
-                <div>
-                    <!-- this div is only shown if user is a curator or admin -->
-                    <hr>
-                    <a href="curator.html" class="navbar-card">
-                        <img src="./assets/leaf.svg">
-                        <h4>CURATOR DASHBOARD</h4>
-                    </a>
-                </div>
-            </div>
-            <h4 id="close-button" onclick="toggleNavbar()" class="border">close</h4>
-        </div>
+        <?php include './components/navbar.php' ?>
     </div>
-    <script src=" ./scripts/script.js">
-    </script>
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/cohere.js"></script>
+    <script src="./scripts/navbar.js" defer></script>
     <script src="./scripts/dashboard.js"></script>
 </body>
 
