@@ -2,7 +2,7 @@
     <div id="header">
         <div id="text">
             <h2>TASK CATALOGUE</h2>
-            <h5>Create and manage all tasks (40 available)</h5>
+            <h5 id="task-count"></h5>
         </div>
         <a href="./curator/create_task.php" id="action" class="border">
             <h3>+</h3>

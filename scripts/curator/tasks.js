@@ -2,6 +2,7 @@
     const container = document.querySelector("#page #content #tasks #container");
     const deletePopup = document.querySelector("#page #content #tasks #confirmation-popup");
     var tasks = {};
+    var completionRates = {};
 
     function fetchData() {
         fetch('/api/task/fetch_all.php?' + new URLSearchParams({
@@ -9,9 +10,16 @@
         }).toString())
             .then((e) => e.json())
             .then((e) => {
-                tasks = e;
+                fetch('/api/task/helper.php')
+                    .then((h) => h.json())
+                    .then((h) => {
+                        completionRates = h;
+                        tasks = e;
 
-                render();
+                        document.querySelector("#task-count").innerHTML = `Create and manage all tasks (${Object.keys(tasks).length} available)`;
+
+                        render();
+                    })
             })
     }
 
@@ -48,7 +56,7 @@
                 <h6 class="border" id="occurance-tag"></h6>
                 <div class="border" id="completion-rate">
                     <img src="./assets/completion_rate.svg">
-                    <h5>50% completion rate</h5>
+                    <h5>${Math.round(completionRates[t['ID']] * 100 * 100) / 100}% completion rate</h5>
                 </div>
             </span>
             <h5>${t['description']}</h5>
