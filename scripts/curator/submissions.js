@@ -61,25 +61,14 @@
             });
     }
 
-    let getParsedActionCount = (submission) => {
-        let t = tasks[submission['task_ID']];
-
-        // we arent tracking counts of 'excess' actions, but actions itself
-        // so when these submissions are added into the db, they will all start from 0
-        // thus, lets just assume 0 = task.target
-
-        // whenever action_count is changed, we set a limit that it can never go below task.target
-        return (submission['action_count'] == 0) ? t['target'] : submission['action_count'];
-    }
-
     let getParsedExcessCount = (submission) => {
         let t = tasks[submission['task_ID']];
-        return (submission['action_count'] != 0) ? submission['action_count'] - t['target'] : 0;
+        return submission['action_count'] - t['target'];
     };
 
     let totalPoints = (submission) => {
         let t = tasks[submission['task_ID']];
-        return t['reward_rate'] * getParsedActionCount(submission);
+        return t['reward_rate'] * submission['action_count'];
     };
 
     let humanReadableTime = (epoch) => {
@@ -201,7 +190,6 @@
 
     function incrementExcess(amount, submissionID) {
         let action = submissions[submissionID]['action_count'];
-        action = action == 0 ? tasks[submissions[submissionID]['task_ID']]['target'] : action;
         fetch('../../api/submission/update.php?' + new URLSearchParams({
             'id': submissionID,
             'action_count': action + amount,

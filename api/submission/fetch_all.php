@@ -1,5 +1,9 @@
 <?php
 include dirname(__DIR__) . '/conn.php';
+include dirname(__DIR__) . '/submission/functions.php';
+
+// fix action counts first
+submission_fix_action_count();
 
 $query = "SELECT * FROM ecoquest.SUBMISSION";
 $submissions = array();
