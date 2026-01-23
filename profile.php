@@ -40,7 +40,7 @@ $contribution = user_get_contribution_total_worded('user1');
 
             <!-- navbar -->
             <div id="top-navbar">
-                <a href="dashboard.html">
+                <a href="dashboard.php">
                     <img src="./assets/ivp/arrow-back-basic-svgrepo-com.svg" alt="">
                 </a>
                 <p style="font-weight: bold; font-size: 20px;">Profile</p>
@@ -59,7 +59,7 @@ $contribution = user_get_contribution_total_worded('user1');
                     </div>
                     <div class="user">
                         <p>Username</p>
-                        <a href="#name">
+                        <a href="#">
                             <img src="assets/ivp/pen-svgrepo-com.svg" alt="">
                         </a>
                         <input type="text" id="name" value="<?php echo $user['name'] ?>" required readonly>
