@@ -19,8 +19,34 @@ $availableResult = mysqli_query($dbConnection, $availablePoint);
 $allAvailable = mysqli_fetch_assoc($availableResult);
 
 include './api/users/contribution.php';
+include './api/goals/functions.php';
 
 $contribution = user_get_contribution_total_worded('user1');
+
+$impactMessageGenerator = function ($contribution) {
+    $plasticKg = $contribution['plastic']['total'];
+    $electricKwh = $contribution['electric']['total'];
+    $carbonKg = $contribution['carbon']['total'];
+    $trashKg = $contribution['trash']['total'];
+
+    $bottles = number_format(round($plasticKg * 50)); // 1 kg plastic = 50 bottles
+    $energy = number_format(round($electricKwh * 10)); // 1 kWh = 10 hours of 100W bulb
+    $barrels = number_format(round($carbonKg / 317)); // 1 barrel crude oil = 317 kg CO2
+    $trees = number_format(round($carbonKg / 25)); // 1 tree absorbs 25 kg CO2/year
+    $trashBags = number_format(round($trashKg / 10)); // 1 trash bag = 10 kg waste
+
+    $message = [
+        "You saved <span style='color: #519C03;'>{$bottles} bottles</span> this year! That requires <span style='color: #519C03;'>{$energy}kWh</span> of energy to process, or <span style='color: #519C03;'>{$barrels} barrels</span> of crude oil.",
+
+        "You offset <span style='color: #519C03;'>{$carbonKg}kg of CO₂</span> this year! That's equal to planting <span style='color: #519C03;'>{$trees} trees</span> for an entire year.",
+
+        "You conserved <span style='color: #519C03;'>{$electricKwh}kWh</span> of electricity! That prevented <span style='color: #519C03;'>{$carbonKg}kg of CO₂</span> emissions from power plants.",
+
+        "You collected <span style='color: #519C03;'>{$trashKg}kg of trash</span> this year! That's <span style='color: #519C03;'>{$trashBags} garbage bags</span> kept out of our environment."
+    ];
+    return $message[array_rand($message)];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -92,11 +118,7 @@ $contribution = user_get_contribution_total_worded('user1');
                 <div id="impact">
                     <p class="impact-title">Your Impact This Year</p>
                     <div id="impact-info">
-                        <p>You saved <span style="color: #519C03;">5,000 bottles</span> this year! That
-                            requires <span style="color: #519C03;">50kWh</span> of energy to process, or <span
-                                style="color: #519C03;">5
-                                barrels</span> of crude oil
-                        </p>
+                        <p><?php echo $impactMessageGenerator($contribution);  ?></p>
                     </div>
                     <div class="impact-list">
                         <img src="assets/ivp/leaf-svgrepo-com.svg" alt="">
