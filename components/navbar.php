@@ -7,6 +7,10 @@
             <h4>ajian_nedo</h4>
         </a>
         <hr>
+        <a href="dashboard.php" class="navbar-card">
+            <img src="./assets/home.svg">
+            <h4>HOME</h4>
+        </a>
         <a href="tasks.php" class="navbar-card">
             <img src="./assets/task.svg">
             <h4>TASKS</h4>

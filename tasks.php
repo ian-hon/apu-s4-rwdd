@@ -10,6 +10,9 @@
 </head>
 
 <body>
+    <?php $headerTitle = "hmmm";
+    include './components/header.php'; ?>
+
     <script src="./scripts/script.js"></script>
 </body>
 
