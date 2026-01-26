@@ -120,6 +120,12 @@
 }
 
 #tasks {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+
+    flex-direction: column;
+
     background: var(--background-secondary);
 
     margin: 0 !important;
@@ -145,16 +151,51 @@
         justify-content: space-between;
         align-items: center;
 
-        & #timer {
+        & #view-all {
             display: flex;
             justify-content: center;
             align-items: center;
 
-            opacity: 0.5;
+            gap: 1ch;
 
-            &>h6 {
-                margin-right: 1ch;
+            background: var(--accent-background);
+            border-color: var(--accent-border);
+
+            padding: 0.5em 1.5ch;
+
+            cursor: pointer;
+
+            opacity: 0.5;
+            transition-duration: 0.3s;
+            text-decoration: none;
+
+            & h5 {
+                font-style: italic;
             }
+
+            & img {
+                height: 1.2em;
+            }
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+
+    & #timer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        opacity: 0.5;
+
+        margin-top: 1em;
+        margin-right: auto !important;
+
+        &>h6 {
+            font-style: italic;
+            margin-right: 1ch;
         }
     }
 }

@@ -64,10 +64,10 @@
             <div id="tasks">
                 <div id="title">
                     <h3>DAILY TASKS</h3>
-                    <div id="timer">
-                        <h6>new tasks in</h6>
-                        <h6 class="countdown"></h6>
-                    </div>
+                    <a href="./tasks.php" id="view-all" class="border">
+                        <h5>view all</h5>
+                        <img src="./assets/arrow_right.svg">
+                    </a>
                 </div>
                 <div id="task-container">
                     <div class="task-card">
@@ -103,6 +103,10 @@
                             <img src="./assets/leaf.svg">
                         </div>
                     </div>
+                </div>
+                <div id="timer">
+                    <h6>new tasks in</h6>
+                    <h6 class="countdown"></h6>
                 </div>
             </div>
             <div id="goals">

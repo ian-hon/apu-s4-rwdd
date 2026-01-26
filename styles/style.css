@@ -29,6 +29,8 @@
     --weekly: #8B5CF6;
     --weekly-background: color-mix(in srgb, var(--weekly), transparent 80%);
 
+    --streak: #e76c00;
+
     /* we use this red value */
     /* make a new variable for the fire one */
     --error: #E7000B;
@@ -154,6 +156,8 @@ h6 {
     scroll-behavior: none;
 
     transition-duration: 0.3s;
+
+    z-index: 9999;
 
     &[data-active="true"] {
         pointer-events: all;

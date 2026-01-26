@@ -3,7 +3,7 @@
     var tasks = {};
 
     function fetchData() {
-        fetch('/api/task/fetch_all.php')
+        fetch('/api/task/fetch_all.php?active=1')
             .then((e) => e.json())
             .then((e) => {
                 tasks = e;

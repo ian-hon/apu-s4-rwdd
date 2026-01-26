@@ -4,7 +4,7 @@
     var tasks = {};
 
     function fetchData() {
-        fetch('/api/task/fetch_all.php?occurance_type=daily')
+        fetch('/api/task/fetch_all.php?occurance_type=daily&active=1')
             .then((e) => e.json())
             .then((e) => {
                 tasks = e;

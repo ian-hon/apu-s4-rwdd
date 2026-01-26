@@ -2,8 +2,21 @@
 include  dirname(__DIR__) . '/conn.php';
 
 $occurance_type = isset($_GET['occurance_type']) ? $_GET['occurance_type'] : null;
+$active = isset($_GET['active']) ? $_GET['active'] : null;
 
-$query = "select * from ecoquest.TASK" . (is_null($occurance_type) ? "" : " where occurance_type = '{$occurance_type}'");
+// to avoid ternary hell
+$conditions = array();
+if (!is_null($occurance_type)) {
+    $conditions[] = "occurance_type = '{$occurance_type}'";
+}
+if (!is_null($active)) {
+    $conditions[] = "active = '{$active}'";
+}
+
+$query = "SELECT * FROM ecoquest.TASK";
+if (count($conditions) > 0) {
+    $query .= " WHERE " . implode(" AND ", $conditions);
+}
 
 $tasks = array();
 
