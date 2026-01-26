@@ -1,7 +1,10 @@
 <?php
 include  dirname(__DIR__) . '/conn.php';
 
-$query = "select * from ecoquest.TASK";
+$occurance_type = isset($_GET['occurance_type']) ? $_GET['occurance_type'] : null;
+
+$query = "select * from ecoquest.TASK" . (is_null($occurance_type) ? "" : " where occurance_type = '{$occurance_type}'");
+
 $tasks = array();
 
 $queryResult = mysqli_query($dbConnection, $query);
