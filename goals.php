@@ -28,7 +28,13 @@ $personalProgress = goals_contributions_all('user1', type: 'personal');
 $globalProgress = goals_contributions_all('user1', type: 'global');
 
 $consistency = goals_overall_completion_rate();
-$onTrack = goals_all_completed('user1', type: 'personal');
+
+$onTrackP = goals_all_completed('user1', type: 'personal');
+$allGoalsP = goals_contributions_all('user1', type: 'personal');
+
+$onTrackG = goals_all_completed('user1', type: 'global');
+$allGoalsG = goals_contributions_all('user1', type: 'global');
+
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +54,7 @@ $onTrack = goals_all_completed('user1', type: 'personal');
         <div id="header">
             <div class="top">
                 <button id="back">
-                    <a href="./dashboard.html">
+                    <a href="./dashboard.php">
                         <img src="./assets/ivp/arrow-back-basic-svgrepo-com.svg" alt="">
                     </a>
                 </button>
@@ -99,30 +105,53 @@ $onTrack = goals_all_completed('user1', type: 'personal');
                 <h4 id="header-impact">Your impact</h4>
             </div>
             <div id="impact">
+                <?php
+                function generateImpactDescription($goalTypeId, $totalValue)
+                {
+                    switch ($goalTypeId) {
+                        case 'carbon':
+                            return "Your carbon offset equals the CO₂ absorption of " . floor($totalValue / 16) . " trees/year";
+                        case 'plastic':
+                            return "Equal to " . ($totalValue * 50) . " plastic bottles kept out of landfills";
+                        case 'electric':
+                            return "This can keep a 100-watt light bulb on for  " . floor($totalValue * 10) . " hours";
+                        case 'trash':
+                            return "That is equivalent to " . floor($totalValue / 5) . "kg of waste diverted from landfills";
+                        default:
+                            return "";
+                    }
+                }
+
+                $descriptionCarbon = generateImpactDescription('carbon', $contribution['carbon']['total']);
+                $descriptionPlastic = generateImpactDescription('plastic', $contribution['plastic']['total']);
+                $descriptionElectric = generateImpactDescription('electric', $contribution['electric']['total']);
+                $descriptionTrash = generateImpactDescription('trash', $contribution['trash']['total']);
+                ?>
+
                 <div class="impt">
                     <img src="./assets/ivp/car-svgrepo-com.svg" alt="">
                     <!-- <img src=<?php echo $contribution['carbon']['media'] ?>> -->
                     <p class="impt-p1"><?php echo $contribution['carbon']['term'] ?></p>
                     <p class="impt-p2"><?php echo $contribution['carbon']['total'] ?> <?php echo $contribution['carbon']['unit'] ?></p>
-                    <p class="impt-p3"><?php echo $contribution['carbon']['description'] ?></p>
+                    <p class="impt-p3"><?php echo $descriptionCarbon ?></p>
                 </div>
                 <div class="impt">
                     <img src="./assets/ivp/bottle-plastic-recycle-recycling-svgrepo-com.svg">
                     <p class="impt-p1"><?php echo $contribution['plastic']['term'] ?></p>
                     <p class="impt-p2"><?php echo $contribution['plastic']['total'] ?> <?php echo $contribution['plastic']['unit'] ?></p>
-                    <p class="impt-p3">Equal to 2,500 plastic bottels kept out of landfills</p>
+                    <p class="impt-p3"><?php echo $descriptionPlastic ?></p>
                 </div>
                 <div class="impt">
                     <img src="./assets/ivp/electric-electricity-svgrepo-com.svg">
                     <p class="impt-p1"><?php echo $contribution['electric']['term'] ?></p>
                     <p class="impt-p2"><?php echo $contribution['electric']['total'] ?> <?php echo $contribution['electric']['unit'] ?></p>
-                    <p class="impt-p3">Your carbon offset equal the CO₂ absorption of 30 trees/year</p>
+                    <p class="impt-p3"><?php echo $descriptionElectric ?></p>
                 </div>
                 <div class="impt">
                     <img src="./assets/ivp/trash-svgrepo-com.svg">
                     <p class="impt-p1"><?php echo $contribution['trash']['term'] ?></p>
                     <p class="impt-p2"><?php echo $contribution['trash']['total'] ?> <?php echo $contribution['trash']['unit'] ?></p>
-                    <p class="impt-p3">Your carbon offset equal the CO₂ absorption of 30 trees/year</p>
+                    <p class="impt-p3"><?php echo $descriptionTrash ?></p>
                 </div>
             </div>
 
@@ -146,7 +175,7 @@ $onTrack = goals_all_completed('user1', type: 'personal');
 
                             <?php $progress = floor(($row['total'] / $row['goal']) * 100); ?>
 
-                            <div class="progress">
+                            <div class="progress" style="background: conic-gradient(var(--accent) calc(<?php echo ($progress) ?>%), var(--tertiary) 0) !important;">
                                 <div id="thumb">
                                     <p class="percent"><?php echo $progress ?> %</p>
                                 </div>
@@ -167,7 +196,7 @@ $onTrack = goals_all_completed('user1', type: 'personal');
 
                             <?php $progress = floor(($row['total'] / $row['goal']) * 100); ?>
 
-                            <div class="progress">
+                            <div class="progress" style="background: conic-gradient(var(--accent) calc(<?php echo ($progress) ?>%), var(--tertiary) 0) !important;">
                                 <div id="thumb">
                                     <p class="percent"><?php echo $progress ?> %</p>
                                 </div>
@@ -185,7 +214,20 @@ $onTrack = goals_all_completed('user1', type: 'personal');
                         <p class="info-p1">TIME LEFT</p>
                     </div>
 
-                    <P class="info-p2"><?php echo $allTitle['ending_time']; ?></P>
+                    <p class="info-p2" id="countdown-timer">
+                        <?php
+                        $now = time(); //curent time in seconds (unix timestamp)
+                        $nextSunday = strtotime('next Sunday 00:00:00'); // next Sunday at midnight in seconds
+                        $timeLeft = $nextSunday - $now;
+
+                        $days = floor($timeLeft / (60 * 60 * 24)); //86400
+                        $hours = floor(($timeLeft % (60 * 60 * 24)) / (60 * 60)); //3600
+                        $minutes = floor(($timeLeft % (60 * 60)) / 60);
+
+                        echo $days . "d " . $hours . "h " . $minutes . "m ";
+                        ?>
+                    </p>
+
                     <p class="info-p3">to complete this weekly</p>
                 </div>
 
@@ -195,7 +237,9 @@ $onTrack = goals_all_completed('user1', type: 'personal');
                         <p class="info-p1">ON TRACK</p>
                     </div>
 
-                    <P class="info-p2"><?php echo $onTrack ?>of 2</P>
+                    <P class="info-p2-personal"><?php echo count($onTrackP) ?> of <?php echo count($allGoalsP); ?></P>
+                    <P class="info-p2-global"><?php echo count($onTrackG) ?> of <?php echo count($allGoalsG); ?></P>
+                    <!-- its array a list of item, can't display directly -->
                     <p class="info-p3">goals</p>
                 </div>
 

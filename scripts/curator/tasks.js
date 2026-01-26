@@ -5,9 +5,7 @@
     var completionRates = {};
 
     function fetchData() {
-        fetch('/api/task/fetch_all.php?' + new URLSearchParams({
-            'active': 1
-        }).toString())
+        fetch('/api/task/fetch_all.php?active=1')
             .then((e) => e.json())
             .then((e) => {
                 fetch('/api/task/helper.php')

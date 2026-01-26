@@ -63,16 +63,18 @@
 
 #time-filter {
     display: flex;
-    padding: 20px 0; 
+    padding: 20px; 
+    min-width: 150px;
+    width:auto;
 }
 
-.time-filters {
-    display: flex; 
-    gap: 10px;    
+#time-filters {
+    margin:40px; 
+    gap:10px; 
 }
-
 
 .filter-button {
+    white-space: none;
     border: none;
     background-color: var(--tertiary-background); 
     border-radius: 15px;
@@ -81,6 +83,7 @@
     cursor: pointer;
     transition: background-color 0.2s, border-color 0.2s, color 0.2s;
     border: 2px solid #1a1a1a;
+    flex-shrink: 0;
 }
 
 
@@ -90,11 +93,10 @@
 
 
 .filter-button.active {
-    background-color: var(--accent); 
-
-    color:var(--background); 
+    background-color: var(--accent);  
     border: 2px solid var(--accent);
 }
+
 #top-achievements img {
     width: 24px;
     height: 24px;

@@ -24,7 +24,7 @@
                 <img onclick="toggleNavbar()" id="burger" src="./assets/burger.svg">
             </div>
             <div id="time-filter">
-                <nav class="time-filters" id="timeFilters">
+                <nav id="timefilters">
                     <button class="filter-button" data-filter="week">This Week</button>
                     <button class="filter-button" data-filter="month">This Month</button>
                     <button class="filter-button" data-filter="alltime">All Time</button>
@@ -78,7 +78,7 @@
                         <p class="stats-title">TOTAL USERS</p>
                     </div>
                     <p class="stats-value"><?= $totalUser['total-user'] ?? '0'?> </p>
-                    <p class="stats-footer green-text"><?= $totalUser['growth'] ?? '0'?>this week</p>
+                    <p class="stats-footer green-text"><?= $totalUser['growth'] ?? '0'?> this week</p>
                 </div>
 
                 <div class="stats-card">
@@ -92,20 +92,20 @@
 
                 <div class="stats-card">
                     <div class="stats-header">
-                        <img src="./assets/wave.svg">
+                        <img src="./assets/average.png">
                         <p class="stats-title">AVG POINTS</p>
                     </div>
                     <p class="stats-value"><?= $averagePoint['average-point'] ?? '0'?></p>
-                    <p class="stats-footer green-text"><?= $averagePoint['growth'] ?? '0'?>from last month</p>
+                    <p class="stats-footer green-text"><?= $averagePoint['growth'] ?? '0'?> from last month</p>
                 </div>
 
                 <div class="stats-card">
                     <div class="stats-header">
-                        <img src="./assets/up-arrow.svg">
+                        <img src="./assets/increase.png">
                         <p class="stats-title">TOP SCORE</p>
                     </div>
-                    <p class="stats-value">4,850</p>
-                    <p class="stats-footer green-text">Sarah Chen</p>
+                    <p class="stats-value"><?= $topScore['top-score'] ?? '0'?></</p>
+                    <p class="stats-footer green-text"><?= htmlspecialchars($topScore['username']?? 'No data yet')?></p>
                 </div>
             </div>
 
@@ -121,17 +121,17 @@
 
                             <div class="user-section">
                                 <div class="user-avatar">
-                                    <span>EW</span>
+                                    <img src="./assets/trophy.svg">
                                 </div>
                                 <div class="user-info">
-                                    <span class="user-title">Your Rank</span>
-                                    <span class="user-level">Intermediate</span>
+                                    <span class="user-title"><?= htmlspecialchars($currentUser['username'] ?? 'Guest') ?></span>
+                                    <span class="user-level"><?= htmlspecialchars($currentUser['title'] ?? 'New Member') ?></span>
                                 </div>
                             </div>
 
                             <div class="user-stats-section">
-                                <span class="user-rank-number">#12</span>
-                                <span class="user-points">2340 pts</span>
+                                <span class="user-rank-number">#<?= $currentUser['rank'] ?? 'N/A' ?></span>
+                                <span class="user-points"><?= number_format($currentUser['points'] ?? 0) ?></span>
                             </div>
                         </div>
                     </div>
@@ -143,104 +143,45 @@
                         </nav>
                     </div>
                     <div class="leaderboard">
-                        <div class="card gold">
-                            <div class="avatar">
-                                <img src="./assets/avatar.svg">
-                                <span class="badge">👑</span>
-                            </div>
-                            <h3>Sarah M.</h3>
-                            <p class="points">4520</p>
-                            <p class="label">pts</p>
-                        </div>
+                        <?php 
+                        $ranks = ['gold', 'silver', 'bronze'];
+                        $badges = ['👑', '🥈', '🥉'];
 
-                        <div class="card silver">
-                            <div class="avatar">
-                                <img src="./assets/avatar.svg">
-                                <span class="badge">🥈</span>
+                        for($i = 0; $i < 3; $i++): 
+                            if(isset($leaderboard[$i])): 
+                                $user = $leaderboard[$i];
+                        ?>
+                            <div class="card <?= $ranks[$i] ?>">
+                                <div class="avatar">
+                                    <img src="./assets/avatar.svg">
+                                    <span class="badge"><?= $badges[$i] ?></span>
+                                </div>
+                                <h3><?=htmlspecialchars($user['username'] ?? 'Guest') ?></h3>
+                                <p class="points"><?= number_format($user[$sortColumn]?? 0) ?></p>
+                                <p class="label"><?= $unit ?></p>
                             </div>
-                            <h3>Mike T.</h3>
-                            <p class="points">3890</p>
-                            <p class="label">pts</p>
-                        </div>
-
-                        <div class="card bronze">
-                            <div class="avatar">
-                                <img src="./assets/avatar.svg">
-                                <span class="badge">🥉</span>
-                            </div>
-                            <h3>Emma L.</h3>
-                            <p class="points">3654</p>
-                            <p class="label">pts</p>
-                        </div>
+                        <?php endif; endfor; ?>
                     </div>
 
                     <ul id="leaderboard-list">
-
-                        <li class="ranking-item">
-                            <div class="rank-badge number-rank">#4</div>
-                            <div class="user-initials">SC</div>
-                            <div class="user-info">
-                                <span class="user-name">Sarah Chen</span>
-                                <span class="user-title">Top Plastic Saver</span>
-                                <span class="user-metric">142 kg</span>
-                            </div>
-                            <div class="metrics">
-                                <div class="metric-item">
-                                    <img src="./assets/fire.svg">
-                                    <span>28 days</span>
+                        <?php for($i = 3; $i < 10; $i++): 
+                            if(isset($leaderboard[$i])): 
+                                $user = $leaderboard[$i];
+                        ?>
+                            <li class="ranking-item">
+                                <div class="rank-badge number-rank">#<?= $i + 1 ?></div>
+                                <div class="user-avatar-container">
+                                    <img src="<?= $imagePath ?>" alt="<?=htmlspecialchars($user['username'] ?? 'N/A') ?>" class="leaderboard-avatar">
                                 </div>
-                                <div class="metric-item">
-                                    <img src="./assets/leaf.svg" alt="CO2">
-                                    <span>12.5t CO₂</span>
-                                </div>
-                            </div>
-                            <span class="user-points green-text">4,850</span>
-                        </li>
-
-                        <li class="ranking-item active-user">
-                            <div class="rank-badge number-rank">#5</div>
-                            <div class="user-initials">AK</div>
-                            <div class="user-info">
-                                <span class="user-name">You (Alex Kim)</span>
-                                <span class="user-title">Consistent Contributor</span>
-                                <span class="user-metric">115 kg</span>
-                            </div>
-                            <div class="metrics">
-                                <div class="metric-item">
-                                    <img src="./assets/fire.svg">
-                                    <span>12 days</span>
-                                </div>
-                                <div class="metric-item">
-                                    <img src="./assets/leaf.svg">
-                                    <span>5.2t CO₂</span>
-                                </div>
-                            </div>
-                            <span class="user-points green-text">4,280</span>
-                        </li>
-
-                        <li class="ranking-item">
-                            <div class="rank-badge number-rank">#6</div>
-                            <div class="user-initials">ET</div>
-                            <div class="user-info">
-                                <span class="user-name">Emma Thompson</span>
-                                <span class="user-title">Most Actions</span>
-                                <span class="user-metric">312 completed</span>
-                            </div>
-                            <div class="metrics">
-                                <div class="metric-item">
-                                    <img src="./assets/fire.svg">
-                                    <span>18 days</span>
-                                </div>
-                                <div class="metric-item">
-                                    <img src="./assets/leaf.svg">
-                                    <span>8.7t CO₂</span>
-                                </div>
-                            </div>
-                            <span class="user-points green-text">3,950</span>
-                        </li>
-
+                                <div class="user-info">
+                                    <span class="user-name"><?= htmlspecialchars($user['username'] ??'Guest') ?></span>
+                                    <span class="user-title"><?= htmlspecialchars($user['title'] ??'N/A') ?></span>                                </div>
+                                <span class="user-points green-text"><?= number_format($user['points']??'0') ?></span>
+                            </li>
+                        <?php endif; endfor; ?>
                     </ul>
-            </section>
+
+                </section>
 
 
         </div>

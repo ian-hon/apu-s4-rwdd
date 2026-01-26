@@ -7,11 +7,14 @@ body {
 #bg-color {
     display: flex;
     flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
     background:
         radial-gradient(ellipse 2200px 1800px at 97% 30%, #519C03 0%, transparent 10%),
         radial-gradient(ellipse 2200px 1800px at 5% 71%, #519C03 0%, transparent 10%),
         black !important;
     height: 100vh;
+    padding-top: 50px;
 
     /* overflow: hidden; */
 }
@@ -23,7 +26,16 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-top: 10px;
+    padding: 10px 0;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+
+    background: black;
+    border-bottom: 2px solid #222;
 
     & p {
         margin: 0 0 4px 4px;
@@ -38,12 +50,19 @@ body {
 }
 
 #hamburger {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background: none;
     border: none;
+    position: relative;
+    cursor: pointer;
 }
 
 /* Element */
-#elements {
+#element {
     overflow-y: scroll;
     width: 100%;
 
@@ -61,6 +80,7 @@ body {
     border: 2px solid #222;
     border-radius: 15px;
     margin: 1.5em;
+    margin-top: 2em;
     background: #101309;
 }
 

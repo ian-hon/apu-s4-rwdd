@@ -1,7 +1,23 @@
 <?php
 include  dirname(__DIR__) . '/conn.php';
 
-$query = "select * from ecoquest.TASK" . (isset($_GET['active']) ? " WHERE TASK.active = {$_GET['active']}" : "");
+$occurance_type = isset($_GET['occurance_type']) ? $_GET['occurance_type'] : null;
+$active = isset($_GET['active']) ? $_GET['active'] : null;
+
+// to avoid ternary hell
+$conditions = array();
+if (!is_null($occurance_type)) {
+    $conditions[] = "occurance_type = '{$occurance_type}'";
+}
+if (!is_null($active)) {
+    $conditions[] = "active = '{$active}'";
+}
+
+$query = "SELECT * FROM ecoquest.TASK";
+if (count($conditions) > 0) {
+    $query .= " WHERE " . implode(" AND ", $conditions);
+}
+
 $tasks = array();
 
 $queryResult = mysqli_query($dbConnection, $query);
