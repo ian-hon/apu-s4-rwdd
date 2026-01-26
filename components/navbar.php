@@ -11,9 +11,10 @@
             <img src="./assets/task.svg">
             <h4>TASKS</h4>
         </a>
-        <a href="achievements.php" class="navbar-card">
-            <img src="./assets/trophy.svg">
-            <h4>ACHIEVEMENTS</h4>
+        <!-- submission history here -->
+        <a href="submission_history.php" class="navbar-card">
+            <img src="./assets/task.svg">
+            <h4>SUBMISSIONS</h4>
         </a>
         <a href="goals.php" class="navbar-card">
             <img src="./assets/target.svg">
@@ -26,6 +27,7 @@
         <a href="points.php" class="navbar-card">
             <img src="./assets/leaf.svg">
             <h4>POINTS</h4>
+            <!-- rewards, redemption history inside here -->
         </a>
         <div>
             <!-- this div is only shown if user is a curator or admin -->
