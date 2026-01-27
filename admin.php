@@ -19,7 +19,7 @@ foreach ($rewards as $reward) {
     if ($reward['active']) { $activeResult['count']++; } 
     else { $endedResult['count']++; }
     
-    if ($reward['remaining'] < 10) { $lowStockResult['count']++; }
+    if ($reward['active'] && $reward['remaining'] < 10) { $lowStockResult['count']++; }
 
     $rawInitial += (int)$reward['initial'];
     $rawRemaining += (int)$reward['remaining'];
