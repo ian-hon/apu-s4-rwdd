@@ -13,6 +13,7 @@ CREATE TABLE ecoquest.GOAL_TYPE (
 
 CREATE TABLE ecoquest.USERS (
     username VARCHAR(200) PRIMARY KEY,
+    email VARCHAR(200),
     password VARCHAR(64),
     name VARCHAR(200),
     DOB INT,
@@ -115,12 +116,12 @@ INSERT INTO ecoquest.GOAL_TYPE (ID, term, unit, decimal_points) VALUES
 ('electric', 'electricity saved', 'kWh', 2),
 ('trash', 'trash', 'kg', 1);
 
-INSERT INTO ecoquest.USERS (username, password, name, DOB, profile_picture, role) VALUES
-('admin1', 'hashed_password_123', 'Emma Green', 19850615, '/images/profiles/admin1.jpg', 'admin'),
-('curator1', 'hashed_password_456', 'David Earth', 19900320, '/images/profiles/curator1.jpg', 'curator'),
-('user1', 'hashed_password_789', 'Sarah Eco', 19950812, '/images/profiles/user1.jpg', 'user'),
-('user2', 'hashed_password_101', 'Mike Recycle', 19880425, '/images/profiles/user2.jpg', 'user'),
-('user3', 'hashed_password_112', 'Lisa Clean', 19920703, '/images/profiles/user3.jpg', 'user');
+INSERT INTO ecoquest.USERS (username, email, password, name, DOB, profile_picture, role) VALUES
+('admin1', 'admin1@ecoquest.com', 'hashed_password_123', 'Emma Green', 19850615, '/images/profiles/admin1.jpg', 'admin'),
+('curator1', 'curator1@ecoquest.com', 'hashed_password_456', 'David Earth', 19900320, '/images/profiles/curator1.jpg', 'curator'),
+('user1', 'user1@ecoquest.com', 'hashed_password_789', 'Sarah Eco', 19950812, '/images/profiles/user1.jpg', 'user'),
+('user2', 'user2@ecoquest.com', 'hashed_password_101', 'Mike Recycle', 19880425, '/images/profiles/user2.jpg', 'user'),
+('user3', 'user3@ecoquest.com', 'hashed_password_112', 'Lisa Clean', 19920703, '/images/profiles/user3.jpg', 'user');
 
 -- TA_XXXX
 INSERT INTO ecoquest.TASK (ID, title, description, curator_instructions, active, target, excess_limit, reward_rate, goal_type, goal_contribution, occurance_type, schedule) VALUES

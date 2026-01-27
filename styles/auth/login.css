@@ -12,7 +12,7 @@
     margin-bottom: 2em;
 
     & h1 {
-        font-size: 4em;
+        font-size: 3.5em;
     }
 }
 
@@ -176,6 +176,50 @@
     }
 }
 
+.error-message {
+    display: block;
+    color: var(--error);
+    margin-top: 0.5rem;
+    margin-left: 2.5rem;
+    min-height: 1.2rem;
+
+    &:empty {
+        display: none;
+    }
+}
+
+.success-message {
+    display: block;
+
+    color: var(--accent);
+    background-color: #181d0d;
+
+    border: 1px solid #4caf50;
+    border-radius: var(--border-radius);
+
+    padding: 1em;
+    margin-bottom: 1.5em;
+
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.error-message-box {
+    display: block;
+
+    color: var(--error);
+    background-color: #181d0d;
+
+    border: 1px solid var(--error);
+    border-radius: var(--border-radius);
+
+    padding: 1em;
+    margin-bottom: 1.5em;
+
+    text-align: center;
+    font-size: 0.9rem;
+}
+
 #login-button {
     border: 1px solid var(--accent-border);
     background-color: var(--accent);
@@ -209,6 +253,80 @@
 
         &:hover {
             opacity: 1;
+        }
+    }
+}
+
+@media (max-width: 770px) {
+    #parent {
+        padding: 1em;
+    }
+
+    #logo {
+        margin-bottom: 1.5em;
+
+        & h1 {
+            font-size: 3em;
+        }
+    }
+
+    #login-page-box {
+        padding: 0 1.5em;
+        min-width: auto;
+        max-width: 100%;
+    }
+
+    #greeting {
+        margin-top: 1em;
+
+        & #subtitle {
+            font-size: 0.9em;
+            margin-bottom: 3em;
+        }
+    }
+
+    #input-section {
+        & h4 {
+            font-size: 1em;
+            margin: 0.7em 0;
+        }
+
+        & #input-form {
+            padding-bottom: 0.5em;
+        }
+
+        & input {
+            font-size: 0.85rem;
+            padding: 0.8em;
+        }
+    }
+
+    .button {
+        font-size: 0.85em;
+        padding: 0.8em;
+    }
+
+    .success-message,
+    .error-message-box {
+        padding: 0.8em;
+        margin-bottom: 1em;
+        font-size: 0.85rem;
+    }
+
+    #login-button {
+        margin-top: 4em;
+        margin-bottom: 1em;
+    }
+
+    #no-account {
+        margin-top: 2em;
+
+        & h3 {
+            font-size: 0.8em;
+        }
+
+        & a {
+            margin-left: 0.3em;
         }
     }
 }
