@@ -1,0 +1,268 @@
+body {
+    color: white;
+    font-family: geist;
+    min-height: 100vh !important;
+    margin: 0;
+    background: transparent;
+}
+
+#bg-color {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+
+    background:
+        radial-gradient(ellipse 2200px 1800px at 97% 30%, #519C03 0%, transparent 10%),
+        radial-gradient(ellipse 2200px 1800px at 5% 71%, #519C03 0%, transparent 10%),
+        black !important;
+
+    z-index: -1;
+
+    overflow: hidden;
+}
+
+@media(min-width: 1024px) {
+    #bg-color {
+        background:
+            radial-gradient(ellipse 2000px 1800px at 90% 43%, #519C03 0%, transparent 20%),
+            radial-gradient(ellipse 2000px 1800px at 7% 70%, #519C03 0%, transparent 20%),
+            black !important;
+        height: 100vh;
+    }
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    background: black;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+
+    & h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-left: 0.5em;
+    }
+}
+
+#header .top {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.65em;
+    padding: 0.5em 0.95em;
+}
+
+#back {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: white;
+
+    & a {
+        width: 1.9em;
+        height: auto;
+        color: white;
+
+        & img {
+            width: 1.9em;
+            height: auto;
+            margin-top: 0.3em;
+            margin-bottom: 0;
+        }
+    }
+}
+
+#hamburger {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 1.9em;
+
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    & img {
+        width: 1.9em;
+        height: auto;
+    }
+}
+
+#elements {
+    overflow-y: scroll;
+    width: 100%;
+    height: calc(100vh - 0px);
+    scrollbar-width: none;
+    background: transparent;
+}
+
+#allRedemptions {
+    position: relative;
+    padding-bottom: 100px;
+}
+
+#header-allRedemptions {
+    font-size: 1rem;
+    margin: 1.5em 1.25em;
+    margin-top: 4.5em;
+    margin-left: 2em;
+    opacity: 0.5;
+}
+
+.redemption-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1em;
+    margin: 1em 1.25em;
+    align-items: flex-start;
+
+    border: 0.13em solid #222;
+    border-radius: 1em;
+    background: black;
+    padding: 1.25em;
+    overflow: hidden;
+
+    img {
+        border-radius: 1em;
+        width: 100%;
+        height: 12.5em;
+        object-fit: cover;
+    }
+
+    .redemption-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        justify-content: space-between;
+        height: 100%;
+
+        .redemption-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+
+            .redemption-title {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5em;
+
+                .redemption-name {
+                    font-weight: bold;
+                    font-size: 0.95rem;
+                    margin: 0;
+                    color: white;
+                }
+
+                .redemption-desc {
+                    font-size: 0.85rem;
+                    opacity: 0.7;
+                    margin: 0;
+                    color: white;
+                }
+            }
+
+            .redemption-price {
+                font-weight: bold;
+                color: #519C03;
+                margin: 0;
+                font-size: 0.9rem;
+            }
+        }
+
+        .redemption-footer {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+
+            .redemption-date {
+                font-size: 0.85rem;
+                opacity: 0.6;
+                margin: 0;
+                color: white;
+            }
+
+            .redemption-fulldate {
+                font-size: 0.8rem;
+                opacity: 0.5;
+                margin: 0;
+                color: white;
+            }
+        }
+    }
+}
+
+.no-redemptions {
+    text-align: center;
+    padding: 3em 2em;
+    opacity: 0.6;
+
+    p {
+        margin: 0;
+        font-size: 1rem;
+    }
+}
+
+@media(min-width: 1024px) {
+    #header {
+        & h3 {
+            font-size: 1.5rem;
+        }
+    }
+
+    #header-allRedemptions {
+        font-size: 1.2rem;
+        margin: 1.5em 2.5em;
+        margin-top: 3.5em;
+    }
+
+    .redemption-card {
+        grid-template-columns: 15.65em 1fr;
+        margin: 1.5em 2em;
+        padding: 1.25em;
+
+        img {
+            width: 15.65em;
+            height: 15.65em;
+        }
+
+        .redemption-info {
+            padding: 2rem;
+
+            .redemption-header {
+                .redemption-title {
+                    .redemption-name {
+                        font-size: 1.25rem;
+                    }
+
+                    .redemption-desc {
+                        font-size: 0.95rem;
+                    }
+                }
+
+                .redemption-price {
+                    font-size: 1.15rem;
+                }
+            }
+
+            .redemption-footer {
+                .redemption-date {
+                    font-size: 0.9rem;
+                }
+
+                .redemption-fulldate {
+                    font-size: 0.80rem;
+                }
+            }
+        }
+    }
+}
