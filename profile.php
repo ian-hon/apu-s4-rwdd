@@ -161,7 +161,7 @@ $impactMessageGenerator = function ($contribution) {
                 <!-- Logout -->
                 <div id="logout">
                     <button>
-                        <a href="auth/login.html">
+                        <a href="auth/login.php">
                             <img src="assets/ivp/logout-svgrepo-com.svg" alt="">
                             Logout
                         </a>

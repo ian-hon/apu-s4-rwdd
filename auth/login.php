@@ -12,9 +12,15 @@
 <body>
     <?php
     session_start();
-    
+
+    $redirects = array(
+        'user' => '../dashboard.php',
+        'admin' => '../admin.html',
+        'curator' => '../curator.php',
+    );
+
     $conn = new mysqli("localhost", "root", "", "ecoquest");
-    
+
     // isset check for existing extended session, sets to true or false, prevents errors on first login
     // secondary check for if extended session is true, then set session lifetime
     if (isset($_SESSION['extended_session']) && $_SESSION['extended_session']) {
@@ -22,19 +28,17 @@
         session_set_cookie_params(['lifetime' => 30 * 24 * 60 * 60]);
     }
 
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
         $username = $_POST["username"];
         $password = $_POST["password"];
         $remember_me = isset($_POST["remember_me"]) ? true : false;
 
-        if(empty($username)){
+        if (empty($username)) {
             echo "Please enter a username";
-        }
-        elseif(empty($password)){
+        } elseif (empty($password)) {
             echo "Please enter a password";
-        }
-        else{
+        } else {
             $result = $conn->query("SELECT * FROM USERS WHERE username = '" . $conn->real_escape_string($username) . "' LIMIT 1");
 
             if ($result->num_rows >= 1) {
@@ -42,18 +46,18 @@
                 $record = $result->fetch_assoc();
                 if (password_verify($password, $record['password'])) {
                     $_SESSION['username'] = $username;
-                    
+                    $_SESSION['password'] = $record['password'];
+
                     // if click remember me, extend session lifetime
                     if ($remember_me) {
                         ini_set('session.gc_maxlifetime', 30 * 24 * 60 * 60);
                         session_set_cookie_params(['lifetime' => 30 * 24 * 60 * 60]);
                         $_SESSION['extended_session'] = true;
                     }
-                    
-                    header("Location: ../dashboard.php");
+
+                    header("Location: {$redirects[$record['role']]}");
                     exit();
-                } 
-                else {
+                } else {
                     $_SESSION['error'] = "Incorrect login credentials";
                 }
             } else {
@@ -78,24 +82,24 @@
             </div>
 
             <?php
-                if (isset($_SESSION['message'])) {
-                    echo "<p class='success-message'>" . htmlspecialchars($_SESSION['message']) . "</p>";
-                    unset($_SESSION['message']);
-                }
-                if (isset($_SESSION['error'])) {
-                    echo "<p class='error-message-box'>" . htmlspecialchars($_SESSION['error']) . "</p>";
-                    unset($_SESSION['error']);
-                }
+            if (isset($_SESSION['message'])) {
+                echo "<p class='success-message'>" . htmlspecialchars($_SESSION['message']) . "</p>";
+                unset($_SESSION['message']);
+            }
+            if (isset($_SESSION['error'])) {
+                echo "<p class='error-message-box'>" . htmlspecialchars($_SESSION['error']) . "</p>";
+                unset($_SESSION['error']);
+            }
             ?>
 
             <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" name="login">
-                <div id="input-section">    
+                <div id="input-section">
                     <h4>Username</h4>
                     <div id="input-form">
                         <div id="input-icon">
                             <img id="user-icon" src="/assets/user.svg" alt="user-icon">
                         </div>
-                        <input type="text" name="username" id="username" placeholder="Enter your username"> 
+                        <input type="text" name="username" id="username" placeholder="Enter your username">
                     </div>
                     <h5><span id="username-error" class="error-message"></span></h5>
 
@@ -114,10 +118,10 @@
                     <div id="remember-me">
                         <div>
                             <input id="remember-me-text" type="checkbox" name="remember_me" value="1">
-                        </div>                  
+                        </div>
                         <div>
                             <label for="remember-me-text" id="remember-me-text">Remember me</label>
-                        </div>  
+                        </div>
                     </div>
                     <div id="forgot-password">
                         <a href="/auth/password-recovery.html" target="_blank">Forgot Password?</a>
@@ -126,8 +130,8 @@
 
 
                 <div>
-                    <input type="submit" value="Login" class="button" id="login-button" 
-                    onclick="return validateForm()">
+                    <input type="submit" value="Login" class="button" id="login-button"
+                        onclick="return validateForm()">
                 </div>
             </form>
 
@@ -140,4 +144,5 @@
     <script src="../scripts/script.js"></script>
     <script src="../scripts/auth/login.js"></script>
 </body>
+
 </html>

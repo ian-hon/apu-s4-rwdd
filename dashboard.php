@@ -3,6 +3,9 @@ include './api/users/contribution.php';
 include './api/task/functions.php';
 include './api/points/functions.php';
 
+include './api/credentials.php';
+enforce_role('user');
+
 $tasks = task_fetch_daily_tasks();
 
 ?>
