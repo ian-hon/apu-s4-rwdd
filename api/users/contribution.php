@@ -132,3 +132,52 @@ function user_get_streak($username)
     // no way youll have full streak lol
     return $today - $expected_day - 1;
 }
+
+function user_get_streak_percentile($username)
+{
+    // return percentage of users that have lower streak than this user
+    include dirname(__DIR__) . '/conn.php';
+
+    $currentStreak = user_get_streak($username);
+
+    $query = "SELECT DISTINCT user FROM SUBMISSION";
+    $result = mysqli_query($dbConnection, $query);
+
+    $totalUsers = 0;
+    $usersWithLowerStreak = 0;
+
+    foreach (mysqli_fetch_all($result) as $row) {
+        $user = $row[0];
+        $userStreak = user_get_streak($user);
+
+        $totalUsers++;
+        if ($userStreak < $currentStreak) {
+            $usersWithLowerStreak++;
+        }
+    }
+
+    if ($totalUsers == 0) {
+        return 0;
+    }
+
+    return floor(($usersWithLowerStreak / $totalUsers) * 100);
+}
+
+function user_check_already_submitted_today($username)
+{
+    include dirname(__DIR__) . '/conn.php';
+
+    $today = floor(time() / 86400);
+    $dayStart = $today * 86400;
+    // check range or just check if theres a submission after dayStart?
+    $dayEnd = ($today + 1) * 86400;
+
+    $query = "SELECT COUNT(*) as count FROM SUBMISSION 
+              WHERE user = '$username' 
+              AND submitted_timestamp BETWEEN $dayStart AND $dayEnd";
+
+    $result = mysqli_query($dbConnection, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    return intval($row['count']) > 0;
+}

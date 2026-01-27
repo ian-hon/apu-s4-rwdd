@@ -316,6 +316,8 @@ h6 {
 
     border-color: var(--tertiary);
 
+    text-decoration: none;
+
     & #icon {
         height: 3em;
         padding: 0.5em;

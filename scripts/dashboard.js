@@ -13,6 +13,7 @@ setProperVh();
 
 // #region dummy timer at task section
 const countdown = document.querySelector(".countdown");
+const countdownFinished = document.querySelector(".countdown-finished");
 const target = (Date.now() - (Date.now() % 86400_000)) + 86400_000;
 
 function getCountdownText(seconds) {
@@ -25,11 +26,12 @@ function getCountdownText(seconds) {
     seconds = seconds % 60;
     minutes %= 60;
 
-    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return `${hours}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
 }
 
 function updateCountdown() {
     countdown.innerHTML = getCountdownText(target - Date.now());
+    countdownFinished.innerHTML = `come back in ${getCountdownText(target - Date.now())}`;
 }
 
 updateCountdown();

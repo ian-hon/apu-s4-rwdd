@@ -1,3 +1,11 @@
+<?php
+include './api/users/contribution.php';
+include "./api/task/functions.php";
+
+$tasks = task_fetch_daily_tasks();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +33,7 @@
                     <div id="streak">
                         <img src="./assets/fire.svg">
                         <h4>
-                            50
+                            <?php echo user_get_streak('user1') ?>
                         </h4>
                     </div>
                 </div>
@@ -36,17 +44,15 @@
                 <img src="./assets/fire.svg" class="border">
                 <div id="details">
                     <h2>
-                        50 days
+                        <?php echo user_get_streak('user1') . " day" . (user_get_streak('user1') == 1 ? "" : "s") ?>
                     </h2>
                     <h5>
-                        better than 80% of users!
+                        better than <?php echo user_get_streak_percentile('user1') // TODO: REPLACE WITH SESSION STORAGE 
+                                    ?>% of users!
                     </h5>
                 </div>
             </div>
-            <div id="fun-fact" class="border" data-state='loading' data-payload='<?php
-                                                                                    include './api/users/contribution.php';
-                                                                                    echo htmlspecialchars(json_encode(user_get_contribution_total_worded('user1')));
-                                                                                    ?>'>
+            <div id="fun-fact" class="border" data-state='loading' data-payload='<?php echo htmlspecialchars(json_encode(user_get_contribution_total_worded('user1'))); ?>'>
                 <div id="data">
                     <h4>Fun fact!</h4>
                     <h5></h5>
@@ -70,38 +76,26 @@
                     </a>
                 </div>
                 <div id="task-container">
-                    <div class="task-card">
-                        <img id="icon" class="border" src="./assets/leaf.svg">
-                        <div id="details">
-                            <h4>Eat a leaf</h4>
-                            <h6>Leaves are good for health</h6>
-                        </div>
-                        <div id="points">
-                            <h6>500</h6>
-                            <img src="./assets/leaf.svg">
-                        </div>
-                    </div>
-                    <div class="task-card">
-                        <img id="icon" class="border" src="./assets/leaf.svg">
-                        <div id="details">
-                            <h4>Eat a leaf</h4>
-                            <h6>Leaves are good for health</h6>
-                        </div>
-                        <div id="points">
-                            <h6>500</h6>
-                            <img src="./assets/leaf.svg">
-                        </div>
-                    </div>
-                    <div class="task-card">
-                        <img id="icon" class="border" src="./assets/leaf.svg">
-                        <div id="details">
-                            <h4>Eat a leaf</h4>
-                            <h6>Leaves are good for health</h6>
-                        </div>
-                        <div id="points">
-                            <h6>500</h6>
-                            <img src="./assets/leaf.svg">
-                        </div>
+                    <?php foreach (
+                        array_filter($tasks, function ($v, $_) {
+                            return !task_already_submitted($v['ID'], 'user1'); // TODO: REPLACE WITH SESSION
+                        }, ARRAY_FILTER_USE_BOTH) as $row
+                    ): ?>
+                        <a class="task-card" id="<?php echo $row['occurance_type'] ?>" href="./view_tasks.php?ID=<?php echo urlencode($row['ID']) ?>">
+                            <img id="icon" class="border" src="./assets/leaf.svg">
+                            <div id="details">
+                                <h4><?php echo $row['title'] ?></h4>
+                                <h6><?php echo $row['description'] ?></h6>
+                            </div>
+                            <div id="points">
+                                <h6><?php echo $row['target'] * $row['reward_rate'] ?></h6>
+                                <img src="./assets/leaf.svg">
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
+                    <div id="finished-all">
+                        <h5>wow, you completed all your daily tasks!</h5>
+                        <h6 class="countdown-finished"></h6>
                     </div>
                 </div>
                 <div id="timer">

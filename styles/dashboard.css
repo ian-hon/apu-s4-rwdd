@@ -74,7 +74,7 @@
             margin-right: 0;
             margin-left: 0.5ch;
 
-            color: var(--error);
+            color: var(--streak);
         }
     }
 
@@ -143,6 +143,31 @@
         /* selects the .task-card thats not the last child */
         & .task-card:not(:last-of-type) {
             margin-bottom: 1em;
+        }
+
+        & #finished-all {
+            display: none;
+            justify-content: center;
+            align-items: center;
+
+            flex-direction: column;
+
+            margin: 3em 0;
+
+            & h6 {
+                opacity: 0.5;
+                margin-top: 1em;
+            }
+        }
+    }
+
+    & #task-container:not(:has(.task-card)) {
+        & #finished-all {
+            display: flex;
+        }
+
+        &+#timer {
+            display: none;
         }
     }
 

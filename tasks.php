@@ -29,7 +29,7 @@ $tasks = task_fetch_daily_tasks();
                     ?></h2>
                 <img src="./assets/fire.svg">
             </span>
-            <h5 class='countdown'>resets in ...</h5>
+            <?php echo (user_check_already_submitted_today('user1') ? "<h5>completed!</h5>" : "<h5 class='countdown'></h5>") ?>
         </div>
         <div class="border">
             <span>

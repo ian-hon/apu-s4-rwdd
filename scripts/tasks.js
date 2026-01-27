@@ -18,11 +18,13 @@ function getCountdownText(seconds) {
     seconds = seconds % 60;
     minutes %= 60;
 
-    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return `${hours}h ${minutes.toString().padStart(2, '0')}m ${seconds.toString().padStart(2, '0')}s`;
 }
 
 function updateCountdown() {
-    countdown.innerHTML = `resets in ${getCountdownText(target - Date.now())}`;
+    if (countdown) {
+        countdown.innerHTML = `${getCountdownText(target - Date.now())} left`;
+    }
 }
 
 updateCountdown();
