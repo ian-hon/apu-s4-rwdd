@@ -285,6 +285,8 @@ $stop2 = $pApp + $pPen;
                     </div>
                 </div>
             </section>
+        </main>
+    </div>
 
     <div id="overlay" class="overlay">
         <div id="popup">
@@ -294,17 +296,17 @@ $stop2 = $pApp + $pPen;
             <form class="reward-form" action="admin_create_reward.php" method="POST" enctype="multipart/form-data">
                 <label>REWARD TITLE *</label>
                 <input type="text" name="title" placeholder="e.g. Eco-Friendly Tote Bag">
-
+                                    
                 <label>CATEGORY *</label>
                 <select name="category">
                     <option value="Merchandise">Merchandise</option>
                     <option value="Voucher">Voucher</option>
                     <option value="Donation">Donation</option>
                 </select>
-
+                                    
                 <label>Description *</label>
                 <input type="text" name="description" placeholder="e.g. Eco-Friendly Tote Bag made of cotton">
-
+                                    
                 <div id="form-row">
                     <div class="form-group">
                         <label>POINTS COST *</label>
@@ -326,7 +328,7 @@ $stop2 = $pApp + $pPen;
             </form>
         </div>
     </div>
-
+                                        
     <script src="./scripts/script.js"></script>
     <script src="./scripts/admin/admin_popup.js" defer></script>
     <script src="./scripts/admin/admin_reward.js" defer></script>
