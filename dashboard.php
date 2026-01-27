@@ -1,6 +1,7 @@
 <?php
 include './api/users/contribution.php';
-include "./api/task/functions.php";
+include './api/task/functions.php';
+include './api/points/functions.php';
 
 $tasks = task_fetch_daily_tasks();
 
@@ -26,7 +27,8 @@ $tasks = task_fetch_daily_tasks();
                 <div id="stats">
                     <div id="leaves">
                         <h4>
-                            4,200
+                            <?php echo points_get_current('user1'); // TODO: REPLACE WITH SESSION STORAGE 
+                            ?>
                         </h4>
                         <img src="./assets/leaf.svg">
                     </div>

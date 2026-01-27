@@ -1,31 +1,17 @@
 <?php
 include './api/conn.php'; // connects to the database
+include './api/submission/functions.php';
+include './api/points/functions.php';
+
+$username = 'user1'; // TODO: Replace with session
 
 // total task
-$totalTask = 'SELECT COUNT(task_ID) AS total_tasks FROM ecoquest.SUBMISSION WHERE user = "user1"';
-$result = mysqli_query($dbConnection, $totalTask); // $dbConnection comes from conn.php
-$allTask = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and stores it inside $user
+$allTask = submission_count_by_user($username);
 
 // total point
-$totalPoint = "SELECT sum(task.reward_rate * submission.action_count) AS total_points FROM submission 
-            INNER JOIN task ON submission.task_ID = task.ID WHERE submission.user = 'user1'";
-$totalPointResult = mysqli_query($dbConnection, $totalPoint);
-$allPoint = mysqli_fetch_assoc($totalPointResult);
+$allPoint = points_get_total($username);
 
-$tasksQuery = "
-    SELECT 
-        task.description,
-        task.reward_rate,
-        task.excess_limit,
-        submission.media,
-        submission.status,
-        submission.action_count
-    FROM submission
-    INNER JOIN task ON submission.task_ID = task.ID
-    WHERE submission.`user` = 'user1'
-";
-
-$tasksResult = mysqli_query($dbConnection, $tasksQuery);
+$tasks = submission_fetch_by_user($username);
 
 ?>
 
@@ -65,13 +51,13 @@ $tasksResult = mysqli_query($dbConnection, $tasksQuery);
             <div class="sh-tracking">
                 <img src="./assets/ivp/leaf-svgrepo-com.svg" alt="">
                 <p class="sh-tracking-p1">Total Tasks</p>
-                <p class="sh-tracking-p2"><?php echo $allTask['total_tasks'] ?></p>
+                <p class="sh-tracking-p2"><?php echo $allTask ?></p>
             </div>
 
             <div class="sh-tracking">
                 <img src="./assets/ivp/tick-circle-svgrepo-com.svg" alt="">
                 <p class="sh-tracking-p1">Points Earned</p>
-                <p class="sh-tracking-p2"><?php echo $allPoint['total_points'] ?></p>
+                <p class="sh-tracking-p2"><?php echo $allPoint ?></p>
             </div>
         </div>
 
@@ -80,7 +66,7 @@ $tasksResult = mysqli_query($dbConnection, $tasksQuery);
             <h3 id="header-allSubmission">All Submissions</h3>
 
             <?php
-            while ($task = mysqli_fetch_assoc($tasksResult)) {
+            foreach ($tasks as $task) {
 
                 $statusClass = '';
 
