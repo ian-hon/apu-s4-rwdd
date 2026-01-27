@@ -23,23 +23,21 @@ if (overlayEl) {
     });
 }
 
-function changeTab(pageId) {
-  
-  const pages = document.querySelectorAll('.page-content');
-  pages.forEach(page => {
-    page.style.display = 'none';
-  });
-
-  document.getElementById(pageId).style.display = 'block';
-}
-
 function changeTab(pageId, event) {
   const pages = document.querySelectorAll('.page-content');
   pages.forEach(page => page.style.display = 'none');
-  document.getElementById(pageId).style.display = 'block';
+  
+  const activePage = document.getElementById(pageId);
+  if (activePage) activePage.style.display = 'block';
 
   const buttons = document.querySelectorAll('.dash-btn');
   buttons.forEach(btn => btn.classList.remove('active'));
-
   event.currentTarget.classList.add('active');
+
+  const filterDiv = document.getElementById('filter');
+  if (pageId === 'stats') {
+    filterDiv.style.display = 'none';
+  } else {
+    filterDiv.style.display = 'block'; 
+  }
 }
