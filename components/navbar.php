@@ -2,35 +2,41 @@
 <!-- call toggleNavbar() -->
 <div id="navbar" data-active="false">
     <div id="container" class="border">
-        <a href="profile.html" id="profile-card" class="border">
+        <a href="profile.php" id="profile-card" class="border">
             <img src="./assets/fire.svg">
             <h4>ajian_nedo</h4>
         </a>
         <hr>
-        <a href="tasks.html" class="navbar-card">
+        <a href="dashboard.php" class="navbar-card">
+            <img src="./assets/home.svg">
+            <h4>HOME</h4>
+        </a>
+        <a href="tasks.php" class="navbar-card">
             <img src="./assets/task.svg">
             <h4>TASKS</h4>
         </a>
-        <a href="achievements.html" class="navbar-card">
-            <img src="./assets/trophy.svg">
-            <h4>ACHIEVEMENTS</h4>
+        <!-- submission history here -->
+        <a href="submission_history.php" class="navbar-card">
+            <img src="./assets/task.svg">
+            <h4>SUBMISSIONS</h4>
         </a>
-        <a href="goals.html" class="navbar-card">
+        <a href="goals.php" class="navbar-card">
             <img src="./assets/target.svg">
             <h4>GOALS</h4>
         </a>
-        <a href="leaderboard.html" class="navbar-card">
+        <a href="leaderboard.php" class="navbar-card">
             <img src="./assets/leaderboard.svg">
             <h4>LEADERBOARD</h4>
         </a>
-        <a href="points.html" class="navbar-card">
+        <a href="points.php" class="navbar-card">
             <img src="./assets/leaf.svg">
             <h4>POINTS</h4>
+            <!-- rewards, redemption history inside here -->
         </a>
         <div>
             <!-- this div is only shown if user is a curator or admin -->
             <hr>
-            <a href="curator.html" class="navbar-card">
+            <a href="curator.php" class="navbar-card">
                 <img src="./assets/leaf.svg">
                 <h4>CURATOR DASHBOARD</h4>
             </a>

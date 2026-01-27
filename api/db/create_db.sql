@@ -33,7 +33,7 @@ CREATE TABLE ecoquest.TASK (
     excess_limit INT,
     reward_rate INT,
     goal_type VARCHAR(100),
-    goal_contribution DECIMAL,
+    goal_contribution DECIMAL(20,10),
     
 
     occurance_type VARCHAR(10),

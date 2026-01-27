@@ -46,7 +46,7 @@ $tasksResult = mysqli_query($dbConnection, $tasksQuery);
     <div id="header">
         <div class="top">
             <button id="back">
-                <a href="./dashboard.html">
+                <a href="./dashboard.php">
                     <img src="./assets/ivp/arrow-back-basic-svgrepo-com.svg" alt="">
                 </a>
             </button>

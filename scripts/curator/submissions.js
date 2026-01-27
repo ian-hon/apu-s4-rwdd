@@ -3,11 +3,11 @@
     const lastUpdatedElement = document.querySelector("#page #content #submissions #header #last-updated");
     const submissionCountElement = document.querySelector("#page #content #submissions #header #submission-count");
 
-    const sidebar = document.querySelector("#page #sidebar #overview");
+    const sidebar = document.querySelector("#page #sidebar #sidebar-content #submissions #overview");
     const sidebarPie = sidebar.querySelector("#pie");
     const sidebarStatistics = sidebar.querySelector("#statistics");
 
-    const sidebarQueryInput = document.querySelector("#page #sidebar #query #submissions #search input");
+    const sidebarQueryInput = document.querySelector("#page #sidebar #sidebar-content #submissions #query #search input");
 
     var submissions = {};
     var tasks = {};
@@ -55,32 +55,20 @@
                             rejected: Object.values(submissions).filter(s => s['status'] == 'rejected').length,
                         };
                         ratios.pending = Object.keys(submissions).length - ratios.approved - ratios.rejected;
-                        console.log(ratios);
 
                         render();
                     })
             });
     }
 
-    let getParsedActionCount = (submission) => {
-        let t = tasks[submission['task_ID']];
-
-        // we arent tracking counts of 'excess' actions, but actions itself
-        // so when these submissions are added into the db, they will all start from 0
-        // thus, lets just assume 0 = task.target
-
-        // whenever action_count is changed, we set a limit that it can never go below task.target
-        return (submission['action_count'] == 0) ? t['target'] : submission['action_count'];
-    }
-
     let getParsedExcessCount = (submission) => {
         let t = tasks[submission['task_ID']];
-        return (submission['action_count'] != 0) ? submission['action_count'] - t['target'] : 0;
+        return submission['action_count'] - t['target'];
     };
 
     let totalPoints = (submission) => {
         let t = tasks[submission['task_ID']];
-        return t['reward_rate'] * getParsedActionCount(submission);
+        return t['reward_rate'] * submission['action_count'];
     };
 
     let humanReadableTime = (epoch) => {
@@ -116,7 +104,6 @@
             }
 
             let t = tasks[s['task_ID']];
-            console.log(currentQuery);
             if (currentQuery && ([t['title'], t['description'], s['user'], humanReadableTime(s['submitted_timestamp'])].filter((text) => text.includes(currentQuery)).length == 0)) {
                 return;
             }
@@ -151,9 +138,9 @@
                             <div id="actions">
                                 <!-- replace with - and + svgs -->
                                 <!-- <img> -->
-                                <h5>-</h5>
+                                <h5 onclick="incrementExcess(-1, '${s['ID']}')">-</h5>
                                 <h5>${getParsedExcessCount(s)}</h5>
-                                <h5>+</h5>
+                                <h5 onclick="incrementExcess(1, '${s['ID']}')">+</h5>
                             </div>
                         </div>
                         <div id="points" class="border">
@@ -173,10 +160,10 @@
                 </div>
                 <div id="actions">
                     <!-- icons next to these? -->
-                    <h4 class="border" id="reject">
+                    <h4 class="border" id="reject" onclick="updateSubmissionStatus('rejected', '${s['ID']}')">
                         REJECT
                     </h4>
-                    <h4 class="border" id="approve">
+                    <h4 class="border" id="approve" onclick="updateSubmissionStatus('approved', '${s['ID']}')">
                         APPROVE
                     </h4>
                 </div>
@@ -186,6 +173,36 @@
 
         renderSidebar();
     }
+
+    function updateSubmissionStatus(status, submissionID) {
+        fetch('../../api/submission/update.php?' + new URLSearchParams({
+            'id': submissionID,
+            'status': status,
+            // TODO: replace with session storage
+            'curator': 'curator1'
+        }))
+            .then((e) => e.text())
+            .then((e) => {
+                fetchData();
+            })
+    }
+    window.updateSubmissionStatus = updateSubmissionStatus;
+
+    function incrementExcess(amount, submissionID) {
+        let action = submissions[submissionID]['action_count'];
+        fetch('../../api/submission/update.php?' + new URLSearchParams({
+            'id': submissionID,
+            'action_count': action + amount,
+            // TODO: replace with session storage
+            'curator': 'curator1'
+        }))
+            .then((e) => e.text())
+            .then((e) => {
+                fetchData();
+            })
+    }
+    window.incrementExcess = incrementExcess;
+
 
     changeQuery('');
     changeFilter('');

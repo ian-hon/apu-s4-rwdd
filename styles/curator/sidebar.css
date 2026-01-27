@@ -20,15 +20,11 @@
     & hr {
         border-collapse: collapse;
         border-style: solid;
-
         border-color: var(--border-color);
-
         margin: 0;
         margin-top: 1em;
         margin-bottom: 1em;
     }
-
-    & #top {}
 
     & #tabs {
         display: flex;
@@ -61,7 +57,13 @@
         }
     }
 
-    & #query {
+    & #sidebar-content #overview {
+        &>h5 {
+            opacity: 0.5;
+        }
+    }
+
+    & #sidebar-content #query {
         & #search {
             & input {
                 border-collapse: collapse;
@@ -123,24 +125,12 @@
     }
 }
 
-#sidebar #overview {
-    &>h5 {
-        opacity: 0.5;
-    }
-}
-
 /* #region query/filter specific */
 #sidebar {
 
-    &[data-tab='submissions'] #overview>div:not(#submissions),
-    &[data-tab='tasks'] #overview>div:not(#tasks),
-    &[data-tab='schedule'] #overview>div:not(#schedule) {
-        display: none;
-    }
-
-    &[data-tab='submissions'] #query>div:not(#submissions),
-    &[data-tab='tasks'] #query>div:not(#tasks),
-    &[data-tab='schedule'] #query>div:not(#schedule) {
+    &[data-tab='submissions'] #sidebar-content>div:not(#submissions),
+    &[data-tab='tasks'] #sidebar-content>div:not(#tasks),
+    &[data-tab='schedule'] #sidebar-content>div:not(#schedule) {
         display: none;
     }
 
@@ -153,84 +143,6 @@
 
         border-width: 2px;
     }
-
-    /* #region submissions tab */
-    /* submission tab filter */
-    &[data-filter='pending'] #filter #pending,
-    &[data-filter='rejected'] #filter #rejected,
-    &[data-filter='approved'] #filter #approved {
-        color: var(--accent);
-        border-color: var(--accent-border);
-        background: var(--accent-background);
-    }
-
-    /* #region selection animation thingy */
-    /* is there a dynamic/smarter way to do this? */
-    & #submissions:has(#statistics #pending:hover),
-    &[data-filter='pending'] {
-        & span:not(#pending) {
-            opacity: 0.5;
-        }
-
-        & #pie {
-            & #pending {
-                transform: scale(1.1);
-                z-index: 1000;
-                border: none;
-            }
-
-            &>div:not(#pending) {
-                opacity: 0.5;
-            }
-        }
-    }
-
-    & #submissions:has(#statistics #approved:hover),
-    &[data-filter='approved'] {
-        & span:not(#approved) {
-            opacity: 0.5;
-        }
-
-        & #pie {
-            & #approved {
-                transform: scale(1.1);
-                z-index: 1000;
-                border: none;
-            }
-
-            &>div:not(#approved) {
-                opacity: 0.5;
-            }
-        }
-    }
-
-    & #submissions:has(#statistics #rejected:hover),
-    &[data-filter='rejected'] {
-        & span:not(#rejected) {
-            opacity: 0.5;
-        }
-
-        & #pie {
-            & #rejected {
-                transform: scale(1.1);
-                z-index: 1000;
-                border: none;
-            }
-
-            &>div:not(#rejected) {
-                opacity: 0.5;
-            }
-        }
-    }
-
-    /* #endregion */
-    /* #endregion */
-
-    /* #region tasks tab */
-    /* #endregion */
-
-    /* #region schedule tab */
-    /* #endregion */
 }
 
 /* #endregion */

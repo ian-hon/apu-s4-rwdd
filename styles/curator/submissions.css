@@ -38,9 +38,81 @@
     }
 }
 
+#sidebar {
 
-#sidebar #overview {
-    & #submissions {
+    /* submission tab filter */
+    &[data-filter='pending'] #filter #pending,
+    &[data-filter='rejected'] #filter #rejected,
+    &[data-filter='approved'] #filter #approved {
+        color: var(--accent) !important;
+        border-color: var(--accent-border) !important;
+        background: var(--accent-background) !important;
+    }
+
+    /* #region selection animation thingy */
+    /* is there a dynamic/smarter way to do this? */
+    & #submissions:has(#statistics #pending:hover),
+    &[data-filter='pending'] {
+        & span:not(#pending) {
+            opacity: 0.5;
+        }
+
+        & #pie {
+            & #pending {
+                transform: scale(1.1);
+                z-index: 1000;
+                border: none;
+            }
+
+            &>div:not(#pending) {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    & #submissions:has(#statistics #approved:hover),
+    &[data-filter='approved'] {
+        & span:not(#approved) {
+            opacity: 0.5;
+        }
+
+        & #pie {
+            & #approved {
+                transform: scale(1.1);
+                z-index: 1000;
+                border: none;
+            }
+
+            &>div:not(#approved) {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    & #submissions:has(#statistics #rejected:hover),
+    &[data-filter='rejected'] {
+        & span:not(#rejected) {
+            opacity: 0.5;
+        }
+
+        & #pie {
+            & #rejected {
+                transform: scale(1.1);
+                z-index: 1000;
+                border: none;
+            }
+
+            &>div:not(#rejected) {
+                opacity: 0.5;
+            }
+        }
+    }
+
+    /* #endregion */
+}
+
+#sidebar #sidebar-content {
+    & #submissions #overview {
         & #pie {
             position: relative;
 

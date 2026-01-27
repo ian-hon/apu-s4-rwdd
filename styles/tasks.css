@@ -1,0 +1,126 @@
+#cards {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+
+    flex-direction: row;
+
+    gap: 1em;
+    padding: 1em;
+
+    &>div {
+        flex: 1;
+
+        & h2 {
+            margin: 0.2em 0;
+        }
+
+        &>h5 {
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        &>span {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+
+            align-self: flex-end;
+
+            gap: 1ch;
+            margin-bottom: 1em;
+
+            & h2 {
+                margin: 0;
+                line-height: 1em;
+            }
+        }
+
+        &:first-child {
+            & span {
+                & h2 {
+                    color: var(--streak);
+                }
+
+                & img {
+                    height: 2em;
+                }
+            }
+        }
+    }
+}
+
+#filters {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1em;
+    margin: 0 1em;
+
+    &>h4 {
+        padding: 0.6em 2ch;
+
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    &[data-filter='daily'] #daily,
+    &[data-filter='weekly'] #weekly {
+        background: var(--accent-background);
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+}
+
+body>#container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+
+    flex-direction: column;
+
+    gap: 1em;
+
+    padding: 1em;
+
+    & .task-card {
+        text-decoration: none;
+
+        &[data-state='submitted'] {
+            opacity: 0.5;
+
+            cursor: not-allowed;
+        }
+    }
+
+    & #separator {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        gap: 2ch;
+        opacity: 0.5;
+
+        & hr {
+            flex: 1;
+        }
+    }
+
+    /* &:not(:has(.task-card[data-state='submitted'])) {
+        & #separator {
+            display: none;
+        }
+    } */
+}
+
+#filters[data-filter='daily']+#container .task-card#weekly,
+#filters[data-filter='weekly']+#container .task-card#daily {
+    display: none;
+}
+
+#filters[data-filter='daily']+#container:not(:has(.task-card#daily[data-state='submitted'])) #separator,
+#filters[data-filter='weekly']+#container:not(:has(.task-card#weekly[data-state='submitted'])) #separator {
+    display: none;
+}

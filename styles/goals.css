@@ -90,6 +90,7 @@ body {
     }
 }
 
+/* element */
 #elements {
     overflow-y: scroll;
     width: 100%;
@@ -331,7 +332,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    background: conic-gradient(var(--accent) calc(30%), var(--tertiary) 0);
+    /* background: conic-gradient(var(--accent) calc(30%), var(--tertiary) 0); */
     border-radius: 1000px;
     height: 100px;
     width: 100px;
@@ -363,7 +364,7 @@ body {
 @media (min-width: 1024px) {
     #goal {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: auto;
     }
 
     .goals {
@@ -430,6 +431,21 @@ body {
         color: #519C03;
         font-weight: 500;
         margin: 15px 0px 10px 0px;
+    }
+
+    & .info-p2-personal,
+    .info-p2-global {
+        display: none;
+
+        font-size: 24px;
+        color: #519C03;
+        font-weight: 500;
+        margin: 15px 0px 10px 0px;
+    }
+
+    & .info-p2-personal.active,
+    .info-p2-global.active {
+        display: block;
     }
 
     & .info-p3 {

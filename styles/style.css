@@ -29,6 +29,8 @@
     --weekly: #8B5CF6;
     --weekly-background: color-mix(in srgb, var(--weekly), transparent 80%);
 
+    --streak: #e76c00;
+
     /* we use this red value */
     /* make a new variable for the fire one */
     --error: #E7000B;
@@ -98,6 +100,9 @@ h5,
 h6,
 p,
 input,
+textarea,
+select,
+option,
 button,
 a,
 span,
@@ -154,6 +159,8 @@ h6 {
     scroll-behavior: none;
 
     transition-duration: 0.3s;
+
+    z-index: 9999;
 
     &[data-active="true"] {
         pointer-events: all;
@@ -218,6 +225,36 @@ h6 {
 
         background: var(--tertiary-background);
         border-color: var(--tertiary);
+
+        cursor: pointer;
+    }
+}
+
+#component-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 2ch;
+
+    width: 100%;
+
+    padding: 0.6em 2ch;
+
+    border-style: solid;
+    border-width: 0;
+    border-bottom-width: 2px;
+    border-color: var(--border-color);
+
+    &>h3 {
+        margin-right: auto;
+    }
+
+    &>img {
+        display: block;
+
+        height: 2.5em;
+        padding: 0.2em;
 
         cursor: pointer;
     }

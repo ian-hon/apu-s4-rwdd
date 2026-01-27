@@ -1,10 +1,11 @@
 (function () { // IIFE idiom
     const overviewElement = document.querySelector("#page #content #schedule #overview");
     const selectorElement = document.querySelector("#page #content #schedule #selector #container");
+    const sidebarElement = document.querySelector("#page #sidebar #schedule #container");
     var tasks = {};
 
     function fetchData() {
-        fetch('/api/task/fetch_all.php')
+        fetch('/api/task/fetch_all.php?occurance_type=daily&active=1')
             .then((e) => e.json())
             .then((e) => {
                 tasks = e;
@@ -51,6 +52,15 @@
     function render() {
         renderSelection();
         renderTimetable();
+        renderSidebar();
+    }
+
+    function renderSidebar() {
+        let days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+        days.forEach((day, index) => {
+            sidebarElement.querySelector(`#${day}`).innerHTML = getTasksFromDay(index).reduce((sum, task) => sum + targetPoints(task), 0);
+        });
     }
 
     function renderSelection() {
