@@ -10,6 +10,7 @@ $password = $_SESSION['password'];
 function redirect_to_login()
 {
     header("Location: auth/login.php");
+    exit;
 }
 
 if (!isset($username) || !isset($password)) {
@@ -26,10 +27,12 @@ function enforce_role($role)
 
     if ($user['password'] != $password) {
         redirect_to_login();
+        exit;
     }
 
     if ($user['role'] != $role) {
         redirect_to_login();
+        exit;
     }
 }
 

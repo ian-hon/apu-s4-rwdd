@@ -1,9 +1,11 @@
 <?php
 include './api/conn.php'; // connects to the database
+include './api/users/functions.php';
 
-$query = 'SELECT * FROM ecoquest.USERS WHERE username = "user1"';
-$result = mysqli_query($dbConnection, $query); // $dbConnection comes from conn.php
-$user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and stores it inside $user
+// $query = 'SELECT * FROM ecoquest.USERS WHERE username = $username';
+// $result = mysqli_query($dbConnection, $query); // $dbConnection comes from conn.php
+// $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and stores it inside $user
+$user = user_fetch($username);
 
 // only run this code if the form is submitted
 // $_SERVER = A giant information box that PHP automatically fills with details about the request
@@ -18,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Check if new password and confirm password match
         if ($newPass === $confirmPass) {
             // Update the password in the database
-            $updateQuery = 'UPDATE ecoquest.USERS SET password = ? WHERE username = "user1"';
+            $updateQuery = "UPDATE ecoquest.USERS SET password = ? WHERE username = '{$username}'";
             $stmt = mysqli_prepare($dbConnection, $updateQuery); //mysqli_prepare in order to use '?' to prevent SQL injection
             mysqli_stmt_bind_param($stmt, 's', $newPass);
             mysqli_stmt_execute($stmt);
