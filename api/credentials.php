@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 $username = $_SESSION['username'];
 $password = $_SESSION['password'];
@@ -18,7 +20,7 @@ function enforce_role($role)
 {
     global $username, $password;
 
-    include dirname(__DIR__) . '/api/users/functions.php';
+    include_once dirname(__DIR__) . '/api/users/functions.php';
 
     $user = user_fetch($username);
 
@@ -29,4 +31,11 @@ function enforce_role($role)
     if ($user['role'] != $role) {
         redirect_to_login();
     }
+}
+
+function fetch_role($username)
+{
+    include_once dirname(__DIR__) . '/api/users/functions.php';
+
+    return user_fetch($username)['role'];
 }
