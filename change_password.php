@@ -83,14 +83,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
+            <!-- Random Password Generator -->
+            <button id="randomPass">Generate Random Password</button>
+
             <!-- Update password -->
             <div id="updatePassword">
                 <div id="update-pass">
-                    <p style="color: grey;">Confirm Changes?</p>
-                    <button>
-                        <a href="#profile.php">
-                            Update Password
-                        </a>
+                    <button type="submit">
+                        Update Password
                     </button>
                 </div>
             </div>
@@ -98,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         </form>
     </div>
+    <script src="./scripts/change_password.js"></script>
 </body>
 
 </html>
