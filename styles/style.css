@@ -527,7 +527,8 @@ h6 {
 
             /* margin-left: 2ch; */
 
-            & #days {
+            & #days,
+            & #weeks {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -559,6 +560,22 @@ h6 {
                         border-color: color-mix(in srgb, var(--tertiary) 80%, var(--daily));
                         background: color-mix(in srgb, var(--tertiary-background) 80%, var(--daily-background));
                         /* color: color-mix(in srgb, var(--tertiary) 80%, var(--daily)); */
+                    }
+                }
+            }
+
+            & #weeks {
+                & h4 {
+                    &[data-active] {
+                        border-color: var(--weekly);
+                        background: var(--weekly-background);
+                        color: var(--weekly);
+                    }
+
+                    &:not([data-active]):hover {
+                        border-color: color-mix(in srgb, var(--tertiary) 80%, var(--weekly));
+                        background: color-mix(in srgb, var(--tertiary-background) 80%, var(--weekly-background));
+                        /* color: color-mix(in srgb, var(--tertiary) 80%, var(--weekly)); */
                     }
                 }
             }

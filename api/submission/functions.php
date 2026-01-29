@@ -36,3 +36,18 @@ function submission_fix_action_count()
 
     mysqli_query($dbConnection, $query);
 }
+
+function submission_fetch_all()
+{
+    include dirname(__DIR__) . "/conn.php";
+
+    $query = "SELECT * FROM submission";
+    $result = mysqli_query($dbConnection, $query);
+
+    $submissions = array();
+    foreach (mysqli_fetch_all($result, MYSQLI_ASSOC) as $row) {
+        $submissions[$row['ID']] = $row;
+    }
+
+    return $submissions;
+}
