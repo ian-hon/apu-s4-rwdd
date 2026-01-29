@@ -106,7 +106,10 @@ option,
 button,
 a,
 span,
-label {
+button,
+label,
+small,
+p {
     font-family: 'Jetbrains Mono';
     font-weight: 400;
 

@@ -1,15 +1,9 @@
 #parent.blur {
-    filter: blur(5px);
+    filter: blur(0.3125em);
     pointer-events: none;
 }
 
-/*pointer events none is to prevent clicking the element behind the blur*/
-/* opacity: 20%;
-  background-color: var(--background); 
-  incase blur-error*/
-
-
-.overlay {
+#overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -19,39 +13,36 @@
     display: none;
     justify-content: center;
     align-items: center;
-    background: var(--background);
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(0.5em);
 }
 
-
-.overlay.active {
+#overlay.active {
     display: flex;
 }
 
-
-.popup {
+#popup {
     background: var(--background-secondary);
-    width: 550px;
-    border-radius: 16px;
-    padding: 24px;
-    border: 1px solid var(--tertiary);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    width: 34.375em; 
+    border-radius: 1em; 
+    padding: 1.5em; 
+    border: 0.0625em solid var(--border-color);
+    box-shadow: 0 0.625em 2.5em var(--background); 
 }
 
-.popup-header {
+#popup-header {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 1.5625em;
 }
-
 
 .reward-form label {
     display: block;
     text-align: left;
     font-size: 0.75rem;
     color: var(--secondary-text);
-    margin-bottom: 8px;
+    margin-bottom: 0.5em; 
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -60,15 +51,14 @@
 .reward-form select {
     width: 100%;
     background: var(--tertiary);
-    border: 1px solid var(--tertiary);
+    border: 0.0625em solid var(--tertiary);
     color: var(--text);
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    padding: 0.75em; 
+    border-radius: 0.5em; 
+    margin-bottom: 1.25em;
     transition: border-color 0.2s;
     box-sizing: border-box;
 }
-
 
 .reward-form input:focus,
 .reward-form select:focus {
@@ -76,49 +66,45 @@
     outline: none;
 }
 
-
 #form-row {
     display: flex;
-    gap: 15px;
+    gap: 0.9375em;
 }
 
 .form-group {
     flex: 1;
 }
 
-.auto-discontinue-box {
+#auto-discontinue-box {
     background: var(--tertiary);
-    /* Contrast against the popup background */
-    padding: 15px;
-    border-radius: 12px;
+    padding: 0.9375em; 
+    border-radius: 0.75em; 
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 1.5625em;
 }
 
-.auto-discontinue-box p {
+#auto-discontinue-box p {
     margin: 0;
     font-size: 0.9rem;
 }
 
-.auto-discontinue-box small {
+#auto-discontinue-box small {
     color: var(--secondary-text);
-    font-size: 0.75rem;
-    display: block;
+    font-size: 0.7rem;
 }
 
-
-.modal-footer {
+#modal-footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    gap: 0.9375em; 
 }
 
 .cancel-btn,
 .submit-btn {
-    padding: 14px;
-    border-radius: 8px;
+    padding: 0.875em; 
+    border-radius: 0.5em; 
     border: none;
     font-weight: bold;
     cursor: pointer;
@@ -133,4 +119,8 @@
 .submit-btn {
     background: var(--accent);
     color: var(--text);
+}
+
+.input-image input[type="file"]::file-selector-button {
+    display: none;
 }

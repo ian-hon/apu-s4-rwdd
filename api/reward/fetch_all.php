@@ -14,7 +14,8 @@ foreach (mysqli_fetch_all($queryResult, MYSQLI_ASSOC) as $line) {
         'media' => $line['media'],
         'active' => ((int)$line['active']) == 1,
         'remaining' => (int)$line['remaining'],
-        'initial' => (int)$line['initial']
+        'initial' => (int)$line['initial'],
+        'category' =>$line['category']
     );
 }
 

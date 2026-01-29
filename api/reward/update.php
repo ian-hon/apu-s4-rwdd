@@ -11,7 +11,8 @@ $allowed_fields = array(
     "media",
     "active",
     "remaining",
-    "initial"
+    "initial",
+    "category"
 );
 
 performUpdate($dbConnection, "REWARD", "ID", $reward_id, $allowed_fields, $_GET);
