@@ -4,18 +4,22 @@ function task_completion_rate($taskID = null)
 {
     include dirname(__DIR__) . "/conn.php";
 
-    $query = "
-        SELECT 
-            task_id,
-            COUNT(CASE WHEN status = 'approved' THEN 1 END) as approved,
-            COUNT(*) as total
-        FROM SUBMISSION
-        GROUP BY task_id
-    ";
+    $result = array();
+    $taskQuery = "SELECT ID FROM task";
+    $taskResult = mysqli_query($dbConnection, $taskQuery);
+    foreach (mysqli_fetch_all($taskResult, MYSQLI_ASSOC) as $row) {
+        $result[$row['ID']] = 0;
+    }
+
+    $query = "SELECT 
+        task_id,
+        COUNT(CASE WHEN status = 'approved' THEN 1 END) as approved,
+        COUNT(*) as total
+    FROM SUBMISSION
+    GROUP BY task_id";
 
     $queryResult = mysqli_query($dbConnection, $query);
 
-    $result = array();
     foreach (mysqli_fetch_all($queryResult, MYSQLI_ASSOC) as $row) {
         $rate = $row['total'] > 0 ? floatval($row['approved']) / floatval($row['total']) : 0;
         $result[$row['task_id']] = $rate;
@@ -56,10 +60,28 @@ function task_fetch_daily_tasks()
     // get day of week (0 = monday, 6 = sunday)
     $dayOfWeek = (intval(date('N')) - 1) % 7;
 
-    $query = "SELECT * FROM task WHERE (schedule & (1 << $dayOfWeek)) != 0 AND active = 1";
+    $query = "SELECT * FROM task WHERE occurance_type = 'daily' AND (schedule & (1 << $dayOfWeek)) != 0 AND active = 1";
     $result = mysqli_query($dbConnection, $query);
 
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
+function task_fetch_weekly_tasks()
+{
+    include dirname(__DIR__) . '/conn.php';
+    include dirname(__DIR__) . '/utils/time_util.php';
+
+    $currentWeek = getEpochWeek(time() * 1000);
+
+    $query = "SELECT * FROM task WHERE occurance_type = 'weekly' AND schedule = $currentWeek AND active = 1";
+    $result = mysqli_query($dbConnection, $query);
+
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
+function task_fetch_all_ongoing()
+{
+    return array_merge(task_fetch_daily_tasks(), task_fetch_weekly_tasks());
 }
 
 function task_already_submitted($taskID, $username)
@@ -68,14 +90,34 @@ function task_already_submitted($taskID, $username)
 
     include dirname(__DIR__) . '/conn.php';
 
-    $day = intval(time() / 86400); // todays epoch day (get current epoch and divide by 86400)
-    $dayStart = $day * 86400;
-    $dayEnd = ($day + 1) * 86400;
+    $taskQuery = "SELECT occurance_type FROM task WHERE ID = '$taskID'";
+    $taskResult = mysqli_query($dbConnection, $taskQuery);
+    $task = mysqli_fetch_assoc($taskResult);
 
-    $query = "SELECT * FROM submission 
-              WHERE submission.submitted_timestamp BETWEEN $dayStart AND $dayEnd 
-              AND submission.user = '$username' 
-              AND submission.task_ID = '$taskID'";
+    if (!$task) {
+        return false;
+    }
+
+    if ($task['occurance_type'] == 'weekly') {
+        include_once dirname(__DIR__) . '/utils/time_util.php';
+        $currentWeek = getEpochWeek(time() * 1000);
+        $weekStart = ($currentWeek * 7 - 3) * 86400;
+        $weekEnd = (($currentWeek + 1) * 7 - 3) * 86400;
+
+        $query = "SELECT * FROM submission 
+                  WHERE submission.submitted_timestamp BETWEEN $weekStart AND $weekEnd 
+                  AND submission.user = '$username' 
+                  AND submission.task_ID = '$taskID'";
+    } else {
+        $day = intval(time() / 86400);
+        $dayStart = $day * 86400;
+        $dayEnd = ($day + 1) * 86400;
+
+        $query = "SELECT * FROM submission 
+                  WHERE submission.submitted_timestamp BETWEEN $dayStart AND $dayEnd 
+                  AND submission.user = '$username' 
+                  AND submission.task_ID = '$taskID'";
+    }
 
     $result = mysqli_query($dbConnection, $query);
 
