@@ -21,6 +21,14 @@ function getDayMap($task)
     return $result;
 }
 
+function getEpochWeek($time)
+{
+    // number of weeks since jan 1970
+    // normalised to monday as the start of the week (so +3)
+    // one week off since +3
+    return intval((($time / (86400 * 1000)) + 3) / 7);
+}
+
 ?>
 <?php foreach ($tasks as $t): ?>
     <?php
@@ -50,11 +58,18 @@ function getDayMap($task)
         <div id="holder">
             <div id="scheduled-days" class="border">
                 <h5 class="box-title">SCHEDULED FOR</h5>
-                <div id="days">
-                    <?php foreach ($dayMap as $index => $isActive): ?>
-                        <h4 class='border' <?php echo $isActive ? 'data-active' : ''; ?> onclick='toggleDay("<?php echo $t['ID']; ?>", <?php echo $index; ?>)'><?php echo $days[$index]; ?></h4>
-                    <?php endforeach; ?>
-                </div>
+                <?php if ($t['occurance_type'] == 'daily'): ?>
+                    <div id="days">
+                        <?php foreach ($dayMap as $index => $isActive): ?>
+                            <h4 class='border' <?php echo $isActive ? 'data-active' : ''; ?> onclick='toggleDay("<?php echo $t['ID']; ?>", <?php echo $index; ?>)'><?php echo $days[$index]; ?></h4>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <div id="weeks">
+                        <h4 class='border' <?php echo (getEpochWeek(time() * 1000) == $t['schedule']) ? 'data-active' : ''; ?> onclick='toggleWeek("<?php echo $t['ID']; ?>", getEpochWeek(new Date()))'>THIS WEEK</h4>
+                        <h4 class='border' <?php echo ((getEpochWeek(time() * 1000) + 1) == $t['schedule']) ? 'data-active' : ''; ?> onclick='toggleWeek("<?php echo $t['ID']; ?>", getEpochWeek(new Date()) + 1)'>NEXT WEEK</h4>
+                    </div>
+                <?php endif; ?>
             </div>
             <div id="rewards">
                 <div id="required" class="border">

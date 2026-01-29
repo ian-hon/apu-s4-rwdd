@@ -42,6 +42,23 @@
             });
     }
     window.toggleDay = toggleDay;
+
+    function toggleWeek(task_id, week) {
+        if (tasks[task_id]['schedule'] == week) {
+            tasks[task_id]['schedule'] = 0;
+        } else {
+            tasks[task_id]['schedule'] = week;
+        }
+
+        fetch('/api/task/update.php?' + new URLSearchParams({
+            id: task_id,
+            schedule: tasks[task_id]['schedule']
+        }).toString())
+            .then((_) => {
+                fetchData();
+            });
+    }
+    window.toggleWeek = toggleWeek;
     // #endregion
 
     // #region confirmation popup
