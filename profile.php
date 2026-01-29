@@ -3,24 +3,12 @@ include './api/conn.php'; // connects to the database
 include './api/credentials.php';
 include_once './api/users/functions.php';
 
+include './api/points/functions.php';
 
-// $query = 'SELECT * FROM ecoquest.USERS WHERE username = user1';
-// $result = mysqli_query($dbConnection, $query); // $dbConnection comes from conn.php
-// $user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and stores it inside $user
 $user = user_fetch($username);
+$totalPoints = points_get_total($username);
+$currentPoints = points_get_current($username);
 
-// refer line 50
-
-// total point
-$totalPoint = "SELECT sum(task.reward_rate * submission.action_count) AS total_points FROM submission 
-            INNER JOIN task ON submission.task_ID = task.ID WHERE submission.user = '{$username}'";
-$totalPointResult = mysqli_query($dbConnection, $totalPoint);
-$allPoint = mysqli_fetch_assoc($totalPointResult)['total_points'];
-
-// available point 
-$availablePoint = "SELECT $allPoint - sum(redemption.price) AS available_point FROM redemption WHERE redemption.user = '$username'";
-$availableResult = mysqli_query($dbConnection, $availablePoint);
-$allAvailable = mysqli_fetch_assoc($availableResult);
 
 include './api/users/contribution.php';
 include './api/goals/functions.php';
@@ -108,13 +96,13 @@ $impactMessageGenerator = function ($contribution) {
                     <div class="point">
                         <img src="assets/ivp/medal-champion-award-winner-olympic-23-svgrepo-com.svg" alt="">
                         <p>Total Point</p>
-                        <p><?php echo $allPoint ?></p>
+                        <p><?php echo $totalPoints ?></p>
                     </div>
 
                     <div class="point">
                         <img src="assets/ivp/leaf-svgrepo-com.svg" alt="">
                         <p>Available</p>
-                        <p><?php echo $allAvailable['available_point'] ?></p>
+                        <p><?php echo $currentPoints ?></p>
                     </div>
                 </div>
 
