@@ -82,7 +82,6 @@ CREATE TABLE ecoquest.REDEMPTION (
     reward_ID VARCHAR(50),
     user VARCHAR(200),
     timestamp INT,
-    price INT,
 
     FOREIGN KEY (reward_ID) REFERENCES REWARD(ID),
     FOREIGN KEY (user) REFERENCES USERS(username)
@@ -168,10 +167,10 @@ INSERT INTO ecoquest.POINTS (ID, amount, timestamp, submission) VALUES
 ('PT_0003', 180, 1700035000, 'SU_0004');
 
 -- RD_XXXX
-INSERT INTO ecoquest.REDEMPTION (ID, reward_ID, user, timestamp, price) VALUES
-('RD_0001', 'RW_0001', 'user1', 1700050000, 150),
-('RD_0002', 'RW_0003', 'user2', 1700060000, 200),
-('RD_0003', 'RW_0002', 'user1', 1700070000, 500);
+INSERT INTO ecoquest.REDEMPTION (ID, reward_ID, user, timestamp) VALUES
+('RD_0001', 'RW_0001', 'user1', 1700050000),
+('RD_0002', 'RW_0003', 'user2', 1700060000),
+('RD_0003', 'RW_0002', 'user1', 1700070000);
 
 -- GL_XXXX
 INSERT INTO ecoquest.GOALS (ID, title, description, media, goal_type, goal, starting_time, ending_time, type) VALUES
