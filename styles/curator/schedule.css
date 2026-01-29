@@ -7,89 +7,135 @@
         }
 
         & #overview {
-            display: flex;
-            justify-content: flex-start;
-            align-items: stretch;
-
-            overflow-x: scroll;
-
             margin-top: 1em;
             padding: var(--screen-padding);
 
-            & .day {
-                /* height: 30em; */
-                min-width: 40ch;
-                width: 30ch;
+            & #daily {
+                display: flex;
+                justify-content: flex-start;
+                align-items: stretch;
 
-                /* &:not(:last-child) {
+                overflow-x: scroll;
+
+                & .day {
+                    /* height: 30em; */
+                    min-width: 40ch;
+                    width: 30ch;
+
+                    /* &:not(:last-child) {
                     margin-right: 3ch;
                 } */
 
-                & #title {
-                    width: 100%;
-                    padding: 0.6em 0;
+                    & #title {
+                        width: 100%;
+                        padding: 0.6em 0;
 
-                    text-align: center;
+                        text-align: center;
 
-                    border-width: 2px;
-                    color: var(--accent);
-                    background: var(--accent-background);
-                    border-color: var(--accent-border);
+                        border-width: 2px;
+                        color: var(--accent);
+                        background: var(--accent-background);
+                        border-color: var(--accent-border);
+                    }
                 }
+            }
 
-                & #container {
-                    margin-top: 1em;
+            & #weekly {
+                display: flex;
+                justify-content: flex-start;
+                align-items: stretch;
+
+                overflow-x: scroll;
+
+                & .week {
+                    min-width: 40ch;
+                    width: 30ch;
+
+                    & #title {
+                        width: 100%;
+                        padding: 0.6em 0;
+
+                        text-align: center;
+
+                        border-width: 2px;
+                        color: var(--accent);
+                        background: var(--accent-background);
+                        border-color: var(--accent-border);
+                    }
 
                     & .task-minimal-card {
-                        display: flex;
-                        justify-content: flex-start;
-                        align-items: flex-end;
-
-                        flex-direction: column;
-
-                        background: var(--daily-background);
-                        border-color: var(--daily);
+                        background: var(--weekly-background);
+                        border-color: var(--weekly);
 
                         & h5 {
-                            color: var(--daily);
-                            font-weight: 500;
-
-                            width: 100%;
-
-                            white-space: wrap;
-                        }
-
-                        & #rewards {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-
-                            padding: 0.4em 2ch;
-                            margin-top: 1em;
-
-                            background: var(--accent-background);
-                            border-color: var(--accent);
-
-                            & h5 {
-                                color: var(--accent);
-                            }
-
-                            & img {
-                                margin-left: 1ch;
-
-                                height: 1.2em;
-                                width: 1.2em;
-                            }
-                        }
-
-                        &:not(:last-child) {
-                            margin-bottom: 1em;
+                            color: var(--weekly);
                         }
                     }
                 }
             }
 
-            & hr {
+            & #container {
+                & .task-minimal-card {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-end;
+
+                    flex-direction: column;
+
+                    background: var(--daily-background);
+                    border-color: var(--daily);
+
+                    margin-top: 1em;
+
+                    & h5 {
+                        color: var(--daily);
+                        font-weight: 500;
+
+                        width: 100%;
+
+                        white-space: wrap;
+                    }
+
+                    & #rewards {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        padding: 0.4em 2ch;
+                        margin-top: 1em;
+
+                        background: var(--accent-background);
+                        border-color: var(--accent);
+
+                        & h5 {
+                            color: var(--accent);
+                        }
+
+                        & img {
+                            margin-left: 1ch;
+
+                            height: 1.2em;
+                            width: 1.2em;
+                        }
+                    }
+                }
+            }
+
+            &>hr {
+                margin: 2em 0;
+
+                min-height: 2px;
+                height: 2px;
+                border-collapse: collapse;
+
+                border: none;
+
+                background: white;
+
+                opacity: 0.05;
+            }
+
+            & div>hr {
                 /* height: 100% !important; */
                 /* align-items: stretch; */
 
@@ -242,6 +288,21 @@
                         }
                     }
                 }
+
+                &[data-occurance='weekly'] {
+                    & #schedule #select h4 {
+                        &[data-active] {
+                            border-color: var(--weekly);
+                            background: var(--weekly-background);
+                            color: var(--weekly);
+                        }
+
+                        &:not([data-active]):hover {
+                            border-color: color-mix(in srgb, var(--tertiary) 80%, var(--weekly));
+                            background: color-mix(in srgb, var(--tertiary-background) 80%, var(--weekly-background));
+                        }
+                    }
+                }
             }
         }
     }
@@ -252,7 +313,8 @@
         height: 1.2em;
     }
 
-    & #container {
+    & #daily-container,
+    & #week-container {
         overflow: hidden;
 
         width: fit-content;
@@ -315,6 +377,15 @@
                 align-items: center;
                 gap: 1ch;
             }
+        }
+    }
+
+    & #week-container {
+        margin-top: 1em;
+
+        & table td:first-child {
+            width: fit-content;
+            text-align: right;
         }
     }
 }

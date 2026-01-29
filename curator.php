@@ -51,6 +51,7 @@ enforce_role('curator');
             ?>
         </div>
     </div>
+    <script src="./scripts/utils.js"></script>
     <script src="./scripts/script.js"></script>
     <script src="./scripts/curator.js"></script>
     <div id="script-imports">
