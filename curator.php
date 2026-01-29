@@ -19,6 +19,8 @@ enforce_role('curator');
     <link rel="stylesheet" href="./styles/curator/schedule.css">
 
     <link rel="stylesheet" href="./styles/style.css">
+
+    <?php echo "<script>var username = '{$username}';</script>" ?>
 </head>
 
 <body>

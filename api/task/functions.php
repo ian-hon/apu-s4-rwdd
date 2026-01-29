@@ -36,7 +36,12 @@ function task_fetch_all($active = true)
     $query = "SELECT * FROM task WHERE active = $activeValue";
     $result = mysqli_query($dbConnection, $query);
 
-    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $tasks = array();
+    foreach (mysqli_fetch_all($result, MYSQLI_ASSOC) as $row) {
+        $tasks[$row['ID']] = $row;
+    }
+
+    return $tasks;
 }
 
 function task_fetch_daily_tasks()

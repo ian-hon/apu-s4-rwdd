@@ -110,7 +110,7 @@
     <div id="curator-note">
         <h5>${t['curator_instructions']}</h5>
     </div>
-</div > `;
+</div>`;
         })
         container.innerHTML = result;
     }
