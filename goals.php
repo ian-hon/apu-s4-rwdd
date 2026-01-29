@@ -1,9 +1,9 @@
 <?php
 include './api/conn.php'; // connects to the database
+include './api/credentials.php';
+include './api/users/functions.php';
 
-$query = 'SELECT * FROM ecoquest.USERS WHERE username = "user1"';
-$result = mysqli_query($dbConnection, $query); // $dbConnection comes from conn.php
-$user = mysqli_fetch_assoc($result); // fetch_assoc gets the first result and stores it inside $user
+$user = user_fetch($username);
 
 $pTitle = "SELECT * FROM goals WHERE type = 'personal'";
 $titleResult = mysqli_query($dbConnection, $pTitle);
@@ -11,29 +11,29 @@ $titleResult = mysqli_query($dbConnection, $pTitle);
 include './api/users/contribution.php';
 include './api/goals/functions.php';
 
-$impact = user_get_contribution_total('user1');
+$impact = user_get_contribution_total($username);
 // e.g. $impact = [1 => 50, 2 => 20]
 
-$contribution = user_get_contribution_total_worded('user1');
+$contribution = user_get_contribution_total_worded($username);
 // e.g. $goal_type_id = 1 (plastic), $data = ['term' => 'plastic saved', 'total' => 50, 'unit' => 'kg', 'decimals' => 1]
 // You can use this data to display user's contribution in different goal types
 
-$actionDone = user_get_actions_total('user1');
+$actionDone = user_get_actions_total($username);
 // e.g. returns integer 156 representing total actions done by the user
 
-$streak = user_get_streak('user1');
+$streak = user_get_streak($username);
 // e.g. returns integer 12 representing current streak count
 
-$personalProgress = goals_contributions_all('user1', type: 'personal');
-$globalProgress = goals_contributions_all('user1', type: 'global');
+$personalProgress = goals_contributions_all($username, type: 'personal');
+$globalProgress = goals_contributions_all($username, type: 'global');
 
 $consistency = goals_overall_completion_rate();
 
-$onTrackP = goals_all_completed('user1', type: 'personal');
-$allGoalsP = goals_contributions_all('user1', type: 'personal');
+$onTrackP = goals_all_completed($username, type: 'personal');
+$allGoalsP = goals_contributions_all($username, type: 'personal');
 
-$onTrackG = goals_all_completed('user1', type: 'global');
-$allGoalsG = goals_contributions_all('user1', type: 'global');
+$onTrackG = goals_all_completed($username, type: 'global');
+$allGoalsG = goals_contributions_all($username, type: 'global');
 
 ?>
 

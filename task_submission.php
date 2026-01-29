@@ -1,0 +1,118 @@
+<?php
+include './api/conn.php';
+include './api/task/functions.php';
+include './api/points/functions.php';
+include './api/credentials.php';
+
+$tasks = task_fetch_all();
+$taskID = $_GET['ID'];
+$currentTask = $tasks[$taskID];
+
+// point
+$points = $currentTask['target'] * $currentTask['reward_rate'];
+
+$sql = "SELECT * FROM submission INNER JOIN users 
+            WHERE submission.user = users.username 
+            AND submission.task_ID = '$taskID'";
+$userSubmitted = mysqli_query($dbConnection, $sql);
+$submittedResult = $userSubmitted;
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Submission | EcoQuest</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/task_submission.css">
+
+</head>
+
+<body>
+    <div id="parent">
+        <div id="bg-color">
+
+            <!-- navbar -->
+            <?php $headerTitle = "Task Submission";
+            include './components/header.php' ?>
+
+            <!-- element -->
+            <div id="element">
+
+                <!-- Tasks -->
+                <div id="tasks">
+                    <div id="task-header">
+                        <img src="./assets/ivp/water-drops-svgrepo-com (1).svg" alt="">
+                        <p><?php echo $currentTask['title'] ?></p>
+                    </div>
+                    <p id="task-body">
+                        <?php echo $currentTask['description'] ?>
+                    </p>
+                    <div id="points"><?php echo $points ?></div>
+
+                    <div id="cameraBtn">
+                        <a href="">
+                            <img src="./assets/ivp/camera-svgrepo-com.svg" alt="">
+                            <p>Upload Proof</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Camera -->
+                <form action="" method="POST" id="camera">
+                    <!-- user for front cam / environment for back cam -->
+                    <input type="file" accept="image/*" capture="environment" id="camera-input">
+
+                    <div id="actual-picture">
+                        <img src="./assets/ivp/camera-svgrepo-com.svg" alt="">
+                    </div>
+
+                    <div id="actionBtn">
+                        <input type="reset" id="cancelBtn" value="Cancel">
+                        <input type="submit" id="submitBtn" value="Submit">
+                    </div>
+                </form>
+
+                <!-- Recent submission -->
+                <div id="submission">
+                    <div id="submission-header">
+                        <h2>Recent Submission</h2>
+                    </div>
+
+                    <?php
+                    foreach ($submittedResult as $row) {
+                        $statusClass = '';
+
+                        if ($row['status'] === 'pending') {
+                            $statusClass = 'orange';
+                        } elseif ($row['status'] === 'rejected') {
+                            $statusClass = 'red';
+                        }
+                    ?>
+                        <div class="submission-lists">
+                            <div class="userInfo">
+                                <img src="./assets/ivp/profile-picture.avif" alt="">
+                                <p class="name"><?php echo $row['username'] ?></p>
+                            </div>
+
+                            <div class="status <?php echo $statusClass; ?>">
+                                <p><?php echo $row['status'] ?></p>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+
+        </div>
+        <?php include './components/navbar.php'; ?>
+    </div>
+
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/navbar.js" defer></script>
+    <script src="./scripts/task_submission.js" defer></script>
+</body>
+
+</html>

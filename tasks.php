@@ -2,6 +2,8 @@
 
 include "./api/task/functions.php";
 include "./api/users/contribution.php";
+include "./api/credentials.php";
+include "./api/users/functions.php";
 
 $tasks = task_fetch_daily_tasks();
 
@@ -25,16 +27,17 @@ $tasks = task_fetch_daily_tasks();
     <div id="cards">
         <div class="border">
             <span>
-                <h2><?php echo user_get_streak('user1') // TODO: REPLACE WITH SESSION 
+                <h2><?php echo user_get_streak($username) // TODO: REPLACE WITH SESSION 
                     ?></h2>
                 <img src="./assets/fire.svg">
             </span>
-            <?php echo (user_check_already_submitted_today('user1') ? "<h5>completed!</h5>" : "<h5 class='countdown'></h5>") ?>
+            <?php echo (user_check_already_submitted_today($username) ? "<h5>completed!</h5>" : "<h5 class='countdown'></h5>") ?>
         </div>
         <div class="border">
             <span>
                 <h2 id=""><?php echo count(array_filter($tasks, function ($v, $_) {
-                                return ($v['occurance_type'] = 'daily') && task_already_submitted($v['ID'], 'user1');
+                                global $username;
+                                return ($v['occurance_type'] = 'daily') && task_already_submitted($v['ID'], $username);
                             }, ARRAY_FILTER_USE_BOTH)) ?></h2>
                 <h4 id=""><?php echo "/" .  count(array_filter($tasks, function ($v, $_) {
                                 return ($v['occurance_type'] = 'daily');
@@ -56,10 +59,11 @@ $tasks = task_fetch_daily_tasks();
     <div id="container">
         <?php foreach (
             array_filter($tasks, function ($v, $_) {
-                return !task_already_submitted($v['ID'], 'user1'); // TODO: REPLACE WITH SESSION
+                global $username;
+                return !task_already_submitted($v['ID'], $username); // TODO: REPLACE WITH SESSION
             }, ARRAY_FILTER_USE_BOTH) as $row
         ): ?>
-            <a class="task-card" id="<?php echo $row['occurance_type'] ?>" href="./view_tasks.php?ID=<?php echo urlencode($row['ID']) ?>">
+            <a class="task-card" id="<?php echo $row['occurance_type'] ?>" href="./task_submission.php?ID=<?php echo urlencode($row['ID']) ?>">
                 <img id="icon" class="border" src="./assets/leaf.svg">
                 <div id="details">
                     <h4><?php echo $row['title'] ?></h4>
@@ -78,7 +82,8 @@ $tasks = task_fetch_daily_tasks();
         </div>
         <?php foreach (
             array_filter($tasks, function ($v, $_) {
-                return task_already_submitted($v['ID'], 'user1'); // TODO: REPLACE WITH SESSION
+                global $username;
+                return task_already_submitted($v['ID'], $username); // TODO: REPLACE WITH SESSION
             }, ARRAY_FILTER_USE_BOTH) as $row
         ): ?>
             <div class="task-card" id="<?php echo $row['occurance_type'] ?>" data-state='submitted'>

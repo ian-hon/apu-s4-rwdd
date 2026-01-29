@@ -2,8 +2,7 @@
 include './api/conn.php'; // connects to the database
 include './api/submission/functions.php';
 include './api/points/functions.php';
-
-$username = 'user1'; // TODO: Replace with session
+include './api/credentials.php';
 
 // total task
 $allTask = submission_count_by_user($username);

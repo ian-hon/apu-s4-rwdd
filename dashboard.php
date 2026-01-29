@@ -4,6 +4,8 @@ include './api/task/functions.php';
 include './api/points/functions.php';
 
 include './api/credentials.php';
+include './api/users/functions.php';
+
 enforce_role('user');
 
 $tasks = task_fetch_daily_tasks();
@@ -30,7 +32,7 @@ $tasks = task_fetch_daily_tasks();
                 <div id="stats">
                     <div id="leaves">
                         <h4>
-                            <?php echo points_get_current('user1'); // TODO: REPLACE WITH SESSION STORAGE 
+                            <?php echo points_get_current($username); // TODO: REPLACE WITH SESSION STORAGE 
                             ?>
                         </h4>
                         <img src="./assets/leaf.svg">
@@ -38,7 +40,7 @@ $tasks = task_fetch_daily_tasks();
                     <div id="streak">
                         <img src="./assets/fire.svg">
                         <h4>
-                            <?php echo user_get_streak('user1') ?>
+                            <?php echo user_get_streak($username) ?>
                         </h4>
                     </div>
                 </div>
@@ -49,15 +51,15 @@ $tasks = task_fetch_daily_tasks();
                 <img src="./assets/fire.svg" class="border">
                 <div id="details">
                     <h2>
-                        <?php echo user_get_streak('user1') . " day" . (user_get_streak('user1') == 1 ? "" : "s") ?>
+                        <?php echo user_get_streak($username) . " day" . (user_get_streak($username) == 1 ? "" : "s") ?>
                     </h2>
                     <h5>
-                        better than <?php echo user_get_streak_percentile('user1') // TODO: REPLACE WITH SESSION STORAGE 
+                        better than <?php echo user_get_streak_percentile($username) // TODO: REPLACE WITH SESSION STORAGE 
                                     ?>% of users!
                     </h5>
                 </div>
             </div>
-            <div id="fun-fact" class="border" data-state='loading' data-payload='<?php echo htmlspecialchars(json_encode(user_get_contribution_total_worded('user1'))); ?>'>
+            <div id="fun-fact" class="border" data-state='loading' data-payload='<?php echo htmlspecialchars(json_encode(user_get_contribution_total_worded($username))); ?>'>
                 <div id="data">
                     <h4>Fun fact!</h4>
                     <h5></h5>
@@ -83,10 +85,11 @@ $tasks = task_fetch_daily_tasks();
                 <div id="task-container">
                     <?php foreach (
                         array_filter($tasks, function ($v, $_) {
-                            return !task_already_submitted($v['ID'], 'user1'); // TODO: REPLACE WITH SESSION
+                            global $username;
+                            return !task_already_submitted($v['ID'], $username); // TODO: REPLACE WITH SESSION
                         }, ARRAY_FILTER_USE_BOTH) as $row
                     ): ?>
-                        <a class="task-card" id="<?php echo $row['occurance_type'] ?>" href="./view_tasks.php?ID=<?php echo urlencode($row['ID']) ?>">
+                        <a class="task-card" id="<?php echo $row['occurance_type'] ?>" href="./task_submission.php?ID=<?php echo urlencode($row['ID']) ?>">
                             <img id="icon" class="border" src="./assets/leaf.svg">
                             <div id="details">
                                 <h4><?php echo $row['title'] ?></h4>

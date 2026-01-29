@@ -4,7 +4,7 @@
     <div id="container" class="border">
         <a href="profile.php" id="profile-card" class="border">
             <img src="./assets/fire.svg">
-            <h4>ajian_nedo</h4>
+            <h4><?php echo htmlspecialchars($username); ?></h4>
         </a>
         <hr>
         <a href="dashboard.php" class="navbar-card">
@@ -33,14 +33,6 @@
             <h4>POINTS</h4>
             <!-- rewards, redemption history inside here -->
         </a>
-        <div>
-            <!-- this div is only shown if user is a curator or admin -->
-            <hr>
-            <a href="curator.php" class="navbar-card">
-                <img src="./assets/leaf.svg">
-                <h4>CURATOR DASHBOARD</h4>
-            </a>
-        </div>
     </div>
     <h4 id="close-button" onclick="toggleNavbar()" class="border">close</h4>
 </div>
