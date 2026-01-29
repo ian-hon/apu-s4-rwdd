@@ -14,7 +14,7 @@ foreach (mysqli_fetch_all($queryResult, MYSQLI_ASSOC) as $line) {
         'ID' => $line['ID'],
         'user' => $line['user'],
         'task_ID' => $line['task_ID'],
-        'media' => $line['media'],
+        // 'media' => $line['media'],
         'submitted_timestamp' => (int)$line['submitted_timestamp'],
         'action_count' => (int)$line['action_count'],
         'status' => $line['status'],

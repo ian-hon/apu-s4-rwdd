@@ -16,7 +16,7 @@ function submission_fetch_by_user($username)
     include dirname(__DIR__) . "/conn.php";
 
     $query = "
-        SELECT * FROM submission
+        SELECT *, submission.ID as submission_ID, task.ID as task_ID FROM submission
         INNER JOIN task ON submission.task_ID = task.ID
         WHERE submission.user = '$username'
     ";
@@ -50,4 +50,15 @@ function submission_fetch_all()
     }
 
     return $submissions;
+}
+
+function submission_fetch_photo($submissionID)
+{
+    include dirname(__DIR__) . "/conn.php";
+
+    $query = "SELECT media FROM submission WHERE ID = '$submissionID'";
+    $result = mysqli_query($dbConnection, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    return $row ? $row['media'] : '';
 }

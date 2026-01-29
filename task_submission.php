@@ -8,6 +8,29 @@ $tasks = task_fetch_all();
 $taskID = $_GET['ID'];
 $currentTask = $tasks[$taskID];
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    include './api/utils/creation_util.php';
+
+    $image = file_get_contents($_FILES['submission-image']['tmp_name']);
+    $newID = generate_next_id($dbConnection, 'submission', 'ID', 'SU_');
+
+    $query = "INSERT INTO submission (ID, user, task_ID, media, submitted_timestamp, action_count, status, curator)
+    VALUES (
+        '$newID',
+        '$username',
+        '$taskID',
+        '" . mysqli_real_escape_string($dbConnection, $image) . "',
+        " . time() . ",
+        " . $currentTask['target'] . ",
+        'pending',
+        NULL
+    )";
+
+    mysqli_query($dbConnection, $query);
+
+    header('Location: ./submission_history.php');
+}
+
 // point
 $points = $currentTask['target'] * $currentTask['reward_rate'];
 
@@ -62,9 +85,9 @@ $submittedResult = $userSubmitted;
                 </div>
 
                 <!-- Camera -->
-                <form action="" method="POST" id="camera">
+                <form action="" method="POST" id="camera" enctype="multipart/form-data">
                     <!-- user for front cam / environment for back cam -->
-                    <input type="file" accept="image/*" capture="environment" id="camera-input">
+                    <input type="file" accept="image/*" capture="environment" id="submission-image" name='submission-image'>
 
                     <div id="actual-picture">
                         <img src="./assets/ivp/camera-svgrepo-com.svg" alt="">
@@ -107,11 +130,9 @@ $submittedResult = $userSubmitted;
             </div>
 
         </div>
-        <?php include './components/navbar.php'; ?>
     </div>
 
     <script src="./scripts/script.js"></script>
-    <script src="./scripts/navbar.js" defer></script>
     <script src="./scripts/task_submission.js" defer></script>
 </body>
 

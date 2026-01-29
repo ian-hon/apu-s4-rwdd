@@ -75,7 +75,7 @@ function humanReadableTime($epoch)
             <h5 id="tag" class="border"><?php echo strtoupper($row['status']); ?></h5>
         </div>
         <div id="image">
-            <img src="./media/submissions/recycle.jpg">
+            <img src="data:image/jpeg;base64,<?php echo base64_encode(submission_fetch_photo($row['ID'])) ?>" />
         </div>
         <div id="data" class="border">
             <div id="task">
