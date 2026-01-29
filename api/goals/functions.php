@@ -130,3 +130,18 @@ function goals_overall_completion_rate()
     }
     return $total / $count;
 }
+
+function goals_contributions_all_users()
+{
+    include dirname(__DIR__) . '/conn.php';
+
+    $query = "SELECT * FROM users WHERE role = 'user'";
+    $queryResult = mysqli_query($dbConnection, $query);
+
+    $result = array();
+    foreach (mysqli_fetch_all($queryResult, MYSQLI_ASSOC) as $user) {
+        $result[$user['username']] = goals_contributions_all($user['username']);
+    }
+
+    return $result;
+}
