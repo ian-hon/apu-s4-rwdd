@@ -62,7 +62,7 @@ $tasks = task_fetch_all_ongoing();
                 return !task_already_submitted($v['ID'], $username);
             }, ARRAY_FILTER_USE_BOTH) as $row
         ): ?>
-            <a class="task-card" id="<?php echo $row['occurance_type'] ?>" href="./view_tasks.php?ID=<?php echo urlencode($row['ID']) ?>">
+            <a class="task-card" id="<?php echo $row['occurance_type'] ?>" href="./task_submission.php?ID=<?php echo urlencode($row['ID']) ?>">
                 <img id="icon" class="border" src="./assets/leaf.svg">
                 <div id="details">
                     <h4><?php echo $row['title'] ?></h4>
