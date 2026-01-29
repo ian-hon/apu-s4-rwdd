@@ -32,6 +32,22 @@ function task_completion_rate($taskID = null)
     }
 }
 
+function task_overall_completion_rate()
+{
+    $total = 0;
+    $count = 0;
+
+    foreach (task_completion_rate() as $row) {
+        $count++;
+        $total += $row;
+    }
+
+    if ($count == 0) {
+        return 0;
+    }
+    return $total / $count;
+}
+
 function task_fetch_all($active = true)
 {
     include dirname(__DIR__) . "/conn.php";

@@ -49,7 +49,7 @@
                     .then((e) => {
                         submissions = e;
 
-                        lastUpdatedElement.innerHTMl = `last updated at ${(new Date()).toString()}`;
+                        lastUpdatedElement.innerHTML = `last updated at ${(new Date()).toString()}`;
                         submissionCountElement.innerHTML = `(${Object.keys(submissions).length} submissions)`;
 
                         ratios = {
