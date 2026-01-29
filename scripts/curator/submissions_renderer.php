@@ -7,7 +7,7 @@ include '../../api/submission/functions.php';
 include '../../api/task/functions.php';
 
 $submissions = submission_fetch_all();
-$tasks = task_fetch_all();
+$tasks = task_fetch_all(null);
 
 function getParsedExcessCount($submission, $tasks)
 {

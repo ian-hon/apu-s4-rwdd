@@ -32,8 +32,13 @@ function task_fetch_all($active = true)
 {
     include dirname(__DIR__) . "/conn.php";
 
-    $activeValue = $active ? 1 : 0;
-    $query = "SELECT * FROM task WHERE active = $activeValue";
+    if (is_null($active)) {
+        $query = "SELECT * FROM task";
+    } else {
+        $activeValue = $active ? 1 : 0;
+        $query = "SELECT * FROM task WHERE active = $activeValue";
+    }
+
     $result = mysqli_query($dbConnection, $query);
 
     $tasks = array();

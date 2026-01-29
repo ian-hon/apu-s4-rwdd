@@ -1,7 +1,6 @@
 <?php
 
 include '../../api/task/functions.php';
-// include '../../api/task/functions.php';
 
 $tasks = task_fetch_all(true);
 $completionRates = task_completion_rate();
