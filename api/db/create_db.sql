@@ -46,7 +46,7 @@ CREATE TABLE ecoquest.SUBMISSION (
     ID VARCHAR(50) PRIMARY KEY,
     user VARCHAR(200),
     task_ID VARCHAR(50),
-    media BLOB,
+    media LONGBLOB,
     submitted_timestamp INT,
     action_count INT,
     status VARCHAR(20),

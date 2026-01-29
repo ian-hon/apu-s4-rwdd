@@ -1,6 +1,7 @@
 <?php
 
 include '../../api/task/functions.php';
+include_once '../../api/utils/time_util.php';
 
 $tasks = task_fetch_all(true);
 $completionRates = task_completion_rate();
@@ -19,14 +20,6 @@ function getDayMap($task)
         $d >>= 1;
     }
     return $result;
-}
-
-function getEpochWeek($time)
-{
-    // number of weeks since jan 1970
-    // normalised to monday as the start of the week (so +3)
-    // one week off since +3
-    return intval((($time / (86400 * 1000)) + 3) / 7);
 }
 
 ?>

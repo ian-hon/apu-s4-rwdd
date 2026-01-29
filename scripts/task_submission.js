@@ -1,10 +1,3 @@
-// hamburger menu toggle
-const hamburger = document.querySelector('#hamburger');
-
-hamburger.addEventListener('click', () => {
-    toggleNavbar();
-});
-
 // Camera access prompt
 const cameraBtn = document.querySelector("#cameraBtn");
 const camera = document.querySelector("#camera");
@@ -28,11 +21,11 @@ cancel.addEventListener('click', (e) => {
 });
 
 submit.addEventListener('click', () => {
-    alert('Image successfully submitted!')
+    // alert('Image successfully submitted!')
 })
 
 // Access mobile camera
-const cameraInput = document.getElementById('camera-input');
+const cameraInput = document.getElementById('submission-image');
 const actualPicture = document.getElementById('actual-picture');
 
 // (e) parameter = variable name we choose to hold the event data 
@@ -42,7 +35,7 @@ cameraInput.addEventListener('change', (e) => {
     if (file) {
         const reader = new FileReader();
 
-        reader.onload = (event) => { 
+        reader.onload = (event) => {
             actualPicture.innerHTML = `
             <img src='${event.target.result}' style='width:100%'; height:100%; object-fit:cover;'>`
         };
