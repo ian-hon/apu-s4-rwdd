@@ -1,6 +1,24 @@
 <?php
+include './api/conn.php';
+include './api/task/functions.php';
+include './api/points/functions.php';
+include './api/credentials.php';
+
+$tasks = task_fetch_all();
+$taskID = $_GET['ID'];
+$currentTask = $tasks[$taskID];
+
+// point
+$points = $currentTask['target'] * $currentTask['reward_rate'];
+
+$sql = "SELECT * FROM submission INNER JOIN users 
+            WHERE submission.user = users.username 
+            AND submission.task_ID = '$taskID'";
+$userSubmitted = mysqli_query($dbConnection, $sql);
+$submittedResult = $userSubmitted;
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,16 +36,8 @@
         <div id="bg-color">
 
             <!-- navbar -->
-            <div id="navbar-top">
-                <a href="dashboard.php">
-                    <img src="./assets/ivp/arrow-back-basic-svgrepo-com.svg" alt="">
-                </a>
-                <h3>Task Submission</h3>
-                <button id="hamburger">
-                    <img src="./assets/burger.svg" alt="">
-                </button>
-                <hr style="background-color: #222; border: none; height: 2px; width: 100%; grid-column: span 3; margin-top: 10px; margin-bottom: 0;">
-            </div>
+            <?php $headerTitle = "Task Submission";
+            include './components/header.php' ?>
 
             <!-- element -->
             <div id="element">
@@ -36,14 +46,12 @@
                 <div id="tasks">
                     <div id="task-header">
                         <img src="./assets/ivp/water-drops-svgrepo-com (1).svg" alt="">
-                        <p>Eat a leaf</p>
+                        <p><?php echo $currentTask['title'] ?></p>
                     </div>
                     <p id="task-body">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat.
+                        <?php echo $currentTask['description'] ?>
                     </p>
-                    <div id="points"> + 100 points</div>
+                    <div id="points"><?php echo $points ?></div>
 
                     <div id="cameraBtn">
                         <a href="">
@@ -74,36 +82,27 @@
                         <h2>Recent Submission</h2>
                     </div>
 
-                    <div class="submission-lists">
-                        <div class="userInfo">
-                            <img src="./assets/ivp/profile-picture.avif" alt="">
-                            <p class="name">User1</p>
-                        </div>
+                    <?php
+                    foreach ($submittedResult as $row) {
+                        $statusClass = '';
 
-                        <div class="status">
-                            <p>Approved</p>
-                        </div>
-                    </div>
-                    <div class="submission-lists">
-                        <div class="userInfo">
-                            <img src="./assets/ivp/profile-picture.avif" alt="">
-                            <p class="name">User1</p>
-                        </div>
+                        if ($row['status'] === 'pending') {
+                            $statusClass = 'orange';
+                        } elseif ($row['status'] === 'rejected') {
+                            $statusClass = 'red';
+                        }
+                    ?>
+                        <div class="submission-lists">
+                            <div class="userInfo">
+                                <img src="./assets/ivp/profile-picture.avif" alt="">
+                                <p class="name"><?php echo $row['username'] ?></p>
+                            </div>
 
-                        <div class="status">
-                            <p>Approved</p>
+                            <div class="status <?php echo $statusClass; ?>">
+                                <p><?php echo $row['status'] ?></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="submission-lists">
-                        <div class="userInfo">
-                            <img src="./assets/ivp/profile-picture.avif" alt="">
-                            <p class="name">User1</p>
-                        </div>
-
-                        <div class="status">
-                            <p>Approved</p>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
 
