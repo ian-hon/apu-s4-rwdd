@@ -36,10 +36,10 @@ $tasks = task_fetch_all_ongoing();
             <span>
                 <h2 id=""><?php echo count(array_filter($tasks, function ($v, $_) {
                                 global $username;
-                                return ($v['occurance_type'] = 'daily') && task_already_submitted($v['ID'], $username);
+                                return ($v['occurance_type'] == 'daily') && task_already_submitted($v['ID'], $username);
                             }, ARRAY_FILTER_USE_BOTH)) ?></h2>
-                <h4 id=""><?php echo "/" .  count(array_filter($tasks, function ($v, $_) {
-                                return ($v['occurance_type'] = 'daily');
+                <h4 id=""><?php echo "/" . count(array_filter($tasks, function ($v, $_) {
+                                return ($v['occurance_type'] == 'daily');
                             }, ARRAY_FILTER_USE_BOTH)) ?></h4>
             </span>
             <h5>daily tasks completed</h5>
