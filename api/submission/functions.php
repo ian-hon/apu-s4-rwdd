@@ -41,7 +41,7 @@ function submission_fetch_all()
 {
     include dirname(__DIR__) . "/conn.php";
 
-    $query = "SELECT * FROM submission";
+    $query = "SELECT * FROM submission ORDER BY submitted_timestamp DESC";
     $result = mysqli_query($dbConnection, $query);
 
     $submissions = array();

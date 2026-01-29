@@ -32,8 +32,7 @@ $tasks = task_fetch_daily_tasks();
                 <div id="stats">
                     <div id="leaves">
                         <h4>
-                            <?php echo points_get_current($username); // TODO: REPLACE WITH SESSION STORAGE 
-                            ?>
+                            <?php echo points_get_current($username); ?>
                         </h4>
                         <img src="./assets/leaf.svg">
                     </div>
@@ -54,8 +53,7 @@ $tasks = task_fetch_daily_tasks();
                         <?php echo user_get_streak($username) . " day" . (user_get_streak($username) == 1 ? "" : "s") ?>
                     </h2>
                     <h5>
-                        better than <?php echo user_get_streak_percentile($username) // TODO: REPLACE WITH SESSION STORAGE 
-                                    ?>% of users!
+                        better than <?php echo user_get_streak_percentile($username) ?>% of users!
                     </h5>
                 </div>
             </div>
