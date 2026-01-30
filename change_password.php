@@ -1,6 +1,7 @@
 <?php
 include './api/conn.php'; // connects to the database
 include './api/users/functions.php';
+include 'api/credentials.php';
 
 // $query = 'SELECT * FROM ecoquest.USERS WHERE username = $username';
 // $result = mysqli_query($dbConnection, $query); // $dbConnection comes from conn.php
@@ -15,15 +16,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newPass = $_POST['newPass'];
     $confirmPass = $_POST['confirmPass'];
 
+    $passwordMatches = false;
+
+    // Check if password is hashed (starts with $2y$)
+    if (strpos($user['password'], '$2y$') === 0) {
+        // Hashed password - use password_verify
+        $passwordMatches = password_verify($currentPass, $user['password']);
+    } else {
+        // Plain text password - use direct comparison
+        $passwordMatches = ($currentPass === $user['password']);
+    }
+
     // Check if current password matches
-    if ($currentPass === $user['password']) {
+    if ($passwordMatches) {
         // Check if new password and confirm password match
         if ($newPass === $confirmPass) {
+            //hashed the new pass before storing
+            $hashedNewPass = password_hash($newPass, PASSWORD_DEFAULT);
+
             // Update the password in the database
-            $updateQuery = "UPDATE ecoquest.USERS SET password = ? WHERE username = '{$username}'";
+            $updateQuery = "UPDATE ecoquest.USERS SET password = ? WHERE username = ?";
             $stmt = mysqli_prepare($dbConnection, $updateQuery); //mysqli_prepare in order to use '?' to prevent SQL injection
-            mysqli_stmt_bind_param($stmt, 's', $newPass);
+            mysqli_stmt_bind_param($stmt, 'ss', $hashedNewPass, $username);
             mysqli_stmt_execute($stmt);
+
+            // Update session password
+            $_SESSION['password'] = $hashedNewPass;
 
             echo "<script>alert('Password updated successfully!'); window.location.href='profile.php';</script>";
         } else {

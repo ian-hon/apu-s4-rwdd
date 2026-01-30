@@ -20,9 +20,9 @@ cancel.addEventListener('click', (e) => {
     cameraInput.value = '';
 });
 
-submit.addEventListener('click', () => {
-    // alert('Image successfully submitted!')
-})
+// submit.addEventListener('click', () => {
+//     // alert('Image successfully submitted!')
+// })
 
 // Access mobile camera
 const cameraInput = document.getElementById('submission-image');
