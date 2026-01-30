@@ -2,13 +2,20 @@ const REWARDContainer = document.getElementById('reward-container');
 let currentFilter = 'ALL';
 let rewardsCache = [];
 
+// --- 1. Utilities ---
 const getIsActive = (val) => val == 1 || val === true || val === 'true' || val === '1';
 
+// --- 2. HTML Generation ---
 function createCardHTML(reward) {
-    const isActive = getIsActive(reward.active);
-    const statusLabel = isActive ? 'ACTIVE' : 'ENDED';
-    const btnText = isActive ? 'Discontinue' : 'Reactivate';
-    const statusClass = isActive ? 'active' : 'ended';
+    const stockCount = parseInt(reward.remaining) || 0;
+    const isMarkedActive = getIsActive(reward.active);
+    
+    // A reward is only "Truly Active" if marked active AND has stock
+    const isActuallyActive = isMarkedActive && stockCount > 0;
+
+    const statusLabel = isActuallyActive ? 'ACTIVE' : (stockCount <= 0 ? 'OUT OF STOCK' : 'ENDED');
+    const statusClass = isActuallyActive ? 'active' : 'ended';
+    const btnText = isActuallyActive ? 'Discontinue' : 'Reactivate';
 
     return `
         <div class="card" data-id="${reward.ID}">                
@@ -25,45 +32,71 @@ function createCardHTML(reward) {
                 </div>
             </div>
 
-            <div class="image-container">
+            <div class="image-container ${stockCount <= 0 ? 'out-of-stock-style' : ''}">
                 <img src="${reward.media}" alt="${reward.title}">
             </div>
 
             <div class="description">
-                <span class="descrip">${reward.description || 'Eco'}</span>
+                <span class="descrip">${reward.description || 'No description available'}</span>
             </div>
 
             <div class="controls">
                 <div class="control-row">
-                    <span>Stock: ${reward.remaining}</span>
+                    <span>Stock: ${stockCount}</span>
                     <div class="stock-count"> 
                         <span class="edit-icon" style="cursor:pointer">✎</span>
                     </div>
                 </div>
             </div>
 
-            <button class="state-btn ${statusClass}">
+            <button class="state-btn ${statusClass}" ${stockCount <= 0 && !isMarkedActive ? 'disabled' : ''}>
                 ${btnText}
             </button>
         </div>`;
 }
 
-/**
- * 2. Updated Event Listener (Now handles both the Button and the Pencil)
- */
+// --- 3. Core Logic: Rendering & Filtering ---
+function renderUI() {
+    if (!REWARDContainer) return;
+
+    const filtered = rewardsCache.filter(r => {
+        const stockCount = parseInt(r.remaining) || 0;
+        let isMarkedActive = getIsActive(r.active);
+
+        // AUTO-DISCONTINUE LOGIC
+        // If it's active in the cache but has no stock, kill it in the DB
+        if (isMarkedActive && stockCount <= 0) {
+            updateDatabase(r.ID, { active: 0 }); 
+            r.active = 0; // Sync local cache
+            isMarkedActive = false;
+        }
+
+        if (currentFilter === 'LOW_STOCK') return isMarkedActive && stockCount > 0 && stockCount < 10;
+        if (currentFilter === 'ACTIVE') return isMarkedActive && stockCount > 0;
+        if (currentFilter === 'ENDED') return !isMarkedActive || stockCount <= 0;
+        return true; // ALL
+    });
+
+    REWARDContainer.innerHTML = filtered.length 
+        ? filtered.map(createCardHTML).join('') 
+        : `<p class="no-data">No rewards found for this category.</p>`;
+}
+
+// --- 4. Event Handlers ---
 REWARDContainer.addEventListener('click', async (e) => {
     const card = e.target.closest('.card');
     if (!card) return;
 
     const rewardId = card.dataset.id;
+    const item = rewardsCache.find(r => r.ID == rewardId);
 
+    // Handle Edit Icon
     if (e.target.classList.contains('edit-icon')) {
         openEditPopup(rewardId);
-        return; 
-    }
-
-    if (e.target.classList.contains('state-btn')) {
-        const item = rewardsCache.find(r => r.ID == rewardId);
+    } 
+    
+    // Handle Toggle Button
+    else if (e.target.classList.contains('state-btn')) {
         const currentActive = getIsActive(item.active);
         const nextState = currentActive ? 0 : 1; 
 
@@ -74,36 +107,32 @@ REWARDContainer.addEventListener('click', async (e) => {
     }
 });
 
-/**
- * 3. Function for NEW rewards
- */
-//
-function openPopup() {
-    const form = document.querySelector('.reward-form');
-    form.reset();
-    document.querySelector('#popup-header h3').innerText = "Create New Reward";
-    form.querySelector('.submit-btn').textContent = "Create Reward";
-    
-    const idInput = form.querySelector('[name="reward_id"]');
-    if (idInput) idInput.value = "";
-    
-    form.querySelector('[name="reward_image"]').required = true;
+function changeFilter(status, event) {
+    document.querySelectorAll('#statistics span, .active-ended span').forEach(card => {
+        card.classList.remove('active-filter');
+    });
 
-    document.getElementById("overlay").classList.add("active");
-    document.getElementById("parent").classList.add("blur");
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active-filter');
+    }
+
+    currentFilter = status.toUpperCase() === 'ALL' ? 'ALL' : 
+                    status.toUpperCase() === 'LOW' ? 'LOW_STOCK' : 
+                    status.toUpperCase();
+    renderUI();
 }
 
+// --- 5. Popups ---
 function openEditPopup(id) {
     const item = rewardsCache.find(r => r.ID == id);
     if (!item) return;
 
     const form = document.querySelector('.reward-form');
-    
     document.querySelector('#popup-header h3').innerText = "Edit Reward";
-    form.querySelector('.submit-btn').textContent = "Confirm";
+    form.querySelector('.submit-btn').textContent = "Confirm Changes";
 
     form.querySelector('[name="title"]').value = item.title;
-    form.querySelector('[name="category"]').value = item.category; // Uses database 'category'
+    form.querySelector('[name="category"]').value = item.category;
     form.querySelector('[name="description"]').value = item.description || '';
     form.querySelector('[name="points"]').value = item.price;
     form.querySelector('[name="stock"]').value = item.remaining;
@@ -116,7 +145,6 @@ function openEditPopup(id) {
         form.appendChild(idInput);
     }
     idInput.value = item.ID;
-
     form.querySelector('[name="reward_image"]').required = false;
 
     document.getElementById("overlay").classList.add("active");
@@ -124,76 +152,21 @@ function openEditPopup(id) {
 }
 
 function closePopup() {
-    const overlay = document.getElementById("overlay");
-    const parent = document.getElementById("parent");
-    if (overlay) overlay.classList.remove("active");
-    if (parent) parent.classList.remove("blur"); 
-}
-/**
- * Filtering Logic
- */
-function changeFilter(status, event) {
-    const cards = document.querySelectorAll('#statistics span, .active-ended span');
-    cards.forEach(card => card.classList.remove('active-filter'));
-
-    if (event && event.currentTarget) {
-        event.currentTarget.classList.add('active-filter');
-    }
-
-    switch (status) {
-        case 'all':    currentFilter = 'ALL'; break;
-        case 'low':    currentFilter = 'LOW_STOCK'; break;
-        case 'active': currentFilter = 'ACTIVE'; break;
-        case 'ended':  currentFilter = 'ENDED'; break;
-    }
-
-    renderUI();
+    document.getElementById("overlay").classList.remove("active");
+    document.getElementById("parent").classList.remove("blur"); 
 }
 
-function renderUI() {
-    const filtered = rewardsCache.filter(r => {
-        const isActive = getIsActive(r.active);
-        if (currentFilter === 'LOW_STOCK') return isActive && parseInt(r.remaining) < 10; 
-        if (currentFilter === 'ACTIVE') return isActive;
-        if (currentFilter === 'ENDED') return !isActive;
-        return true;
-    });
-
-    if (REWARDContainer) {
-        REWARDContainer.innerHTML = filtered.length 
-            ? filtered.map(createCardHTML).join('') 
-            : `<p class="no-data">No rewards found for this filter.</p>`;
-    }
-}
-
-/**
- * Data Syncing
- */
+// --- 6. Data Fetching ---
 async function fetchAndRender() {
     try {
         const response = await fetch('api/reward/fetch_all.php');
-        const dataObject = await response.json();
-        rewardsCache = Object.values(dataObject);
+        const data = await response.json();
+        rewardsCache = Object.values(data);
         renderUI();
     } catch (error) {
-        console.error("Fetch error:", error);
+        console.error("Critical: Could not load rewards.", error);
     }
 }
-
-REWARDContainer.addEventListener('click', async (e) => {
-    const card = e.target.closest('.card');
-    if (!card || !e.target.classList.contains('state-btn')) return;
-
-    const rewardId = card.dataset.id;
-    const item = rewardsCache.find(r => r.ID == rewardId);
-    const currentActive = getIsActive(item.active);
-    const nextState = currentActive ? 0 : 1; 
-
-    if (await updateDatabase(rewardId, { active: nextState })) {
-        item.active = nextState;
-        renderUI();
-    }
-});
 
 async function updateDatabase(id, data) {
     const params = new URLSearchParams({ id, ...data });
@@ -201,16 +174,15 @@ async function updateDatabase(id, data) {
         const response = await fetch(`api/reward/update.php?${params.toString()}`);
         return response.ok; 
     } catch (error) {
-        console.error("Update failed:", error);
+        console.error("Database update failed.", error);
         return false;
     }
 }
 
+// Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    const totalRewardTab = document.getElementById('total-reward');
-    if (totalRewardTab) {
-        setTimeout(() => changeFilter('all', { currentTarget: totalRewardTab }), 100);
-    }
+    const totalTab = document.getElementById('total-reward');
+    if (totalTab) setTimeout(() => changeFilter('all', { currentTarget: totalTab }), 100);
 });
 
 fetchAndRender();

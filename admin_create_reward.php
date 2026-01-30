@@ -24,7 +24,7 @@ if (isset($_POST['submit_reward'])) {
         if ($mediaPath != "") {
             $sql = "UPDATE REWARD SET title=?, category=?, description=?, price=?, media=?, remaining=? WHERE ID=?";
             $stmt = $dbConnection->prepare($sql);
-            $stmt->bind_param("sssisiss", $title, $category, $description, $price, $mediaPath, $stock, $rewardID);
+            $stmt->bind_param("sssisis", $title, $category, $description, $price, $mediaPath, $stock, $rewardID);
         } else {
             $sql = "UPDATE REWARD SET title=?, category=?, description=?, price=?, remaining=? WHERE ID=?";
             $stmt = $dbConnection->prepare($sql);
@@ -32,7 +32,8 @@ if (isset($_POST['submit_reward'])) {
         }
         $msg = "reward_updated";
     } else {
-        $newID = "reward_" . time();
+        include './api/utils/creation_util.php';
+        $newID = generate_next_id($dbConnection, 'submission', 'ID', 'RW_');
         $sql = "INSERT INTO REWARD (ID, title, category, description, price, media, active, remaining, initial) 
                 VALUES (?, ?, ?, ?, ?, ?, 1, ?, ?)";
         $stmt = $dbConnection->prepare($sql);

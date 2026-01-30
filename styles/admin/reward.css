@@ -143,10 +143,19 @@
 
 #statistics .active-filter, 
 .active-ended .active-filter {
-    border: 0.125em solid var(--accent) !important;
     background-color: var(--background) !important;
     transform: scale(1.02);
     box-shadow: 0 0.25em 0.625em rgba(0, 0, 0, 0.08);
+    border: 0.125em solid;
+}
+
+#statistics .active-filter,
+#active.active-filter {
+    border-color: var(--accent) !important;
+}
+
+#ended.active-filter {
+    border-color: var(--error) !important; 
 }
 
 #low-stock.active-filter {

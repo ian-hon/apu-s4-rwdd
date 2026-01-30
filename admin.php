@@ -136,19 +136,19 @@ $stop2 = $pApp + $pPen;
                         </span>
                         <span id="low-stock" onclick="changeFilter('low',event)" style="cursor: pointer">
                             <h5>Low Stock Alert</h5>
-                            <img src="./assets/target.svg">
+                            <img src="./assets/warning.png">
                             <h3><?= $lowStockResult['count'] ?? 0?></h3>
                             <h6>Require Attention</h6>
                         </span>
                     </div>
                     <div class="active-ended">
                         <span id="active" onclick="changeFilter('active', event)" style="cursor: pointer">
-                            <img src="./assets/target.svg">
+                            <img src="./assets/accept.png">
                             <h5>Active</h5>
                             <h3><?= $activeResult['count'] ?? 0?></h3>
                         </span>
                         <span id="ended" onclick="changeFilter('ended', event)" style="cursor: pointer">
-                            <img src="./assets/target.svg">
+                            <img src="./assets/remove.png">
                             <h5>Ended</h5>
                             <h3><?= $endedResult['count'] ?? 0 ?></h3>
                         </span>
@@ -157,7 +157,7 @@ $stop2 = $pApp + $pPen;
             </div>
 
             <div class="sidebar-footer">
-                <button class="logout-btn" onclick="window.location.href='logout.php'">
+                <button class="logout-btn" onclick="window.location.href='../auth/login.php'">
                     <div class="logout-content">
                         <img src="./assets/logout.png" alt="logout">
                         <span>Log Out</span>
@@ -213,7 +213,7 @@ $stop2 = $pApp + $pPen;
                     <div class="stat-card">
                         <div class="content">
                             <p class="label">Success Rate</p>
-                            <h2 class="value"><?=$successRate['count'] ?? 0?></h2>
+                            <h2 class="value"><?= round($pApp) ?? 0?></h2>
                             <p class="trend positive">Percentage of User Tasks Verified</p>
                             <img src="./assets/target.svg">
                         </div>

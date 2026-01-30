@@ -17,7 +17,6 @@ if (session_status() === PHP_SESSION_NONE) {
 $sessionUserId = $_SESSION['username'] ?? null;
 
 // --- 1. Data Processing ---
-// --- 1. Data Processing ---
 $participants = array_filter($users, function($u) {
     return isset($u['role']) && $u['role'] === 'user';
 });
@@ -89,9 +88,11 @@ if ($sortColumn === 'plastic_impact') {
 }
 
 usort($participants, function($a, $b) use ($sortColumn) {
-    return (int)($b[$sortColumn] ?? 0) <=> (int)($a[$sortColumn] ?? 0);
+    $valA = (float)($a[$sortColumn] ?? 0);
+    $valB = (float)($b[$sortColumn] ?? 0);
+    
+    return $valB <=> $valA;
 });
-
 $leaderboard = array_values($participants);
 
 $currentUser = null;
@@ -181,19 +182,39 @@ $avgPointsVal = ($totalUserCount > 0) ? round($totalPointsSum / $totalUserCount)
             <section id="global-rankings">
                 <h2>Global Rankings</h2>
                 <div class="user-card">
-                    <div class="label-header"><p>Compete with eco-warriors worldwide</p></div>
+                    <div class="label-header">
+                        <p>Compete with eco-warriors worldwide</p>
+                    </div>
+
                     <div class="rank-card">
                         <div class="card-content">
                             <div class="user-section">
-                                <div class="user-avatar"><img src="./assets/leaf.svg"></div>
+                                <?php 
+                                    $currentImgPath = $currentUser['profile_pic'] ?? './assets/avatar.png';
+                                    
+                                    if ($sortColumn === 'plastic_impact') {
+                                        $displayDecimals = 3;
+                                    } elseif ($sortColumn === 'electric_impact') {
+                                        $displayDecimals = 2;
+                                    } else {
+                                        $displayDecimals = 0;
+                                    }
+                                ?>
+                                <div class="user-avatar-container">
+                                    <img src="<?= $currentImgPath ?>" class="leaderboard-avatar" alt="Profile">
+                                </div>
                                 <div class="user-info">
                                     <span class="user-title"><?= htmlspecialchars($currentUser['name']) ?></span>
                                     <span class="user-level"><?= htmlspecialchars($currentUser['title'] ?? 'Member') ?></span>
                                 </div>
                             </div>
+
                             <div class="user-stats-section">
                                 <span class="user-rank-number">#<?= $currentUser['rank'] ?></span>
-                                <span class="user-points"><?= number_format($currentUser[$sortColumn] ?? 0) ?></span>
+                                <span class="user-points">
+                                    <?= number_format($currentUser[$sortColumn] ?? 0, $displayDecimals) ?> 
+                                    <small><?= $unit ?></small>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -223,7 +244,16 @@ $avgPointsVal = ($totalUserCount > 0) ? round($totalPointsSum / $totalUserCount)
                                     <span class="badge"><?= $badges[$index] ?></span>
                                 </div>
                                 <h3><?= htmlspecialchars($user['name']) ?></h3>
-                                <p class="user-points green-text"><?= number_format($user[$sortColumn] ?? 0) ?></p>
+                                <?php
+                                    if ($sortColumn === 'plastic_impact') {
+                                        $decimals = 3;
+                                    } elseif ($sortColumn === 'electric_impact') {
+                                        $decimals = 2;
+                                    } else {
+                                        $decimals = 0; // Default for 'points'
+                                    }
+                                ?>
+                                <p class="user-points green-text"><?= number_format($user[$sortColumn] ?? 0,$decimals) ?></p>
                                 <p class="label"><?= $unit ?></p>
                             </div>
                         <?php endif; endforeach; ?>
@@ -241,8 +271,17 @@ $avgPointsVal = ($totalUserCount > 0) ? round($totalPointsSum / $totalUserCount)
                                 <div class="user-info">
                                     <span class="user-name"><?= htmlspecialchars($user['name']) ?></span>
                                 </div>
+                                <?php
+                                    if ($sortColumn === 'plastic_impact') {
+                                        $decimals = 3;
+                                    } elseif ($sortColumn === 'electric_impact') {
+                                        $decimals = 2;
+                                    } else {
+                                        $decimals = 0; // Default for 'points'
+                                    }
+                                ?>
                                 <span class="user-points green-text">
-                                    <?= number_format($user[$sortColumn] ?? 0) ?> <?= $unit ?>
+                                    <?= number_format($user[$sortColumn] ?? 0,$decimals) ?> <?= $unit ?>
                                 </span>
                             </li>
                         <?php endif; endfor; ?>
