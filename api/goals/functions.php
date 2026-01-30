@@ -45,6 +45,43 @@ function goals_contributions_all($username, $type = NULL, $onlyActive = true)
     return $result;
 }
 
+function goals_contributions_global()
+{
+    include dirname(__DIR__) . '/conn.php';
+
+    $query = "SELECT *, COALESCE((
+        SELECT
+            SUM(task.goal_contribution * submission.action_count)
+        FROM submission
+        INNER JOIN task
+        ON task.ID = submission.task_ID
+        WHERE
+            (submission.status = 'approved') AND
+            (task.goal_type = goals.goal_type) AND
+            (submission.submitted_timestamp BETWEEN goals.starting_time AND goals.ending_time)
+    ), 0) AS total FROM goals
+    WHERE goals.type = 'global'";
+
+    $queryResult = mysqli_query($dbConnection, $query);
+
+    $result = array();
+    foreach (mysqli_fetch_all($queryResult, MYSQLI_ASSOC) as $row) {
+        $result[$row['ID']] = array(
+            'ID' => $row['ID'],
+            'title' => $row['title'],
+            'description' => $row['description'],
+            'media' => $row['media'],
+            'goal_type' => $row['goal_type'],
+            'goal' => floatval($row['goal']),
+            'starting_time' => intval($row['starting_time']),
+            'ending_time' => intval($row['ending_time']),
+            'type' => $row['type'],
+            'total' => floatval($row['total']),
+        );
+    }
+    return $result;
+}
+
 function goals_contributions($username, $goalID, $onlyActive = true)
 {
     return goals_contributions_all($username, onlyActive: $onlyActive)[$goalID];

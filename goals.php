@@ -25,7 +25,7 @@ $streak = user_get_streak($username);
 // e.g. returns integer 12 representing current streak count
 
 $personalProgress = goals_contributions_all($username, type: 'personal');
-$globalProgress = goals_contributions_all($username, type: 'global');
+$globalProgress = goals_contributions_global();
 
 $consistency = goals_overall_completion_rate();
 
