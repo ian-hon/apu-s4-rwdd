@@ -137,12 +137,12 @@ INSERT INTO ecoquest.TASK (ID, title, description, curator_instructions, active,
 ('TA_0007', 'Community Litter Pickup', 'Pick up litter during a walk (5-10 pieces)', 'Before/after photos showing collected litter', 1, 5, 10, 18, 'trash', 0.1000000000, 'weekly', (UNIX_TIMESTAMP() / (86400 * 7)) + 1);
 
 -- RW_XXXX
-INSERT INTO ecoquest.REWARD (ID, title, description, price, media, active, remaining, initial) VALUES
-('RW_0001', 'Bamboo Toothbrush Set', 'Set of 4 biodegradable bamboo toothbrushes', 150, '/images/rewards/bamboo_brush.jpg', TRUE, 25, 30),
-('RW_0002', 'Tree Planting Donation', 'Plant 5 trees through environmental charity', 500, '/images/rewards/tree_donation.jpg', TRUE, 15, 20),
-('RW_0003', 'Reusable Water Bottle', 'Stainless steel eco-friendly water bottle', 200, '/images/rewards/water_bottle.jpg', TRUE, 35, 40),
-('RW_0004', 'Ocean Cleanup Donation', 'Support ocean plastic removal project', 800, '/images/rewards/ocean_cleanup.jpg', TRUE, 8, 10),
-('RW_0005', 'Solar Charger', 'Portable solar phone charger', 400, '/images/rewards/solar_charger.jpg', TRUE, 12, 15);
+INSERT INTO ecoquest.REWARD (ID, title, description, price, media, active, remaining, initial, category) VALUES
+('RW_0001', 'Bamboo Toothbrush Set', 'Set of 4 biodegradable bamboo toothbrushes', 150, '/images/rewards/bamboo_brush.jpg', TRUE, 25, 30, 'Merchandise'),
+('RW_0002', 'Tree Planting Donation', 'Plant 5 trees through environmental charity', 500, '/images/rewards/tree_donation.jpg', TRUE, 15, 20, 'Donation'),
+('RW_0003', 'Reusable Water Bottle', 'Stainless steel eco-friendly water bottle', 200, '/images/rewards/water_bottle.jpg', TRUE, 35, 40, 'Merchandise'),
+('RW_0004', 'Ocean Cleanup Donation', 'Support ocean plastic removal project', 800, '/images/rewards/ocean_cleanup.jpg', TRUE, 8, 10, 'Donation'),
+('RW_0005', 'Solar Charger', 'Portable solar phone charger', 400, '/images/rewards/solar_charger.jpg', TRUE, 12, 15, 'Merchandise');
 
 -- SU_XXXX
 INSERT INTO ecoquest.SUBMISSION (ID, user, task_ID, media, submitted_timestamp, action_count, status, curator) VALUES

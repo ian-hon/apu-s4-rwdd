@@ -4,7 +4,7 @@ include 'api/reward/fetch_all.php';
 include 'api/users/fetch_all.php';
 include 'api/submission/fetch_all.php';
 include 'api/task/fetch_all.php';
-include 'api/points/fetch_all.php';
+include 'api/points/functions.php';
 include 'api/roles/fetch_all.php';
 include 'api/credentials/fetch_all.php';
 include 'api/goals/functions.php'; 
@@ -17,6 +17,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $sessionUserId = $_SESSION['username'] ?? null;
 
 // --- 1. Data Processing ---
+// --- 1. Data Processing ---
 $participants = array_filter($users, function($u) {
     return isset($u['role']) && $u['role'] === 'user';
 });
@@ -26,9 +27,9 @@ $totalPointsSum = 0;
 foreach ($participants as &$u) {
     $username = $u['username'];
     
-    $userImpacts = goals_contributions_all($username, NULL, false);
+    $u['points'] = points_get_total($username);
     
-    $u['points'] = 0;
+    $userImpacts = goals_contributions_all($username, NULL, false);
     $u['plastic_impact'] = 0;
     $u['electric_impact'] = 0;
     $u['action_count'] = 0;
@@ -36,11 +37,6 @@ foreach ($participants as &$u) {
     foreach ($submissions as $sub) {
         if ($sub['user'] === $username && $sub['status'] === 'approved') {
             $u['action_count']++;
-            foreach ($points as $p) {
-                if ($p['submission'] === $sub['ID']) {
-                    $u['points'] += (int)$p['amount'];
-                }
-            }
         }
     }
 
@@ -52,7 +48,6 @@ foreach ($participants as &$u) {
     $totalPointsSum += $u['points'];
 }
 unset($u);
-
 // --- 2. Hall of Fame Logic ---
 $topPlasticUser = ['username' => 'No data', 'val' => 0];
 $topElectricUser = ['username' => 'No data', 'val' => 0];
