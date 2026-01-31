@@ -15,7 +15,7 @@
 
     $redirects = array(
         'user' => '../dashboard.php',
-        'admin' => '../admin.html',
+        'admin' => '../admin.php',
         'curator' => '../curator.php',
     );
 

@@ -1,5 +1,4 @@
 <?php
-
 $statusFilter = $_GET['status'];
 $queryFilter = $_GET['query'];
 

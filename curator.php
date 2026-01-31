@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-
 include './api/credentials.php';
 enforce_role('curator');
 
