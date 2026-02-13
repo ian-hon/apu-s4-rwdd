@@ -8,17 +8,12 @@
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/auth/login.css">
     <link rel="stylesheet" href="../styles/auth/register.css">
-
-    <script src="../scripts/script.js"></script>
-    <script src="../scripts/auth/register.js"></script>
 </head>
 
 <body>
     <?php
     session_start();
-    $conn = new mysqli("localhost", "root", "", "ecoquest");
-
-    $duplicateUsername = false;
+    $conn = mysqli_connect("localhost", "root", "", "ecoquest");
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -49,16 +44,17 @@
 
             $sql = "INSERT INTO USERS (username, password, name, DOB, email, role) VALUES ('$username', '$hash', '$name', $dobTimestamp, '$email', 'user')";
 
-            try {
-                mysqli_query($conn, $sql);
+            $result = mysqli_query($conn, $sql);
+
+            if ($result) {
                 $_SESSION['message'] = "Account created successfully!";
                 header("Location: login.php");
                 exit();
-            } catch (mysqli_sql_exception $e) {
-                if ($e->getCode() == 1062) {
-                    echo "<script>duplicateUsername = true</script>";
+            } else {
+                if (mysqli_errno($conn) == 1062) {
+                    echo "<p class='error-message'>Username already exists</p>";
                 } else {
-                    echo "Error: " . $e->getMessage();
+                    echo "Error: " . mysqli_error($conn);
                 }
             }
         }
@@ -148,6 +144,8 @@
             </div>
         </div>
     </div>
+    <script src="../scripts/script.js"></script>
+    <script defer src="../scripts/auth/register.js"></script>
 </body>
 
 </html>
