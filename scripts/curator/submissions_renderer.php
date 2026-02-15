@@ -1,6 +1,6 @@
 <?php
-$statusFilter = $_GET['status'];
-$queryFilter = $_GET['query'];
+$statusFilter = array_key_exists('status', $_GET) ? $_GET['status'] : null;
+$queryFilter = array_key_exists('query', $_GET) ? $_GET['query'] : null;
 
 include '../../api/submission/functions.php';
 include '../../api/task/functions.php';
@@ -31,12 +31,12 @@ function humanReadableTime($epoch)
 ?>
 <?php foreach (
     array_filter($submissions, function ($s) use ($statusFilter, $queryFilter, $tasks) {
-        if (isset($statusFilter) && ($s['status'] != $statusFilter)) {
+        if ((!is_null($statusFilter)) && ($s['status'] != $statusFilter)) {
             return false;
         }
 
         $t = $tasks[$s['task_ID']];
-        if (isset($queryFilter)) {
+        if (!is_null($queryFilter)) {
             $searchFields = [
                 strtolower($t['title']),
                 strtolower($t['description']),
