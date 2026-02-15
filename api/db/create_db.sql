@@ -17,7 +17,7 @@ CREATE TABLE ecoquest.USERS (
     password VARCHAR(64),
     name VARCHAR(200),
     DOB BIGINT,
-    profile_picture BLOB,
+    profile_picture LONGBLOB,
     role VARCHAR(20),
     FOREIGN KEY (role) REFERENCES ROLES(role)
 );
@@ -71,7 +71,7 @@ CREATE TABLE ecoquest.REWARD (
     title VARCHAR(200),
     description VARCHAR(2000),
     price INT,
-    media BLOB,
+    media LONGBLOB,
     active BOOLEAN,
     remaining INT,
     initial INT,
