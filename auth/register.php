@@ -8,26 +8,27 @@
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/auth/login.css">
     <link rel="stylesheet" href="../styles/auth/register.css">
-
-    <script src="../scripts/script.js"></script>
-    <script src="../scripts/auth/register.js"></script>
 </head>
 
 <body>
     <?php
     session_start();
-    $conn = new mysqli("localhost", "root", "", "ecoquest");
-
-    $duplicateUsername = false;
+    $conn = mysqli_connect("localhost", "root", "", "ecoquest");
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
+        $dob = $_POST["dob"];
         $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $password = $_POST["password"];
         $confirm_password = $_POST["confirm_password"];
 
-        if (empty($username)) {
+        if (empty($name)) {
+            echo "Please enter your name";
+        } elseif (empty($dob)) {
+            echo "Please enter your date of birth";
+        } elseif (empty($username)) {
             echo "Please enter valid username";
         } elseif (empty($email)) {
             echo "Please enter valid email";
@@ -39,19 +40,21 @@
             echo "Passwords do not match";
         } else {
             $hash = password_hash($password, PASSWORD_DEFAULT);
+            $dobTimestamp = strtotime($dob);
 
-            $sql = "INSERT INTO USERS (username, email, password, role) VALUES ('$username', '$email', '$hash', 'user')";
+            $sql = "INSERT INTO USERS (username, password, name, DOB, email, role) VALUES ('$username', '$hash', '$name', $dobTimestamp, '$email', 'user')";
 
-            try {
-                mysqli_query($conn, $sql);
+            $result = mysqli_query($conn, $sql);
+
+            if ($result) {
                 $_SESSION['message'] = "Account created successfully!";
                 header("Location: login.php");
                 exit();
-            } catch (mysqli_sql_exception $e) {
-                if ($e->getCode() == 1062) {
-                    echo "<script>duplicateUsername = true</script>";
+            } else {
+                if (mysqli_errno($conn) == 1062) {
+                    echo "<p class='error-message'>Username already exists</p>";
                 } else {
-                    echo "Error: " . $e->getMessage();
+                    echo "Error: " . mysqli_error($conn);
                 }
             }
         }
@@ -75,6 +78,24 @@
 
             <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post" name="login">
                 <div id="input-section">
+                    <h4>Name</h4>
+                    <div id="input-form">
+                        <div id="input-icon">
+                            <img id="user-icon" src="/assets/user.svg" alt="user-icon">
+                        </div>
+                        <input type="text" name="name" id="name" placeholder="Enter your full name">
+                    </div>
+                    <span id="name-error" class="error-message"></span>
+
+                    <h4>Date of Birth</h4>
+                    <div id="input-form">
+                        <div id="input-icon">
+                            <img id="calendar-icon" src="/assets/user.svg" alt="calendar-icon">
+                        </div>
+                        <input type="date" name="dob" id="dob">
+                    </div>
+                    <span id="dob-error" class="error-message"></span>
+
                     <h4>Username</h4>
                     <div id="input-form">
                         <div id="input-icon">
@@ -123,6 +144,8 @@
             </div>
         </div>
     </div>
+    <script src="../scripts/script.js"></script>
+    <script defer src="../scripts/auth/register.js"></script>
 </body>
 
 </html>

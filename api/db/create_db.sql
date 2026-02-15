@@ -16,7 +16,7 @@ CREATE TABLE ecoquest.USERS (
     email VARCHAR(200),
     password VARCHAR(64),
     name VARCHAR(200),
-    DOB INT,
+    DOB BIGINT,
     profile_picture BLOB,
     role VARCHAR(20),
     FOREIGN KEY (role) REFERENCES ROLES(role)
@@ -118,14 +118,14 @@ INSERT INTO ecoquest.GOAL_TYPE (ID, term, unit, decimal_points) VALUES
 ('trash', 'trash', 'kg', 1);
 
 INSERT INTO ecoquest.USERS (username, email, password, name, DOB, profile_picture, role) VALUES
-('emma_green_admin', 'admin1@email.com', 'hashed_password_123', 'Emma Green', 19850615, '', 'admin'),
-('david_earth', 'curator1@email.com', 'hashed_password_456', 'David Earth', 19900320, '', 'curator'),
-('saraheco22', 'user1@email.com', 'hashed_password_789', 'Sarah Eco', 19950812, '', 'user'),
-('mike_recycles', 'user2@email.com', 'hashed_password_101', 'Mike Recycle', 19880425, '', 'user'),
-('lisa_clean88', 'user3@email.com', 'hashed_password_112', 'Lisa Clean', 19920703, '', 'user'),
-('admin', 'a@a.a', '$2y$10$g/s9zjqgb9JsUjuUi1LMaeuzjjv/SZ6hmNE.8eKsA4oUoMqUy6EMm', 'Admin', 19850615, '', 'admin'),
-('curator', 'c@c.c', '$2y$10$do//dApxo/iFxnR4TLRheOOsCHD2FFq6Y6RCncK.dK96vo4Ib/9.u', 'Curator', 19850615, '', 'curator'),
-('john_doe', 'j@j.j', '$2y$10$B7s6repms81x.FElU0W9VuSO3FmqxcZJ59kXILaH7LiBgkYuDATPO', 'John Doe', 19850615, '', 'user');
+('emma_green_admin', 'admin1@email.com', 'hashed_password_123', 'Emma Green', 487123200, '', 'admin'),
+('david_earth', 'curator1@email.com', 'hashed_password_456', 'David Earth', 637977600, '', 'curator'),
+('saraheco22', 'user1@email.com', 'hashed_password_789', 'Sarah Eco', 808185600, '', 'user'),
+('mike_recycles', 'user2@email.com', 'hashed_password_101', 'Mike Recycle', 577929600, '', 'user'),
+('lisa_clean88', 'user3@email.com', 'hashed_password_112', 'Lisa Clean', 709948800, '', 'user'),
+('admin', 'a@a.a', '$2y$10$g/s9zjqgb9JsUjuUi1LMaeuzjjv/SZ6hmNE.8eKsA4oUoMqUy6EMm', 'Admin', 487123200, '', 'admin'),
+('curator', 'c@c.c', '$2y$10$do//dApxo/iFxnR4TLRheOOsCHD2FFq6Y6RCncK.dK96vo4Ib/9.u', 'Curator', 487123200, '', 'curator'),
+('john_doe', 'j@j.j', '$2y$10$B7s6repms81x.FElU0W9VuSO3FmqxcZJ59kXILaH7LiBgkYuDATPO', 'John Doe', 487123200, '', 'user');
 
 -- TA_XXXX
 INSERT INTO ecoquest.TASK (ID, title, description, curator_instructions, active, target, excess_limit, reward_rate, goal_type, goal_contribution, occurance_type, schedule) VALUES
