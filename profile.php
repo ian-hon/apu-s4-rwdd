@@ -5,6 +5,29 @@ include_once './api/users/functions.php';
 
 include './api/points/functions.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_picture'])) {
+    $file = $_FILES['profile_picture'];
+    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+
+    $maxSize = 5 * 1024 * 1024; // 5MB
+
+    if (in_array($file['type'], $allowedTypes) && $file['size'] <= $maxSize && $file['error'] === 0) {
+        $imageData = file_get_contents($file['tmp_name']);
+        $imageData = mysqli_real_escape_string($dbConnection, $imageData);
+
+        $updateQuery = "UPDATE users SET profile_picture = '$imageData' WHERE username = '$username'";
+        try {
+            if (mysqli_query($dbConnection, $updateQuery)) {
+                header("Location: profile.php");
+                exit();
+            }
+        } catch (Exception $e) {
+            header("Location: profile.php");
+            // var_dump($e);
+        }
+    }
+}
+
 $user = user_fetch($username);
 $totalPoints = points_get_total($username);
 $currentPoints = points_get_current($username);
@@ -73,7 +96,17 @@ $impactMessageGenerator = function ($contribution) {
                 <!-- profile -->
                 <div id="profile">
                     <div id="pfp">
-                        <img src="assets/ivp/profile-picture.avif" alt="">
+                        <?php if ($user['profile_picture']): ?>
+                            <img src="data:image/jpeg;base64,<?php echo base64_encode($user['profile_picture']); ?>" alt="Profile Picture">
+                        <?php else: ?>
+                            <img src="assets/ivp/profile-picture.avif" alt="Default Profile Picture">
+                        <?php endif; ?>
+                        <form method="POST" enctype="multipart/form-data" id="pfp-form">
+                            <label for="pfp-upload" id="pfp-label">
+                                <img src="assets/pen_white.svg" alt="Edit">
+                            </label>
+                            <input type="file" name="profile_picture" id="pfp-upload" accept="image/*">
+                        </form>
                     </div>
                     <div class="user">
                         <p>Username</p>

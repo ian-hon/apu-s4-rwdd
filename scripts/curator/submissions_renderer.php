@@ -1,10 +1,10 @@
 <?php
-
-$statusFilter = $_GET['status'];
-$queryFilter = $_GET['query'];
+$statusFilter = array_key_exists('status', $_GET) ? $_GET['status'] : null;
+$queryFilter = array_key_exists('query', $_GET) ? $_GET['query'] : null;
 
 include '../../api/submission/functions.php';
 include '../../api/task/functions.php';
+include '../../api/users/functions.php';
 
 $submissions = submission_fetch_all();
 $tasks = task_fetch_all(null);
@@ -32,12 +32,12 @@ function humanReadableTime($epoch)
 ?>
 <?php foreach (
     array_filter($submissions, function ($s) use ($statusFilter, $queryFilter, $tasks) {
-        if (isset($statusFilter) && ($s['status'] != $statusFilter)) {
+        if ((!is_null($statusFilter)) && ($s['status'] != $statusFilter)) {
             return false;
         }
 
         $t = $tasks[$s['task_ID']];
-        if (isset($queryFilter)) {
+        if (!is_null($queryFilter)) {
             $searchFields = [
                 strtolower($t['title']),
                 strtolower($t['description']),
@@ -66,7 +66,14 @@ function humanReadableTime($epoch)
         <div id="header">
             <!-- is there a justify-self thing that can do this? -->
             <span>
-                <img id="pfp" src="./assets/fire.svg">
+                <?php 
+                    $userPfp = user_fetch_pfp($row['user']);
+                    if ($userPfp): 
+                ?>
+                    <img id="pfp" src="data:image/jpeg;base64,<?php echo base64_encode($userPfp); ?>" alt="Profile Picture">
+                <?php else: ?>
+                    <img id="pfp" src="../../assets/ivp/profile-picture.avif" alt="Default Profile Picture">
+                <?php endif; ?>
                 <div id="info">
                     <h4><?php echo $row['user']; ?></h4>
                     <h5><?php echo humanReadableTime($row['submitted_timestamp']); ?></h5>

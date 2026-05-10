@@ -1,5 +1,6 @@
 <?php
 include './api/conn.php'; // connects to the database
+include './api/credentials.php';
 
 // Fetch redemption history for the user
 $redemptionQuery = "
@@ -14,7 +15,7 @@ $redemptionQuery = "
         reward.media
     FROM ecoquest.REDEMPTION as redemption
     INNER JOIN ecoquest.REWARD as reward ON redemption.reward_ID = reward.ID
-    WHERE redemption.user = 'user1'
+    WHERE redemption.user = '$username'
     ORDER BY redemption.timestamp DESC
 ";
 

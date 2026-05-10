@@ -15,7 +15,7 @@
 
     $redirects = array(
         'user' => '../dashboard.php',
-        'admin' => '../admin.php',
+        'admin' => '../admin.html',
         'curator' => '../curator.php',
     );
 
@@ -122,6 +122,9 @@
                         <div>
                             <label for="remember-me-text" id="remember-me-text">Remember me</label>
                         </div>
+                    </div>
+                    <div id="forgot-password">
+                        <a href="/auth/password-recovery.html" target="_blank">Forgot Password?</a>
                     </div>
                 </div>
 

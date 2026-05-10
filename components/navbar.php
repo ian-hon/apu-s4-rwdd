@@ -3,7 +3,16 @@
 <div id="navbar" data-active="false">
     <div id="container" class="border">
         <a href="profile.php" id="profile-card" class="border">
-            <img src="./assets/fire.svg">
+            <?php
+            include_once dirname(__DIR__) . '/api/users/functions.php';
+
+            $pfp = user_fetch_pfp($username);
+            if ($pfp):
+            ?>
+                <img src="data:image/jpeg;base64,<?php echo base64_encode($pfp); ?>" alt="Profile Picture">
+            <?php else: ?>
+                <img src="./assets/ivp/profile-picture.avif" alt="Default Profile Picture">
+            <?php endif; ?>
             <h4><?php echo htmlspecialchars($username); ?></h4>
         </a>
         <hr>
@@ -28,10 +37,13 @@
             <img src="./assets/leaderboard.svg">
             <h4>LEADERBOARD</h4>
         </a>
-        <a href="points.php" class="navbar-card">
+        <a href="rewards.php" class="navbar-card">
+            <img src="./assets/gift.svg">
+            <h4>REWARDS</h4>
+        </a>
+        <a href="redemption_history.php" class="navbar-card">
             <img src="./assets/leaf.svg">
-            <h4>POINTS</h4>
-            <!-- rewards, redemption history inside here -->
+            <h4>REDEMPTIONS</h4>
         </a>
     </div>
     <h4 id="close-button" onclick="toggleNavbar()" class="border">close</h4>

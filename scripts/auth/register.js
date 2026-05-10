@@ -1,19 +1,72 @@
+const nameInput = document.getElementById('name');
+const dobInput = document.getElementById('dob');
+const usernameInput = document.getElementById('username');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const confirmPasswordInput = document.getElementById('confirm-password');
+const submitButton = document.getElementById('login-button');
+
+const nameError = document.getElementById('name-error');
+const dobError = document.getElementById('dob-error');
+const usernameError = document.getElementById('username-error');
+const duplicateUsernameError = document.getElementById('duplicate-username-error');
+const emailError = document.getElementById('email-error');
+const passwordError = document.getElementById('password-error');
+const confirmPasswordError = document.getElementById('confirm-password-error');
+
 var duplicateUsername = false;
+var checkTimer;
+
+usernameInput.addEventListener('keyup', function () {
+  duplicateUsername = false;
+  duplicateUsernameError.textContent = '';
+  submitButton.disabled = false;
+  submitButton.style.opacity = '1';
+  submitButton.style.cursor = 'pointer';
+
+  var username = usernameInput.value.trim();
+  checkUsername(username);
+});
+
+function checkUsername(username) {
+  fetch('/api/users/check_duplicate_username.php?username=' + username)
+    .then(response => response.json())
+    .then(data => {
+      if (data.exists) {
+        duplicateUsername = true;
+        submitButton.disabled = true;
+        submitButton.style.opacity = '0.5';
+        submitButton.style.cursor = 'not-allowed';
+        document.getElementById('duplicate-username-error').textContent = 'Username already exists';
+      } else {
+        duplicateUsername = false;
+        submitButton.disabled = false;
+        submitButton.style.opacity = '1';
+        submitButton.style.cursor = 'pointer';
+        document.getElementById('duplicate-username-error').textContent = '';
+      }
+    });
+}
 
 function validateForm() {
-  const usernameInput = document.getElementById('username');
-  const emailInput = document.getElementById('email');
-  const passwordInput = document.getElementById('password');
-  const confirmPasswordInput = document.getElementById('confirm-password');
-  
-  const usernameError = document.getElementById('username-error');
-  const duplicateUsernameError = document.getElementById('duplicate-username-error');
-  const emailError = document.getElementById('email-error');
-  const passwordError = document.getElementById('password-error');
-  const confirmPasswordError = document.getElementById('confirm-password-error');
-  
-  let isValid = true; 
-  
+  let isValid = true;
+
+  // Validate name
+  if (nameInput.value.trim() === '') {
+    nameError.textContent = 'Please enter your name';
+    isValid = false;
+  } else {
+    nameError.textContent = '';
+  }
+
+  // Validate date of birth
+  if (dobInput.value.trim() === '') {
+    dobError.textContent = 'Please enter your date of birth';
+    isValid = false;
+  } else {
+    dobError.textContent = '';
+  }
+
   // Validate username
   if (usernameInput.value.trim() === '') {
     usernameError.textContent = 'Please enter valid username';
@@ -22,13 +75,13 @@ function validateForm() {
     usernameError.textContent = '';
   }
 
-  if (duplicateUsername === true) { 
+  if (duplicateUsername === true) {
     duplicateUsernameError.textContent = 'Username already exists, please enter a different username';
     isValid = false;
   } else {
     duplicateUsernameError.textContent = '';
   }
-  
+
   // Validate email
   if (emailInput.value.trim() === '') {
     emailError.textContent = 'Please enter valid email';
@@ -36,7 +89,7 @@ function validateForm() {
   } else {
     emailError.textContent = '';
   }
-  
+
   // Validate password
   if (passwordInput.value.trim() === '') {
     passwordError.textContent = 'Please enter valid password';
@@ -44,7 +97,7 @@ function validateForm() {
   } else {
     passwordError.textContent = '';
   }
-  
+
   // Validate confirm password
   if (confirmPasswordInput.value.trim() === '') {
     confirmPasswordError.textContent = 'Please confirm your password';
@@ -55,6 +108,6 @@ function validateForm() {
   } else {
     confirmPasswordError.textContent = '';
   }
-  
+
   return isValid;
 }
