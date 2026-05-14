@@ -1,22 +1,25 @@
 <?php 
 session_start();
 include './api/conn.php'; // connects to the database
-include './api/utils/creation_util.php';
-include './api/credentials.php';
-include './api/points/functions.php';
 
 // Fetch user current points
-// $username comes from credentials.php
-$totalPoints = points_get_current($username);
+// Have to replace user1 with session user later
+$totalPoint = "SELECT sum(task.reward_rate * submission.action_count) AS total_points FROM submission 
+            INNER JOIN task ON submission.task_ID = task.ID WHERE submission.user = 'user1'";
+$totalPointResult = mysqli_query($dbConnection, $totalPoint);
+$allPoint = mysqli_fetch_assoc($totalPointResult);
+$currentPoints = $allPoint['total_points'] ?? 0;
 
 // Fetch avaiable rewards
 $rewardsQuery = "SELECT * FROM ecoquest.REWARD WHERE active = 1 ORDER BY price ASC";
 $rewardsResult = mysqli_query($dbConnection, $rewardsQuery);
 
 
+
 // Redemption handling
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['redeem'])) {
     $rewardId = $_POST['reward_id'];
+    $username = 'user1'; // Replace w $_SESSION['username'] later
     
     // Fetch user points, check users points again
     $pointsQuery = "SELECT sum(task.reward_rate * submission.action_count) AS total_points 
@@ -24,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['redeem'])) {
                     INNER JOIN task ON submission.task_ID = task.ID 
                     WHERE submission.user = '$username'";
     $pointsResult = mysqli_query($dbConnection, $pointsQuery);
+    $currentPoints = mysqli_fetch_assoc($pointsResult)['total_points'] ?? 0;
     
     // Get reward details
     $rewardQuery = "SELECT * FROM REWARD WHERE ID = '$rewardId' AND active = 1";
@@ -31,13 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['redeem'])) {
     $reward = mysqli_fetch_assoc($rewardResult);
 
     // Check again again
-    if ($reward && $totalPoints >= $reward['price'] && $reward['remaining'] > 0) {
-        $redemptionId = generate_next_id($dbConnection, 'redemption', 'ID', 'RD_');
+    if ($reward && $currentPoints >= $reward['price'] && $reward['remaining'] > 0) {
+        // Generate redemption ID, replace w creation util later
+        $redemptionId = 'RD_' . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
         $timestamp = time();
-        $price = $reward['price'];
         
-        $insertQuery = "INSERT INTO REDEMPTION (ID, reward_ID, user, timestamp, price) 
-                       VALUES ('$redemptionId', '$rewardId', '$username', $timestamp, $price)";
+        $insertQuery = "INSERT INTO REDEMPTION (ID, reward_ID, user, timestamp) 
+                       VALUES ('$redemptionId', '$rewardId', '$username', $timestamp)";
         
         // Update remaining stock
         $updateQuery = "UPDATE REWARD SET remaining = remaining - 1 WHERE ID = '$rewardId'";
@@ -87,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['redeem'])) {
                 <img src="./assets/ivp/tick-circle-svgrepo-com.svg" alt="">
                 <div class="points-info">
                     <p class="points-label">Your Points</p>
-                    <p class="points-value"><?php echo number_format($totalPoints); ?></p>
+                    <p class="points-value"><?php echo number_format($currentPoints); ?></p>
                 </div>
             </div>
         </div>
@@ -99,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['redeem'])) {
             $rewardCount = 0;
             while ($reward = mysqli_fetch_assoc($rewardsResult)) {
                 $rewardCount++;
-                $canRedeem = $totalPoints >= $reward['price'];
+                $canRedeem = $currentPoints >= $reward['price'];
                 $remaining = $reward['remaining'] ?? 0;
                 $isOutOfStock = $remaining <= 0;
             ?>
@@ -129,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['redeem'])) {
                                     } elseif ($canRedeem) {
                                         echo 'Redeem';
                                     } else {
-                                        echo number_format($reward['price'] - $totalPoints) . ' pts needed';
+                                        echo number_format($reward['price'] - $currentPoints) . ' pts needed';
                                     }
                                 ?>
                             </button>

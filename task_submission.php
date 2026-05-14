@@ -3,7 +3,6 @@ include './api/conn.php';
 include './api/task/functions.php';
 include './api/points/functions.php';
 include './api/credentials.php';
-include './api/users/functions.php';
 
 $tasks = task_fetch_all();
 $taskID = $_GET['ID'];
@@ -118,14 +117,7 @@ $submittedResult = $userSubmitted;
                     ?>
                         <div class="submission-lists">
                             <div class="userInfo">
-                                <?php 
-                                    $userPfp = user_fetch_pfp($row['username']);
-                                    if ($userPfp): 
-                                ?>
-                                    <img src="data:image/jpeg;base64,<?php echo base64_encode($userPfp); ?>" alt="Profile Picture">
-                                <?php else: ?>
-                                    <img src="./assets/ivp/profile-picture.avif" alt="Default Profile Picture">
-                                <?php endif; ?>
+                                <img src="./assets/ivp/profile-picture.avif" alt="">
                                 <p class="name"><?php echo $row['username'] ?></p>
                             </div>
 

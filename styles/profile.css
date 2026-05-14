@@ -88,7 +88,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
 
     & img {
         object-fit: cover;
@@ -99,40 +98,6 @@ body {
         border-radius: 100%;
 
         margin: 2em;
-    }
-
-    & #pfp-form {
-        position: absolute;
-        bottom: 2em;
-        right: calc(50% - 65px);
-
-        & #pfp-upload {
-            display: none;
-        }
-
-        & #pfp-label {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 32px;
-            height: 32px;
-            background: var(--accent);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.2s;
-
-            &:hover {
-                filter: brightness(0.8);
-                transform: scale(1.1);
-            }
-
-            & img {
-                width: 16px;
-                height: 16px;
-                margin: 0;
-                border: none;
-            }
-        }
     }
 }
 

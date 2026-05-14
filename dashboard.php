@@ -2,7 +2,6 @@
 include './api/users/contribution.php';
 include './api/task/functions.php';
 include './api/points/functions.php';
-include './api/goals/functions.php';
 
 include './api/credentials.php';
 include './api/users/functions.php';
@@ -10,8 +9,6 @@ include './api/users/functions.php';
 enforce_role('user');
 
 $tasks = task_fetch_daily_tasks();
-$globalGoals = goals_contributions_global();
-$completionRates = goals_completion_rate();
 
 ?>
 
@@ -114,40 +111,65 @@ $completionRates = goals_completion_rate();
             </div>
             <div id="goals">
                 <h3 id="title">GLOBAL GOALS</h3>
-                <?php foreach ($globalGoals as $goal):
-                    $progress = $goal['goal'] > 0 ? ($goal['total'] / $goal['goal']) * 100 : 0;
-                    $completionRate = isset($completionRates[$goal['ID']]) ? $completionRates[$goal['ID']] : 0;
-                ?>
-                    <div id="goal-container">
-                        <div class="goal-card">
-                            <div id="header">
-                                <img src="<?php echo htmlspecialchars($goal['media']); ?>" class="border">
-                                <div id="details">
-                                    <h4>
-                                        <?php echo htmlspecialchars($goal['title']); ?>
-                                    </h4>
-                                    <h5>
-                                        <?php echo htmlspecialchars($goal['description']); ?>
-                                    </h5>
-                                </div>
+                <div id="goal-container">
+                    <div class="goal-card">
+                        <div id="header">
+                            <img src="./assets/plastic.svg" class="border">
+                            <div id="details">
+                                <h4>
+                                    Plastic saved
+                                </h4>
+                                <h5>
+                                    5,440 contributors
+                                </h5>
                             </div>
-                            <div id="data">
-                                <div>
-                                    <div id="details">
-                                        <h2 id="target">
-                                            <?php echo number_format($goal['total'], 1); ?>
-                                        </h2>
-                                        <h5>/ <?php echo number_format($goal['goal'], 0); ?> <?php echo $goal['goal_type']; ?></h5>
-                                    </div>
-                                    <h6><?php echo round($progress); ?>% progress</h6>
+                        </div>
+                        <div id="data">
+                            <div>
+                                <div id="details">
+                                    <h2 id="target">
+                                        40.5
+                                    </h2>
+                                    <h5>/ 50 kg</h5>
                                 </div>
-                                <div class="progressbar">
-                                    <div id="thumb" style="width: <?php echo min(100, $progress); ?>%;"></div>
-                                </div>
+                                <h6>83% progress</h6>
+                            </div>
+                            <div class="progressbar">
+                                <div id="thumb"></div>
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                </div>
+                <div id="goal-container">
+                    <div class="goal-card">
+                        <div id="header">
+                            <img src="./assets/cloud.svg" class="border">
+
+                            <div id="details">
+                                <h4>
+                                    CO<sub>2</sub> offset
+                                </h4>
+                                <h5>
+                                    1,553 contributors
+                                </h5>
+                            </div>
+                        </div>
+                        <div id="data">
+                            <div>
+                                <div id="details">
+                                    <h2 id="target">
+                                        25.3
+                                    </h2>
+                                    <h5>/ 30 tonnes</h5>
+                                </div>
+                                <h6>83% progress</h6>
+                            </div>
+                            <div class="progressbar">
+                                <div id="thumb"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <?php include './components/navbar.php' ?>
